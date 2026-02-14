@@ -1,0 +1,37 @@
+{
+  "home-page": {
+    "website-name": "Chara カラ",
+    "summary": [
+      "",
+      "CharaChorder 入力デバイス",
+      "向けにカスタマイズされた非公式和音学習ツール"
+    ],
+    "source-code": "ソースコード",
+    "remark": "(Chara、カラ、りょうけん座 β 星、北の星座である獵犬座の第二の明るい星。)"
+  },
+  "nav": {
+    "page": {
+      "home": {
+        "title": "ホーム",
+        "tooltip": "ホームページへ移動",
+        "aria-label": "ホームページリンク"
+      },
+      "settings": {
+        "title": "設定",
+        "tooltip": "設定ページへ移動",
+        "aria-label": "設定ページリンク"
+      },
+      "information": {
+        "title": "情報",
+        "tooltip": "情報ページへ移動",
+        "aria-label": "情報ページリンク"
+      }
+    }
+  },
+  "settings-page": {
+    "title": "設定",
+    "panel-header": {
+      "ui-language": "UI 言語"
+    }
+  }
+}

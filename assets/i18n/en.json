@@ -1,0 +1,38 @@
+{
+  "home-page": {
+    "website-name": "Chara",
+    "summary": [
+      "An unofficial chord learning tool tailored for",
+      "CharaChorder devices",
+      ""
+    ],
+    "source-code": "source code",
+    "dev-note": "dev note",
+    "remark": "(Chara, β Canum Venaticorum, the second-brightest star in the northern constellation of Canes Venatici.)"
+  },
+  "nav": {
+    "page": {
+      "home": {
+        "title": "home",
+        "tooltip": "Go to Home page",
+        "aria-label": "home page link"
+      },
+      "settings": {
+        "title": "settings",
+        "tooltip": "Go to Settings page",
+        "aria-label": "settings page link"
+      },
+      "information": {
+        "title": "info",
+        "tooltip": "Go to Information page",
+        "aria-label": "information page link"
+      }
+    }
+  },
+  "settings-page": {
+    "title": "settings",
+    "panel-header": {
+      "ui-language": "UI language"
+    }
+  }
+}

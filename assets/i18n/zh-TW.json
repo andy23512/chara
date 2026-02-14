@@ -1,0 +1,37 @@
+{
+  "home-page": {
+    "website-name": "Chara 常陳四",
+    "summary": [
+      "專為",
+      "CharaChorder 輸入裝置",
+      "量身打造的非官方和弦學習工具"
+    ],
+    "source-code": "原始碼",
+    "remark": "(Chara，即常陳四，也叫獵犬座β，是獵犬座第二亮星。)"
+  },
+  "nav": {
+    "page": {
+      "home": {
+        "title": "首頁",
+        "tooltip": "前往首頁",
+        "aria-label": "首頁連結"
+      },
+      "settings": {
+        "title": "設定",
+        "tooltip": "前往設定頁面",
+        "aria-label": "設定頁面連結"
+      },
+      "information": {
+        "title": "資訊",
+        "tooltip": "前往資訊頁面",
+        "aria-label": "資訊頁面連結"
+      }
+    }
+  },
+  "settings-page": {
+    "title": "設定",
+    "panel-header": {
+      "ui-language": "介面語言"
+    }
+  }
+}
