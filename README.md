@@ -1,11 +1,11 @@
-# Alnitak
+# Chara
 
 An unofficial practice tool of CharaChorder 3D input devices (CharaChorder One, CharaChorder Two and Master Forge)
 
 ## Links
 
-- [Website](https://andy23512.github.io/alnitak/)
-- [Introduction & Development Note](https://andy23512.github.io/blog/alnitak-a-practice-tool-of-charachorder-3d-input-devices-developed-by-tangent/)
+- [Website](https://andy23512.github.io/chara/)
+- [Introduction & Development Note](https://andy23512.github.io/blog/chara-a-practice-tool-of-charachorder-3d-input-devices-developed-by-tangent/)
 
 ## Features
 

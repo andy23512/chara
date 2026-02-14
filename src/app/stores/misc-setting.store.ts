@@ -4,6 +4,7 @@ import {
 } from '@angular-architects/ngrx-toolkit';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { MiscSetting } from '../models/misc-setting.models';
+import { prefixStorageKey } from '../utils/store.utils';
 
 const INITIAL_MISC_SETTING: MiscSetting = {
   thumbRotationAngle: 10,
@@ -14,7 +15,7 @@ export const MiscSettingStore = signalStore(
   { providedIn: 'root' },
   withDevtools('miscSetting'),
   withStorageSync({
-    key: 'miscSetting',
+    key: prefixStorageKey('miscSetting'),
     parse(stateString: string) {
       return { ...INITIAL_MISC_SETTING, ...JSON.parse(stateString) };
     },

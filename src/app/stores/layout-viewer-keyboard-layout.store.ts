@@ -15,11 +15,12 @@ import { KEYBOARD_LAYOUTS_FROM_KBDLAYOUT } from '../data/keyboard-layouts-from-k
 import { KEYBOARD_LAYOUTS_FROM_XKEYBOARD } from '../data/keyboard-layouts-from-xkeyboard';
 import { KeyBoardLayout } from '../models/keyboard-layout.models';
 import { convertKeyboardLayoutToCharacterKeyCodeMap } from '../utils/layout.utils';
+import { prefixStorageKey } from '../utils/store.utils';
 
 export const LayoutViewerKeyboardLayoutStore = signalStore(
   { providedIn: 'root' },
   withDevtools('layoutViewerKeyboardLayout'),
-  withStorageSync('layoutViewerKeyboardLayout'),
+  withStorageSync(prefixStorageKey('layoutViewerKeyboardLayout')),
   withState({
     selectedId: 'us',
   }),

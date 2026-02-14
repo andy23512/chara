@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/nx/schemas/project-schema.json",
-  "name": "alnitak",
+  "name": "chara",
   "projectType": "application",
   "generators": {
     "@schematics/angular:component": {
@@ -13,7 +13,7 @@
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "options": {
-        "outputPath": "dist/alnitak",
+        "outputPath": "dist/chara",
         "index": "src/index.html",
         "main": "src/main.ts",
         "polyfills": ["zone.js"],
@@ -55,10 +55,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "alnitak:build:production"
+          "browserTarget": "chara:build:production"
         },
         "development": {
-          "browserTarget": "alnitak:build:development"
+          "browserTarget": "chara:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -66,7 +66,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "alnitak:build"
+        "browserTarget": "chara:build"
       }
     },
     "test": {
@@ -83,11 +83,11 @@
     "deploy": {
       "executor": "angular-cli-ghpages:deploy",
       "options": {
-        "buildTarget": "alnitak:build:production",
-        "baseHref": "/alnitak/",
+        "buildTarget": "chara:build:production",
+        "baseHref": "/chara/",
         "name": "Tangent Chang",
         "email": "andy23512@gmail.com",
-        "dir": "dist/alnitak"
+        "dir": "dist/chara"
       }
     }
   }

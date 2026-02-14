@@ -16,6 +16,7 @@ import {
   SUPPORTED_LANGUAGES,
   UiLanguage,
 } from '../models/language-setting.models';
+import { prefixStorageKey } from '../utils/store.utils';
 
 function getInitialLanguageSetting(): LanguageSetting {
   const translateService = inject(TranslateService);
@@ -34,7 +35,7 @@ export const LanguageSettingStore = signalStore(
   { providedIn: 'root' },
   withDevtools('languageSetting'),
   withStorageSync({
-    key: 'languageSetting',
+    key: prefixStorageKey('languageSetting'),
     parse(stateString: string) {
       return { ...getInitialLanguageSetting(), ...JSON.parse(stateString) };
     },

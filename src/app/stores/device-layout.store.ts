@@ -21,12 +21,13 @@ import {
   M4G_DEFAULT_DEVICE_LAYOUT,
 } from '../data/device-layouts';
 import { DeviceLayout } from '../models/device-layout.models';
+import { prefixStorageKey } from '../utils/store.utils';
 import { withSelectedEntity } from './selected-entity.feature';
 
 export const DeviceLayoutStore = signalStore(
   { providedIn: 'root' },
   withDevtools('deviceLayout'),
-  withStorageSync('deviceLayout'),
+  withStorageSync(prefixStorageKey('deviceLayout')),
   withEntities<DeviceLayout>(),
   withSelectedEntity(),
   withComputed((state) => ({

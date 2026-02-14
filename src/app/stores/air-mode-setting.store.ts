@@ -4,6 +4,7 @@ import {
 } from '@angular-architects/ngrx-toolkit';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { AirModeSetting } from '../models/air-mode-setting.models';
+import { prefixStorageKey } from '../utils/store.utils';
 
 const INITIAL_AIR_MODE_SETTING: AirModeSetting = {
   enabled: false,
@@ -15,7 +16,7 @@ export const AirModeSettingStore = signalStore(
   { providedIn: 'root' },
   withDevtools('airModeSetting'),
   withStorageSync({
-    key: 'airModeSetting',
+    key: prefixStorageKey('airModeSetting'),
     parse(stateString: string) {
       return { ...INITIAL_AIR_MODE_SETTING, ...JSON.parse(stateString) };
     },

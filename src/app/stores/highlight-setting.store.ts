@@ -5,6 +5,7 @@ import {
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { mergeDeepLeft } from 'ramda';
 import { HighlightSetting } from '../models/highlight-setting.models';
+import { prefixStorageKey } from '../utils/store.utils';
 
 export const INITIAL_HIGHLIGHT_SETTING: HighlightSetting = {
   shiftLayer: {
@@ -41,7 +42,7 @@ export const HighlightSettingStore = signalStore(
   { providedIn: 'root' },
   withDevtools('highlightSetting'),
   withStorageSync({
-    key: 'highlightSetting',
+    key: prefixStorageKey('highlightSetting'),
     parse(stateString: string) {
       return mergeDeepLeft(
         INITIAL_HIGHLIGHT_SETTING,

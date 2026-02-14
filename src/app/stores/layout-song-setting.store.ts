@@ -11,6 +11,7 @@ import {
   withState,
 } from '@ngrx/signals';
 import { LayoutSongSetting } from '../models/layout-song-setting.models';
+import { prefixStorageKey } from '../utils/store.utils';
 
 const INITIAL_LAYOUT_SONG_SETTING: LayoutSongSetting = {
   volume: 1,
@@ -22,7 +23,7 @@ export const LayoutSongSettingStore = signalStore(
   { providedIn: 'root' },
   withDevtools('layoutSongSetting'),
   withStorageSync({
-    key: 'layoutSongSetting',
+    key: prefixStorageKey('layoutSongSetting'),
     parse(stateString: string) {
       return { ...INITIAL_LAYOUT_SONG_SETTING, ...JSON.parse(stateString) };
     },

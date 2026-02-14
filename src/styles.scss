@@ -46,24 +46,24 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$alnitak-primary: mat.define-palette($primary-map);
-$alnitak-accent: mat.define-palette($accent-map);
+$chara-primary: mat.define-palette($primary-map);
+$chara-accent: mat.define-palette($accent-map);
 
 // The warn palette is optional (defaults to red).
-$alnitak-warn: mat.define-palette(mat.$red-palette);
+$chara-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$alnitak-theme: mat.define-dark-theme((color: (primary: $alnitak-primary,
-        accent: $alnitak-accent,
-        warn: $alnitak-warn,
+$chara-theme: mat.define-dark-theme((color: (primary: $chara-primary,
+        accent: $chara-accent,
+        warn: $chara-warn,
       ),
     ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($alnitak-theme);
+@include mat.all-component-themes($chara-theme);
 
 html {
   --mat-toolbar-title-text-font: Roboto, sans-serif;
@@ -74,15 +74,15 @@ html {
 }
 
 .list-item-active {
-  background: mat.get-theme-color($alnitak-theme,
+  background: mat.get-theme-color($chara-theme,
       primary,
       default,
       0.5) !important;
 }
 
 .mat-button-toggle-checked {
-  background-color: mat.get-color_from_palette($alnitak-primary, 500) !important;
-  color: mat.get-contrast_color_from_palette($alnitak-primary, 500) !important;
+  background-color: mat.get-color_from_palette($chara-primary, 500) !important;
+  color: mat.get-contrast_color_from_palette($chara-primary, 500) !important;
 }
 
 /* You can add global styles to this file, and also import other style files */
