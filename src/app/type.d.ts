@@ -1,1 +1,1 @@
-declare type ExtendableMessageEvent = any;
+declare type ExtendableMessageEvent = unknown;

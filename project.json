@@ -1,14 +1,14 @@
 {
-  "$schema": "node_modules/nx/schemas/project-schema.json",
   "name": "chara",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "sourceRoot": "src",
+  "prefix": "app",
   "generators": {
     "@schematics/angular:component": {
       "style": "scss"
     }
   },
-  "sourceRoot": "src",
-  "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -19,9 +19,14 @@
         "polyfills": ["zone.js"],
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["src/favicon.ico", "src/assets", "src/googlef5d600e4a2cd82e1.html"],
+        "assets": [
+          "src/favicon.ico",
+          "src/assets",
+          "src/googlef5d600e4a2cd82e1.html"
+        ],
         "styles": ["src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "webWorkerTsConfig": "tsconfig.worker.json"
       },
       "configurations": {
         "production": {
@@ -77,7 +82,8 @@
         "inlineStyleLanguage": "scss",
         "assets": ["src/favicon.ico", "src/assets"],
         "styles": ["src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "webWorkerTsConfig": "tsconfig.worker.json"
       }
     },
     "deploy": {

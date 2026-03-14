@@ -7355,13 +7355,6 @@ ngx-print@^2.0.0:
   dependencies:
     tslib "^2.3.0"
 
-ngx-web-llm@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/ngx-web-llm/-/ngx-web-llm-0.0.2.tgz#f3924d3451536866f49a74312501fd3e10c54aed"
-  integrity sha512-GCh5SOBJFRYi5M0wCUl8amgmf/ToBhzFU48LGGlJQT7tVsgyaiqKfi/gEDI0XuNE/8z7mJSi5aQL2HX+uyBGIA==
-  dependencies:
-    tslib "^2.3.0"
-
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"
