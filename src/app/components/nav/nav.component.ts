@@ -9,16 +9,9 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatIconButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormField, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
-import {
-  MatListItem,
-  MatListSubheaderCssMatStyler,
-  MatNavList,
-} from '@angular/material/list';
 import {
   MatSidenav,
   MatSidenavContainer,
@@ -36,9 +29,8 @@ import * as fuzzy from 'fuzzy';
 import { uniqBy } from 'ramda';
 import { Observable } from 'rxjs';
 import { filter, map, shareReplay, take } from 'rxjs/operators';
-import { NAV_LINKS } from 'src/app/data/nav-links';
+import { MAIN_NAV_LINKS, NAV_LINKS } from 'src/app/data/nav-links';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
-import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 import { LESSON_DATA_FOR_SEARCH, TOPICS } from '../../data/topics';
 import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component';
 
@@ -49,14 +41,9 @@ import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component'
   imports: [
     AsyncPipe,
     FormsModule,
-    MatFormField,
-    MatSuffix,
     MatIcon,
+    MatButton,
     MatIconButton,
-    MatInput,
-    MatListItem,
-    MatListSubheaderCssMatStyler,
-    MatNavList,
     MatSidenav,
     MatSidenavContainer,
     MatSidenavContent,
@@ -66,12 +53,12 @@ import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component'
     RouterOutlet,
     IconGuardPipe,
     TranslatePipe,
-    RealTitleCasePipe,
   ],
 })
 export class NavComponent implements OnInit {
   public topics = TOPICS;
   public navLinks = NAV_LINKS;
+  public mainNavLinks = MAIN_NAV_LINKS;
   public toggleSideMenuShortcut = 'meta.b';
 
   public readonly searchQuery = signal('');

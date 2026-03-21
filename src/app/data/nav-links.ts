@@ -26,3 +26,38 @@ export const NAV_LINKS: NavLink[] = [
     icon: 'info',
   },
 ];
+
+export const MAIN_NAV_LINKS: NavLink[] = [
+  {
+    title: 'Chords',
+    routerLink: '/chords',
+    routerLinkActiveOptions: { exact: false },
+    ariaLabel: 'nav.page.chords.aria-label',
+    tooltipMessage: 'nav.page.chords.tooltip',
+    icon: 'piano',
+  },
+  {
+    title: 'Adapt',
+    routerLink: '/adapt',
+    routerLinkActiveOptions: { exact: false },
+    ariaLabel: 'nav.page.adapt.aria-label',
+    tooltipMessage: 'nav.page.adapt.tooltip',
+    icon: 'published_with_changes',
+  },
+  {
+    title: 'Realize',
+    routerLink: '/realize',
+    routerLinkActiveOptions: { exact: false },
+    ariaLabel: 'nav.page.realize.aria-label',
+    tooltipMessage: 'nav.page.realize.tooltip',
+    icon: 'model_training',
+  },
+  {
+    title: 'Accum',
+    routerLink: '/accum',
+    routerLinkActiveOptions: { exact: false },
+    ariaLabel: 'nav.page.accum.aria-label',
+    tooltipMessage: 'nav.page.accum.tooltip',
+    icon: 'merge',
+  },
+];

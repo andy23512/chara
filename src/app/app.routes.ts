@@ -9,4 +9,8 @@ export const APP_ROUTES: Route[] = [
   { path: 'information', component: InformationPageComponent },
   { path: 'settings', component: SettingsPageComponent },
   { path: 'llm', component: LlmPageComponent },
+  { path: 'chords', component: HomePageComponent },
+  { path: 'adapt', component: HomePageComponent },
+  { path: 'realize', component: HomePageComponent },
+  { path: 'accum', component: HomePageComponent },
 ];

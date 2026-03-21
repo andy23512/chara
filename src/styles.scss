@@ -119,3 +119,7 @@ span.first-cap {
 .first-cap:first-letter {
   text-transform: uppercase;
 }
+
+.mat-mdc-tooltip-panel {
+  pointer-events: none;
+}
