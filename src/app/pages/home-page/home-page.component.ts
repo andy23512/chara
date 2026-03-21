@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,7 +19,26 @@ import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 import { DeviceLayoutStore } from 'src/app/stores/device-layout.store';
 import { VisibilitySettingStore } from 'src/app/stores/visibility-setting.store';
 import { chordAnimationEventsToObservable } from 'src/app/utils/chord-animation.utils';
-import { pickRandomItem, shuffle } from 'src/app/utils/random.utils';
+import { shuffle } from 'src/app/utils/random.utils';
+
+function getHighlightPositionCodes() {
+  const randomIndex = Math.floor(Math.random() * 4);
+  const string = 'Chara';
+  const char1 = string[randomIndex];
+  const char2 = string[randomIndex + 1];
+  const relativePositionCodeMap = {
+    C: [2, 3, 4],
+    h: [0, 3],
+    a: [0, 1, 2],
+    r: [2, 3],
+  };
+  return [
+    ...relativePositionCodeMap[char1 as keyof typeof relativePositionCodeMap],
+    ...relativePositionCodeMap[
+      char2 as keyof typeof relativePositionCodeMap
+    ].map((code) => code + 5),
+  ];
+}
 
 @Component({
   selector: 'app-home-page',
@@ -30,7 +48,6 @@ import { pickRandomItem, shuffle } from 'src/app/utils/random.utils';
     MatIcon,
     SwitchComponent,
     IconGuardPipe,
-    AsyncPipe,
     TranslatePipe,
     RealTitleCasePipe,
   ],
@@ -42,12 +59,7 @@ export class HomePageComponent {
   readonly visibilitySettingStore = inject(VisibilitySettingStore);
   readonly deviceLayoutStore = inject(DeviceLayoutStore);
   firstLessonUrl = '/topic/number/lesson/123';
-  highlightPositionCodes: number[] = [
-    [0, 1, 2, 3, 4, [1, 2], [1, 4], [3, 2], [3, 4]],
-    [5, 6, 7, 8, 9, [6, 7], [6, 9], [8, 7], [8, 9]],
-  ]
-    .map((list) => pickRandomItem(list))
-    .flat();
+  highlightPositionCodes: number[] = getHighlightPositionCodes();
   animationStartSubject = new BehaviorSubject(1);
   typingDeviceName$ = this.animationStartSubject.pipe(
     exhaustMap(() =>

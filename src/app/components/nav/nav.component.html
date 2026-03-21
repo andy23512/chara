@@ -1,7 +1,7 @@
 <mat-sidenav-container class="h-full" autosize>
   <mat-sidenav
     #drawer
-    class="!w-[240px] !bg-gray-450"
+    class="!bg-gray-450"
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -10,26 +10,23 @@
     data-style-dense
   >
     <header class="sticky top-0 z-10 bg-gray-450 shadow">
-      <div class="flex w-44 flex-wrap">
+      <div class="flex flex-col">
         @for (navLink of navLinks; track $index) {
           <a
-            class="w-1/2"
+            class="w-full"
             [routerLink]="navLink.routerLink"
             routerLinkActive
             [routerLinkActiveOptions]="navLink.routerLinkActiveOptions"
             #rla="routerLinkActive"
             [attr.aria-label]="navLink.ariaLabel | translate"
             [matTooltip]="navLink.tooltipMessage | translate"
+            [matTooltipPosition]="'right'"
+            [class.!bg-chara-500]="rla.isActive"
+            [class.!text-gray-900]="rla.isActive"
             (click)="onNavLinkClick()"
           >
-            <button
-              type="button"
-              mat-flat-button
-              class="whitespace-nowrap"
-              [color]="rla.isActive ? 'primary' : null"
-            >
+            <button type="button" mat-icon-button>
               <mat-icon>{{ navLink.icon | iconGuard }}</mat-icon>
-              {{ navLink.title | translate | realTitleCase }}
             </button>
           </a>
         }

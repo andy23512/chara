@@ -9,7 +9,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -52,7 +52,7 @@ import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component'
     MatFormField,
     MatSuffix,
     MatIcon,
-    MatButton,
+    MatIconButton,
     MatInput,
     MatListItem,
     MatListSubheaderCssMatStyler,
