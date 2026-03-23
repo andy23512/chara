@@ -38,7 +38,7 @@ export const MAIN_NAV_LINKS: NavLink[] = [
   },
   {
     title: 'Adapt',
-    routerLink: '/adapt',
+    routerLink: '/adaptation',
     routerLinkActiveOptions: { exact: false },
     ariaLabel: 'nav.page.adapt.aria-label',
     tooltipMessage: 'nav.page.adapt.tooltip',
@@ -46,7 +46,7 @@ export const MAIN_NAV_LINKS: NavLink[] = [
   },
   {
     title: 'Realize',
-    routerLink: '/realize',
+    routerLink: '/realization',
     routerLinkActiveOptions: { exact: false },
     ariaLabel: 'nav.page.realize.aria-label',
     tooltipMessage: 'nav.page.realize.tooltip',
@@ -54,7 +54,7 @@ export const MAIN_NAV_LINKS: NavLink[] = [
   },
   {
     title: 'Accum',
-    routerLink: '/accum',
+    routerLink: '/accumulation',
     routerLinkActiveOptions: { exact: false },
     ariaLabel: 'nav.page.accum.aria-label',
     tooltipMessage: 'nav.page.accum.tooltip',
