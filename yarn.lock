@@ -3537,6 +3537,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/w3c-web-serial@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@types/w3c-web-serial/-/w3c-web-serial-1.0.8.tgz#38338a26b45ffbcc85596c3940bcafeb90200529"
+  integrity sha512-QQOT+bxQJhRGXoZDZGLs3ksLud1dMNnMiSQtBA0w8KXvLpXX4oM4TZb6J0GgJ8UbCaHo5s9/4VQT8uXy9JER2A==
+
 "@types/ws@^8.5.5":
   version "8.5.10"
   resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.10.tgz#4acfb517970853fa6574a3a6886791d04a396787"
@@ -3844,6 +3849,26 @@ adjust-sourcemap-loader@^4.0.0:
   dependencies:
     loader-utils "^2.0.0"
     regex-parser "^2.2.11"
+
+ag-charts-types@13.2.1:
+  version "13.2.1"
+  resolved "https://registry.yarnpkg.com/ag-charts-types/-/ag-charts-types-13.2.1.tgz#2fcaff60dbf5e96fe2fcd6776a2c8b7a8666e712"
+  integrity sha512-r7veb3QqJtIKlXmeUsLR4/oDPwmHxFI2tmbZra/203mdaz3uwQUrrgYNg628nrK+7L2YxXnwGc6L05tWjLLjNQ==
+
+ag-grid-angular@^35.2.1:
+  version "35.2.1"
+  resolved "https://registry.yarnpkg.com/ag-grid-angular/-/ag-grid-angular-35.2.1.tgz#a397cfb93f60f9c4f54bf83e47ede45662dc37df"
+  integrity sha512-zEBd6bCGd/wq1wdp22SnBc3no7bt9K6pfvocgAiZOywxim4lwkFoHrb7ITVAEt8ghh89gCsb32LfqnIWglo+RA==
+  dependencies:
+    ag-grid-community "35.2.1"
+    tslib "^2.3.0"
+
+ag-grid-community@35.2.1:
+  version "35.2.1"
+  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-35.2.1.tgz#ee7fbc95b67d8c625af699822770e5cc9229a338"
+  integrity sha512-ycmGI+1EbUT7i3eg/Kgi1owwnkdHXRufo10Xm6cfSsVPM3TMpvlbLgi28KIPt9DGHZWHq9fOBn7nxMNdv1Yaow==
+  dependencies:
+    ag-charts-types "13.2.1"
 
 agent-base@^7.0.2, agent-base@^7.1.0, agent-base@^7.1.1:
   version "7.1.1"
@@ -5472,6 +5497,11 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
+
+eventemitter2@^6.4.9:
+  version "6.4.9"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.9.tgz#41f2750781b4230ed58827bc119d293471ecb125"
+  integrity sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==
 
 eventemitter3@^4.0.0:
   version "4.0.7"
@@ -9305,6 +9335,13 @@ tailwindcss@^3.0.2:
     postcss-selector-parser "^6.0.11"
     resolve "^1.22.2"
     sucrase "^3.32.0"
+
+tangent-cc-lib@0.0.38:
+  version "0.0.38"
+  resolved "https://registry.yarnpkg.com/tangent-cc-lib/-/tangent-cc-lib-0.0.38.tgz#ec26a7d5ca6fb79461e9da8eaf5aedbe5e7fd65b"
+  integrity sha512-/nUyB/actqakq4O2818AEeTOSvCRebjXdRjq+FV48v9YLudOlv8zGbKTfinJn2QdwkPZDrWTA3aW9MKmtDusSQ==
+  dependencies:
+    tslib "^2.3.0"
 
 tapable@^2.1.1, tapable@^2.2.0, tapable@^2.2.1:
   version "2.2.1"

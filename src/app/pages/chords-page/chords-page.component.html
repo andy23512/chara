@@ -1,1 +1,11 @@
-Chords page
+<div class="flex gap-2">
+  <button mat-flat-button color="primary" (click)="loadChordsFromDevice()">
+    Load chords from device
+  </button>
+</div>
+<ag-grid-angular
+  class="flex-1"
+  [theme]="tableTheme"
+  [rowData]="flattenedChordTreeNodesSignal()"
+  [columnDefs]="colDefs"
+/>
