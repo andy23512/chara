@@ -1,0 +1,13 @@
+@if (chordKeyLabel(); as label) {
+  @switch (label.type) {
+    @case (ChordKeyLabelType.Char) {
+      {{ chordKeyLabel().c }}
+    }
+    @case (KeyLabelType.Icon) {
+      <mat-icon class="align-middle">{{ label.c | iconGuard }}</mat-icon>
+    }
+    @default {
+      {{ chordKeyLabel() | json }}
+    }
+  }
+}

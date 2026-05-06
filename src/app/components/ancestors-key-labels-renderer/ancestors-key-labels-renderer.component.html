@@ -1,0 +1,8 @@
+@for (keyLabels of ancestorsKeyLabels; track $index; let isLast = $last) {
+  @for (keyLabel of keyLabels; track $index) {
+    <app-chord-key-label [chordKeyLabel]="keyLabel"></app-chord-key-label>
+  }
+  @if (!isLast) {
+    <span class="mx-1 inline-block h-5 border-l align-middle"></span>
+  }
+}

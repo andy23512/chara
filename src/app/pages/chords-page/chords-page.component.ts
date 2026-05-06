@@ -22,6 +22,8 @@ import {
   themeQuartz,
 } from 'ag-grid-community';
 import { lastValueFrom } from 'rxjs';
+import { AncestorsKeyLabelsRendererComponent } from 'src/app/components/ancestors-key-labels-renderer/ancestors-key-labels-renderer.component';
+import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
 import { ChordDataWithKeyLabels } from 'src/app/models/chord.models';
 import { OperatingSystemService } from 'src/app/services/operating-system.service';
 import { KeyboardLayoutSettingStore } from 'src/app/stores/keyboard-layout-setting.store';
@@ -52,7 +54,12 @@ const tableTheme = themeQuartz.withPart(colorSchemeDark);
   selector: 'app-chords-page',
   templateUrl: 'chords-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatButtonModule, AgGridAngular],
+  imports: [
+    MatButtonModule,
+    AgGridAngular,
+    ChordKeyLabelsRendererComponent,
+    AncestorsKeyLabelsRendererComponent,
+  ],
   standalone: true,
 })
 export class ChordsPageComponent {
@@ -77,9 +84,21 @@ export class ChordsPageComponent {
 
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef<ChordDataWithKeyLabels>[] = [
-    { field: 'inputKeyLabels' },
-    { field: 'outputKeyLabels' },
-    { field: 'ancestorsKeyLabels' },
+    {
+      field: 'inputKeyLabels',
+      headerName: 'Input',
+      cellRenderer: ChordKeyLabelsRendererComponent,
+    },
+    {
+      field: 'outputKeyLabels',
+      headerName: 'Output (keys)',
+      cellRenderer: ChordKeyLabelsRendererComponent,
+    },
+    {
+      field: 'ancestorsKeyLabels',
+      headerName: 'Ancestors',
+      cellRenderer: AncestorsKeyLabelsRendererComponent,
+    },
   ];
 
   public async loadChordsFromDevice() {
