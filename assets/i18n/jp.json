@@ -31,7 +31,14 @@
   "settings-page": {
     "title": "設定",
     "panel-header": {
+      "os-keyboard-layout": "OS キーボードレイアウト",
       "ui-language": "UI 言語"
     }
+  },
+  "os-keyboard-layout-setting": {
+    "search-placeholder": "レイアウトを検索...",
+    "search-no-entry": "一致するレイアウトが見つかりませんでした。",
+    "open-reference-button-tooltip": "このレイアウトの参考ウェブサイトを開く",
+    "reset-button-tooltip": "リセット"
   }
 }

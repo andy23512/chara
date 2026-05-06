@@ -32,7 +32,14 @@
   "settings-page": {
     "title": "settings",
     "panel-header": {
+      "os-keyboard-layout": "OS keyboard layout",
       "ui-language": "UI language"
     }
+  },
+  "os-keyboard-layout-setting": {
+    "search-placeholder": "Find layout...",
+    "search-no-entry": "No matching layout was found.",
+    "open-reference-button-tooltip": "open reference website for this layout",
+    "reset-button-tooltip": "reset"
   }
 }

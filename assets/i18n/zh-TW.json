@@ -31,7 +31,14 @@
   "settings-page": {
     "title": "設定",
     "panel-header": {
+      "os-keyboard-layout": "作業系統鍵盤佈局",
       "ui-language": "介面語言"
     }
+  },
+  "os-keyboard-layout-setting": {
+    "search-placeholder": "搜尋佈局...",
+    "search-no-entry": "找不到符合的佈局。",
+    "open-reference-button-tooltip": "開啟此佈局的參考網站",
+    "reset-button-tooltip": "重置"
   }
 }
