@@ -1,13 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,13 +18,10 @@ import {
 } from '@angular/router';
 import { HotkeysService } from '@ngneat/hotkeys';
 import { TranslatePipe } from '@ngx-translate/core';
-import * as fuzzy from 'fuzzy';
-import { uniqBy } from 'ramda';
 import { Observable } from 'rxjs';
 import { filter, map, shareReplay, take } from 'rxjs/operators';
 import { MAIN_NAV_LINKS, NAV_LINKS } from 'src/app/data/nav-links';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
-import { LESSON_DATA_FOR_SEARCH, TOPICS } from '../../data/topics';
 import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component';
 
 @Component({
@@ -56,27 +46,9 @@ import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component'
   ],
 })
 export class NavComponent implements OnInit {
-  public topics = TOPICS;
   public navLinks = NAV_LINKS;
   public mainNavLinks = MAIN_NAV_LINKS;
   public toggleSideMenuShortcut = 'meta.b';
-
-  public readonly searchQuery = signal('');
-
-  public readonly searchResult = computed(() => {
-    const searchQuery = this.searchQuery();
-    if (!searchQuery) {
-      return null;
-    }
-    return uniqBy(
-      (d) => d.id,
-      fuzzy
-        .filter(searchQuery, LESSON_DATA_FOR_SEARCH, {
-          extract: (d) => d.key,
-        })
-        .map((d) => d.original.lesson),
-    );
-  });
 
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly matDialog = inject(MatDialog);
@@ -103,7 +75,6 @@ export class NavComponent implements OnInit {
   }
 
   onNavLinkClick() {
-    this.cleanSearchQuery();
     this.isHandset$
       .pipe(
         take(1),
@@ -116,9 +87,5 @@ export class NavComponent implements OnInit {
 
   openHotkeyDialog() {
     this.matDialog.open(HotkeyDialogComponent);
-  }
-
-  private cleanSearchQuery() {
-    this.searchQuery.set('');
   }
 }

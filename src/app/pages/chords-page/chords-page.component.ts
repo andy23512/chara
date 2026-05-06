@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   HostBinding,
+  inject,
   isDevMode,
   signal,
 } from '@angular/core';
@@ -20,7 +22,13 @@ import {
   themeQuartz,
 } from 'ag-grid-community';
 import { lastValueFrom } from 'rxjs';
-import { flattenChordTreeNodes } from 'src/app/utils/chord.utils';
+import { ChordDataWithKeyLabels } from 'src/app/models/chord.models';
+import { OperatingSystemService } from 'src/app/services/operating-system.service';
+import { KeyboardLayoutSettingStore } from 'src/app/stores/keyboard-layout-setting.store';
+import {
+  convertFlattenedChordTreeNodesToChordDataWithKeyLabels,
+  flattenChordTreeNodes,
+} from 'src/app/utils/chord.utils';
 import {
   ChordTreeNode,
   convertChordsToChordTreeNodes,
@@ -54,12 +62,24 @@ export class ChordsPageComponent {
   public flattenedChordTreeNodesSignal = signal<ChordTreeNode[]>(
     isDevMode() ? flattenChordTreeNodes(MOCK_CHORD_TREE_NODES) : [],
   );
+  public keyboardLayout = inject(KeyboardLayoutSettingStore).selectedEntity;
+  public operatingSystem = inject(OperatingSystemService);
+
+  public chordDataWithKeyLabelsList = computed(() => {
+    const keyboardLayout = this.keyboardLayout();
+    const operatingSystem = this.operatingSystem.getOS();
+    return convertFlattenedChordTreeNodesToChordDataWithKeyLabels(
+      this.flattenedChordTreeNodesSignal(),
+      keyboardLayout,
+      operatingSystem,
+    );
+  });
 
   // Column Definitions: Defines the columns to be displayed.
-  colDefs: ColDef<ChordTreeNode>[] = [
-    { field: 'input' },
-    { field: 'output' },
-    { field: 'ancestors' },
+  colDefs: ColDef<ChordDataWithKeyLabels>[] = [
+    { field: 'inputKeyLabels' },
+    { field: 'outputKeyLabels' },
+    { field: 'ancestorsKeyLabels' },
   ];
 
   public async loadChordsFromDevice() {

@@ -44,6 +44,7 @@ export type Icon =
   | 'move_down'
   | 'move_up'
   | 'music_note_2'
+  | 'open_in_new'
   | 'pause'
   | 'piano'
   | 'play_arrow'

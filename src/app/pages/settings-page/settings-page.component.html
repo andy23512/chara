@@ -4,6 +4,16 @@
 <mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header class="!text-xl">{{
+      "settings-page.panel-header.os-keyboard-layout"
+        | translate
+        | realTitleCase
+    }}</mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <app-os-keyboard-layout-setting-panel-content></app-os-keyboard-layout-setting-panel-content>
+    </ng-template>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header class="!text-xl">{{
       "settings-page.panel-header.ui-language" | translate | realTitleCase
     }}</mat-expansion-panel-header>
     <ng-template matExpansionPanelContent>

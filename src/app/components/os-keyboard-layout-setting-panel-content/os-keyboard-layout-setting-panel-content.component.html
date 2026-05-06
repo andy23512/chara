@@ -1,0 +1,57 @@
+<mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+  <mat-select
+    class="!text-alnitak-200 !font-bold"
+    [value]="selectedKeyboardLayoutId()"
+    (valueChange)="setSelectedKeyboardLayoutId($event)"
+  >
+    <mat-option>
+      <ngx-mat-select-search
+        [ngModel]="keyboardLayoutSearchQuery()"
+        (ngModelChange)="keyboardLayoutSearchQuery.set($event)"
+        [placeholderLabel]="
+          'os-keyboard-layout-setting.search-placeholder' | translate
+        "
+        [noEntriesFoundLabel]="
+          'os-keyboard-layout-setting.search-no-entry' | translate
+        "
+      ></ngx-mat-select-search>
+    </mat-option>
+    @for (
+      keyboardLayout of filteredKeyboardLayouts();
+      track keyboardLayout.id
+    ) {
+      <mat-option [value]="keyboardLayout.id">{{
+        keyboardLayout.name
+      }}</mat-option>
+    }
+  </mat-select>
+  <div matSuffix class="flex">
+    <a
+      [href]="keyboardLayout().reference"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="onOpenReferenceButtonClick($event)"
+      [matTooltip]="
+        'os-keyboard-layout-setting.open-reference-button-tooltip'
+          | translate
+          | realTitleCase
+      "
+    >
+      <button mat-icon-button>
+        <mat-icon>{{ "open_in_new" | iconGuard }}</mat-icon>
+      </button>
+    </a>
+    <button
+      mat-icon-button
+      (click)="onResetButtonClick($event)"
+      [disabled]="selectedKeyboardLayoutId() === 'us'"
+      [matTooltip]="
+        'os-keyboard-layout-setting.reset-button-tooltip'
+          | translate
+          | realTitleCase
+      "
+    >
+      <mat-icon>{{ "replay" | iconGuard }}</mat-icon>
+    </button>
+  </div>
+</mat-form-field>
