@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   HostBinding,
   inject,
   isDevMode,
   signal,
+  viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { AgGridAngular } from 'ag-grid-angular';
@@ -32,7 +34,10 @@ import {
   flattenChordTreeNodes,
 } from 'src/app/utils/chord.utils';
 import {
+  Chord,
+  ChordInNumberListForm,
   ChordTreeNode,
+  convertChordInNumberListFormToChord,
   convertChordsToChordTreeNodes,
   SerialHandler,
   SerialPortHandler,
@@ -66,17 +71,19 @@ export class ChordsPageComponent {
   @HostBinding('class') public hostClasses = ['flex', 'flex-col', 'h-full'];
   public tableTheme = tableTheme;
   public isDevMode = isDevMode();
-  public flattenedChordTreeNodesSignal = signal<ChordTreeNode[]>(
+  public flatChordTreeNodesSignal = signal<ChordTreeNode[]>(
     isDevMode() ? flattenChordTreeNodes(MOCK_CHORD_TREE_NODES) : [],
   );
   public keyboardLayout = inject(KeyboardLayoutSettingStore).selectedEntity;
   public operatingSystem = inject(OperatingSystemService);
+  public fileInput =
+    viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
 
   public chordDataWithKeyLabelsList = computed(() => {
     const keyboardLayout = this.keyboardLayout();
     const operatingSystem = this.operatingSystem.getOS();
     return convertFlattenedChordTreeNodesToChordDataWithKeyLabels(
-      this.flattenedChordTreeNodesSignal(),
+      this.flatChordTreeNodesSignal(),
       keyboardLayout,
       operatingSystem,
     );
@@ -111,7 +118,39 @@ export class ChordsPageComponent {
       return;
     }
     const chordTreeNodes = convertChordsToChordTreeNodes(chords);
-    const flattenedChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
-    this.flattenedChordTreeNodesSignal.set(flattenedChordTreeNodes);
+    const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
+    this.flatChordTreeNodesSignal.set(flatChordTreeNodes);
+  }
+
+  public openFileSelectionDialog() {
+    this.fileInput().nativeElement.click();
+  }
+
+  public async onFileInputChange() {
+    if (typeof FileReader === 'undefined') {
+      return;
+    }
+    const fileInputElement = this.fileInput().nativeElement;
+    if (
+      fileInputElement.files === null ||
+      fileInputElement.files.length === 0
+    ) {
+      return;
+    }
+    const file = fileInputElement.files[0];
+    const text = await file.text();
+    if (!text) {
+      return;
+    }
+    const data = JSON.parse(text);
+    if (!data?.chords) {
+      return;
+    }
+    const chords: Chord[] = (data.chords as ChordInNumberListForm[]).map(
+      convertChordInNumberListFormToChord,
+    );
+    const chordTreeNodes = convertChordsToChordTreeNodes(chords);
+    const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
+    this.flatChordTreeNodesSignal.set(flatChordTreeNodes);
   }
 }

@@ -2,6 +2,19 @@
   <button mat-flat-button color="primary" (click)="loadChordsFromDevice()">
     Load chords from device
   </button>
+  @if (isDevMode) {
+    <button mat-flat-button color="primary" (click)="openFileSelectionDialog()">
+      Load chords from file
+    </button>
+    <input
+      #fileInput
+      class="hidden"
+      type="file"
+      accept=".json"
+      aria-label="file input for selecting a chord library file to load into this editor"
+      (change)="onFileInputChange()"
+    />
+  }
 </div>
 <ag-grid-angular
   class="flex-1"

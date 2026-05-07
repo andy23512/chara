@@ -104,7 +104,12 @@ export function convertFlattenedChordTreeNodesToChordDataWithKeyLabels(
             return null;
           }
           const indexInOutput = outputKeyLabel.findIndex(
-            (k) => k.type === keyLabel.type && k.c === keyLabel.c,
+            (k) =>
+              k.type === keyLabel.type &&
+              (k.c === keyLabel.c ||
+                (typeof k.c === 'string' &&
+                  typeof keyLabel.c === 'string' &&
+                  k.c.toLowerCase() === keyLabel.c.toLowerCase())),
           );
           return {
             indexInOutput: indexInOutput === -1 ? Infinity : indexInOutput,
