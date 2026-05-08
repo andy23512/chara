@@ -61,13 +61,13 @@ function getKeyLabelFromActionCode(
     }
     const rawKeyLabel = rawKeyLabelMap[action.keyCode];
     if (rawKeyLabel) {
-      return rawKeyLabel;
+      return { ...rawKeyLabel, variant: action.variant };
     }
   } else if (action?.type === ActionType.NonKey && action.actionName) {
     const rawKeyLabel =
       NON_KEY_ACTION_NAME_2_RAW_KEY_LABEL_MAP[action.actionName];
     if (rawKeyLabel) {
-      return rawKeyLabel;
+      return { ...rawKeyLabel, variant: action.variant };
     }
   } else if (actionCode >= 32) {
     return {

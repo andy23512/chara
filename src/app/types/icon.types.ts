@@ -1,3 +1,5 @@
+import { KeyLabelIcon } from 'tangent-cc-lib';
+
 export type Icon =
   | '123'
   | 'abc'
@@ -10,6 +12,10 @@ export type Icon =
   | 'article'
   | 'backspace'
   | 'block'
+  | 'brightness_high'
+  | 'brightness_low'
+  | 'chevron_backward'
+  | 'chevron_forward'
   | 'chevron_left'
   | 'chevron_right'
   | 'close'
@@ -47,10 +53,12 @@ export type Icon =
   | 'move_down'
   | 'move_up'
   | 'music_note_2'
+  | 'no_sound'
   | 'open_in_new'
   | 'pause'
   | 'piano'
   | 'play_arrow'
+  | 'play_pause'
   | 'print'
   | 'published_with_changes'
   | 'question_mark'
@@ -62,6 +70,8 @@ export type Icon =
   | 'screenshot_monitor'
   | 'search'
   | 'settings'
+  | 'skip_next'
+  | 'skip_previous'
   | 'space_bar'
   | 'shift'
   | 'swipe_down'
@@ -76,6 +86,10 @@ export type Icon =
   | 'touchpad_mouse'
   | 'trending_up'
   | 'upload'
+  | 'volume_down'
   | 'volume_off'
   | 'volume_up'
   | 'window';
+
+let _keyLabelIconType!: KeyLabelIcon;
+let _iconType: Icon = _keyLabelIconType;

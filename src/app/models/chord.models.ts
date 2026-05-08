@@ -1,15 +1,16 @@
 import {
+  ActionVariant,
   Chord,
   FontLogo,
   KeyLabelIcon,
-  KeyLabelType
+  KeyLabelType,
 } from 'tangent-cc-lib';
 
 export enum ChordKeyLabelType {
   Char = 'char',
 }
 
-export type ChordKeyLabel =
+export type ChordKeyLabel = (
   | {
       type: ChordKeyLabelType.Char;
       c: string;
@@ -35,7 +36,8 @@ export type ChordKeyLabel =
       type: KeyLabelType.ActionCode;
       c: number;
       title: string;
-    };
+    }
+) & { variant?: ActionVariant };
 
 export interface ChordDataWithKeyLabels extends Chord {
   inputKeyLabels: ChordKeyLabel[];

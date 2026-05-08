@@ -10,4 +10,14 @@
       {{ chordKeyLabel() | json }}
     }
   }
+  @if (label.variant) {
+    <sub class="absolute bottom-0 right-0">
+      @if (label.variant === ActionVariant.Left) {
+        L
+      }
+      @if (label.variant === ActionVariant.Right) {
+        R
+      }
+    </sub>
+  }
 }
