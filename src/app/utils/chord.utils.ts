@@ -10,7 +10,7 @@ import {
   OS_2_META_KEY_LABEL_MAP,
 } from 'tangent-cc-lib';
 import {
-  ChordDataWithKeyLabels,
+  ChordData,
   ChordKeyLabel,
   ChordKeyLabelType,
 } from '../models/chord.models';
@@ -69,6 +69,13 @@ function getKeyLabelFromActionCode(
     if (rawKeyLabel) {
       return { ...rawKeyLabel, variant: action.variant };
     }
+  } else if (action?.type === ActionType.WindowsAltCode && action.character) {
+    return {
+      type: ChordKeyLabelType.Char,
+      c: action.character,
+      title: 'Title', // TODO - add title
+      isWindowsAltKey: true,
+    };
   } else if (actionCode >= 32) {
     return {
       type: KeyLabelType.ActionCode,
@@ -79,11 +86,11 @@ function getKeyLabelFromActionCode(
   return null;
 }
 
-export function convertFlattenedChordTreeNodesToChordDataWithKeyLabels(
+export function convertFlattenedChordTreeNodesToChordData(
   chordTreeNodes: ChordTreeNode[],
   keyboardLayout: KeyboardLayout,
   operatingSystem: OperatingSystemName | undefined,
-): ChordDataWithKeyLabels[] {
+): ChordData[] {
   const inputKeyLabelsMap = new Map<number, ChordKeyLabel[]>();
   const outputKeyLabelsMap = new Map<number, ChordKeyLabel[]>();
 
@@ -159,5 +166,88 @@ export function convertFlattenedChordTreeNodesToChordDataWithKeyLabels(
     ancestorsKeyLabels: node.ancestors.map(
       (ancestor) => inputKeyLabelsMap.get(ancestor.id)!,
     ),
+    textOutput: calculateTextOutputFromChordOutput(node.output, keyboardLayout),
   }));
+}
+
+function calculateTextOutputFromChordOutput(
+  output: number[],
+  keyboardLayout: KeyboardLayout,
+): string {
+  let textOutput = '';
+  let pressCurrent = false;
+  let releaseCurrent = false;
+  let holdKeys: Partial<
+    Record<
+      | 'ShiftLeft'
+      | 'ShiftRight'
+      | 'MetaLeft'
+      | 'MetaRight'
+      | 'ControlLeft'
+      | 'ControlRight',
+      boolean
+    >
+  > = {};
+  output.forEach((actionCode) => {
+    const action = ACTIONS.find((a) => a.codeId === actionCode);
+    const holdCtrlOrMeta =
+      holdKeys['ControlLeft'] ||
+      holdKeys['ControlRight'] ||
+      holdKeys['MetaLeft'] ||
+      holdKeys['MetaRight'];
+    if (action?.type === ActionType.WSK && action.keyCode && !holdCtrlOrMeta) {
+      const holdShift = holdKeys['ShiftLeft'] || holdKeys['ShiftRight'];
+      const keyboardLayoutKey = keyboardLayout.layout[action?.keyCode];
+      if (
+        (action.withShift || holdShift) &&
+        keyboardLayoutKey?.withShift &&
+        keyboardLayoutKey?.withShift.type === 'text'
+      ) {
+        textOutput += keyboardLayoutKey.withShift.value;
+      } else if (
+        !holdShift &&
+        keyboardLayoutKey?.unmodified &&
+        keyboardLayoutKey?.unmodified.type === 'text'
+      ) {
+        textOutput += keyboardLayoutKey.unmodified.value;
+      }
+    } else if (action?.type === ActionType.NonWSK && action.keyCode) {
+      if (action.keyCode === 'SpaceLeft' || action.keyCode === 'SpaceRight') {
+        textOutput += ' ';
+      } else if (
+        action.keyCode === 'ShiftLeft' ||
+        action.keyCode === 'ShiftRight' ||
+        action.keyCode === 'MetaLeft' ||
+        action.keyCode === 'MetaRight' ||
+        action.keyCode === 'ControlLeft' ||
+        action.keyCode === 'ControlRight'
+      ) {
+        if (pressCurrent) {
+          holdKeys[action.keyCode] = true;
+        }
+        if (releaseCurrent) {
+          holdKeys[action.keyCode] = false;
+        }
+      } else if (action.keyCode === 'Backspace') {
+        textOutput = textOutput.slice(0, -1);
+      }
+    } else if (action?.type === ActionType.WindowsAltCode && action.character) {
+      textOutput += action.character;
+    }
+    if (action?.type === ActionType.NonKey) {
+      if (action.actionName === 'PressNext') {
+        pressCurrent = true;
+        releaseCurrent = false;
+        return;
+      }
+      if (action.actionName === 'ReleaseNext') {
+        releaseCurrent = true;
+        pressCurrent = false;
+        return;
+      }
+    }
+    pressCurrent = false;
+    releaseCurrent = false;
+  });
+  return textOutput;
 }

@@ -26,11 +26,11 @@ import {
 import { lastValueFrom } from 'rxjs';
 import { AncestorsKeyLabelsRendererComponent } from 'src/app/components/ancestors-key-labels-renderer/ancestors-key-labels-renderer.component';
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
-import { ChordDataWithKeyLabels } from 'src/app/models/chord.models';
+import { ChordData } from 'src/app/models/chord.models';
 import { OperatingSystemService } from 'src/app/services/operating-system.service';
 import { KeyboardLayoutSettingStore } from 'src/app/stores/keyboard-layout-setting.store';
 import {
-  convertFlattenedChordTreeNodesToChordDataWithKeyLabels,
+  convertFlattenedChordTreeNodesToChordData,
   flattenChordTreeNodes,
 } from 'src/app/utils/chord.utils';
 import {
@@ -79,10 +79,10 @@ export class ChordsPageComponent {
   public fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
 
-  public chordDataWithKeyLabelsList = computed(() => {
+  public chordDataList = computed(() => {
     const keyboardLayout = this.keyboardLayout();
     const operatingSystem = this.operatingSystem.getOS();
-    return convertFlattenedChordTreeNodesToChordDataWithKeyLabels(
+    return convertFlattenedChordTreeNodesToChordData(
       this.flatChordTreeNodesSignal(),
       keyboardLayout,
       operatingSystem,
@@ -90,11 +90,15 @@ export class ChordsPageComponent {
   });
 
   // Column Definitions: Defines the columns to be displayed.
-  colDefs: ColDef<ChordDataWithKeyLabels>[] = [
+  colDefs: ColDef<ChordData>[] = [
     {
       field: 'inputKeyLabels',
       headerName: 'Input',
       cellRenderer: ChordKeyLabelsRendererComponent,
+    },
+    {
+      field: 'textOutput',
+      headerName: 'Output (text)',
     },
     {
       field: 'outputKeyLabels',

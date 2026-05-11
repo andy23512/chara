@@ -1,7 +1,12 @@
 @if (chordKeyLabel(); as label) {
   @switch (label.type) {
     @case (ChordKeyLabelType.Char) {
-      {{ chordKeyLabel().c }}
+      <span [class]="{ 'bg-chara-900/50': label.isWindowsAltKey }">{{
+        label.c
+      }}</span>
+    }
+    @case (KeyLabelType.String) {
+      <span class="underline">{{ label.c }}</span>
     }
     @case (KeyLabelType.Icon) {
       <mat-icon class="align-middle">{{ label.c | iconGuard }}</mat-icon>

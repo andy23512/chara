@@ -16,6 +16,7 @@ export type ChordKeyLabel = (
       c: string;
       title: string;
       isDeadKey?: boolean;
+      isWindowsAltKey?: boolean;
     }
   | {
       type: KeyLabelType.String;
@@ -39,8 +40,9 @@ export type ChordKeyLabel = (
     }
 ) & { variant?: ActionVariant };
 
-export interface ChordDataWithKeyLabels extends Chord {
+export interface ChordData extends Chord {
   inputKeyLabels: ChordKeyLabel[];
   outputKeyLabels: ChordKeyLabel[];
   ancestorsKeyLabels: ChordKeyLabel[][];
+  textOutput: string;
 }
