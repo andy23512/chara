@@ -6,10 +6,11 @@ import {
   HostBinding,
   inject,
   isDevMode,
-  signal,
   viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { patchState } from '@ngrx/signals';
+import { setEntities } from '@ngrx/signals/entities';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
   ClientSideRowModelModule,
@@ -28,6 +29,7 @@ import { AncestorsKeyLabelsRendererComponent } from 'src/app/components/ancestor
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
 import { ChordData } from 'src/app/models/chord.models';
 import { OperatingSystemService } from 'src/app/services/operating-system.service';
+import { FlatChordTreeNodeStore } from 'src/app/stores/flat-chord-tree-node.store';
 import { KeyboardLayoutSettingStore } from 'src/app/stores/keyboard-layout-setting.store';
 import {
   convertFlattenedChordTreeNodesToChordData,
@@ -36,13 +38,11 @@ import {
 import {
   Chord,
   ChordInNumberListForm,
-  ChordTreeNode,
   convertChordInNumberListFormToChord,
   convertChordsToChordTreeNodes,
   SerialHandler,
   SerialPortHandler,
 } from 'tangent-cc-lib';
-import { MOCK_CHORD_TREE_NODES } from '../../mock/mock-chords';
 
 ModuleRegistry.registerModules([
   TextFilterModule,
@@ -71,9 +71,8 @@ export class ChordsPageComponent {
   @HostBinding('class') public hostClasses = ['flex', 'flex-col', 'h-full'];
   public tableTheme = tableTheme;
   public isDevMode = isDevMode();
-  public flatChordTreeNodesSignal = signal<ChordTreeNode[]>(
-    isDevMode() ? flattenChordTreeNodes(MOCK_CHORD_TREE_NODES) : [],
-  );
+  public flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
+  public flatChordTreeNodes = this.flatChordTreeNodeStore.entities;
   public keyboardLayout = inject(KeyboardLayoutSettingStore).selectedEntity;
   public operatingSystem = inject(OperatingSystemService);
   public fileInput =
@@ -83,7 +82,7 @@ export class ChordsPageComponent {
     const keyboardLayout = this.keyboardLayout();
     const operatingSystem = this.operatingSystem.getOS();
     return convertFlattenedChordTreeNodesToChordData(
-      this.flatChordTreeNodesSignal(),
+      this.flatChordTreeNodes(),
       keyboardLayout,
       operatingSystem,
     );
@@ -123,7 +122,7 @@ export class ChordsPageComponent {
     }
     const chordTreeNodes = convertChordsToChordTreeNodes(chords);
     const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
-    this.flatChordTreeNodesSignal.set(flatChordTreeNodes);
+    patchState(this.flatChordTreeNodeStore, setEntities(flatChordTreeNodes));
   }
 
   public openFileSelectionDialog() {
@@ -155,6 +154,6 @@ export class ChordsPageComponent {
     );
     const chordTreeNodes = convertChordsToChordTreeNodes(chords);
     const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
-    this.flatChordTreeNodesSignal.set(flatChordTreeNodes);
+    patchState(this.flatChordTreeNodeStore, setEntities(flatChordTreeNodes));
   }
 }

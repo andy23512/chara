@@ -1,0 +1,15 @@
+import {
+  withDevtools,
+  withStorageSync,
+} from '@angular-architects/ngrx-toolkit';
+import { signalStore } from '@ngrx/signals';
+import { withEntities } from '@ngrx/signals/entities';
+import { ChordTreeNode } from 'tangent-cc-lib';
+import { prefixStorageKey } from '../utils/store.utils';
+
+export const FlatChordTreeNodeStore = signalStore(
+  { providedIn: 'root' },
+  withDevtools('flatChordTreeNode'),
+  withStorageSync(prefixStorageKey('flatChordTreeNode')),
+  withEntities<ChordTreeNode>(),
+);
