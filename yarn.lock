@@ -7,6 +7,11 @@
   resolved "https://registry.yarnpkg.com/@adobe/css-tools/-/css-tools-4.3.3.tgz#90749bde8b89cd41764224f5aac29cd4138f75ff"
   integrity sha512-rE0Pygv0sEZ4vBWHlAgJLGDU7Pm8xoO6p3wsEceb7GYAjScrOHpEo8KK/eVkAcnSM+slAEtXjA2JpdjLp4fJQQ==
 
+"@ag-grid-community/locale@^35.3.0":
+  version "35.3.0"
+  resolved "https://registry.yarnpkg.com/@ag-grid-community/locale/-/locale-35.3.0.tgz#7b129d77fe8ecbf2609971be7144d9ca8cc40b38"
+  integrity sha512-PM1JLyvX3gdAYOKFXfsJODY1nf+AN/uEfGnNbSMgfA5QVkWY9ImdZln+E2odpfOckt2j+N/KQDxaNtFgZ0GrgQ==
+
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
