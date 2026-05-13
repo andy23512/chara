@@ -1,20 +1,61 @@
 import { Route } from '@angular/router';
-import { AccumulationPageComponent } from './pages/accumulation-page/accumulation-page.component';
-import { AdaptationPageComponent } from './pages/adaptation-page/adaptation-page.component';
-import { ChordsPageComponent } from './pages/chords-page/chords-page.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { InformationPageComponent } from './pages/information-page/information-page.component';
-import { LlmPageComponent } from './pages/llm-page/llm-page.component';
-import { RealizationPageComponent } from './pages/realization-page/realization-page.component';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
 export const APP_ROUTES: Route[] = [
-  { path: '', pathMatch: 'full', component: HomePageComponent },
-  { path: 'information', component: InformationPageComponent },
-  { path: 'settings', component: SettingsPageComponent },
-  { path: 'llm', component: LlmPageComponent },
-  { path: 'chords', component: ChordsPageComponent },
-  { path: 'adaptation', component: AdaptationPageComponent },
-  { path: 'realization', component: RealizationPageComponent },
-  { path: 'accumulation', component: AccumulationPageComponent },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./pages/home-page/home-page.component').then(
+        (m) => m.HomePageComponent,
+      ),
+  },
+  {
+    path: 'information',
+    loadComponent: () =>
+      import('./pages/information-page/information-page.component').then(
+        (m) => m.InformationPageComponent,
+      ),
+  },
+  {
+    path: 'settings',
+    loadComponent: () =>
+      import('./pages/settings-page/settings-page.component').then(
+        (m) => m.SettingsPageComponent,
+      ),
+  },
+  {
+    path: 'llm',
+    loadComponent: () =>
+      import('./pages/llm-page/llm-page.component').then(
+        (m) => m.LlmPageComponent,
+      ),
+  },
+  {
+    path: 'chords',
+    loadComponent: () =>
+      import('./pages/chords-page/chords-page.component').then(
+        (m) => m.ChordsPageComponent,
+      ),
+  },
+  {
+    path: 'adaptation',
+    loadComponent: () =>
+      import('./pages/adaptation-page/adaptation-page.component').then(
+        (m) => m.AdaptationPageComponent,
+      ),
+  },
+  {
+    path: 'realization',
+    loadComponent: () =>
+      import('./pages/realization-page/realization-page.component').then(
+        (m) => m.RealizationPageComponent,
+      ),
+  },
+  {
+    path: 'accumulation',
+    loadComponent: () =>
+      import('./pages/accumulation-page/accumulation-page.component').then(
+        (m) => m.AccumulationPageComponent,
+      ),
+  },
 ];

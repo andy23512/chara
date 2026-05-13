@@ -1,6 +1,9 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatProgressBar } from '@angular/material/progress-bar';
 import { HotkeysService } from '@ngneat/hotkeys';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 import { HotkeyDialogComponent } from './components/hotkey-dialog/hotkey-dialog.component';
 import { NavComponent } from './components/nav/nav.component';
 
@@ -8,11 +11,12 @@ import { NavComponent } from './components/nav/nav.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [NavComponent],
+  imports: [NavComponent, AsyncPipe, MatProgressBar],
 })
 export class AppComponent implements OnInit {
   private readonly matDialog = inject(MatDialog);
   private readonly hotkeysService = inject(HotkeysService);
+  public readonly loader = inject(LoadingBarService);
 
   private hotkeyDialogRef: MatDialogRef<HotkeyDialogComponent> | null = null;
 

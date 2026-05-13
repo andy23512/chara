@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CreateWebWorkerMLCEngine } from '@mlc-ai/web-llm';
 
 @Injectable({ providedIn: 'root' })
 export class LlmService {
   engine: any;
 
   async initEngine() {
+    const { CreateWebWorkerMLCEngine } = await import('@mlc-ai/web-llm');
+
     this.engine = await CreateWebWorkerMLCEngine(
       new Worker(new URL('../app.worker', import.meta.url)),
       'Llama-3.1-8B-Instruct-q4f32_1-MLC',

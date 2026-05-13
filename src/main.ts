@@ -1,8 +1,17 @@
-import { provideHttpClient } from '@angular/common/http';
-import { APP_INITIALIZER, inject, provideZoneChangeDetection } from '@angular/core';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import {
+  APP_INITIALIZER,
+  inject,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideLoadingBarInterceptor } from '@ngx-loading-bar/http-client';
+import { provideLoadingBarRouter } from '@ngx-loading-bar/router';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app/app.component';
@@ -23,9 +32,12 @@ export function initializeLlmFactory() {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideZoneChangeDetection(),provideRouter(APP_ROUTES, withComponentInputBinding()),
+    provideZoneChangeDetection(),
+    provideRouter(APP_ROUTES, withComponentInputBinding()),
     provideAnimations(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideLoadingBarInterceptor(),
+    provideLoadingBarRouter(),
     provideTranslateService({
       lang: 'en',
       fallbackLang: 'en',

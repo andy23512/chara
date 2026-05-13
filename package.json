@@ -32,6 +32,9 @@
     "@ngrx/component": "21.1.0",
     "@ngrx/signals": "21.1.0",
     "@ngrx/store": "21.1.0",
+    "@ngx-loading-bar/core": "^7.0.1",
+    "@ngx-loading-bar/http-client": "^7.0.1",
+    "@ngx-loading-bar/router": "^7.0.1",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "@webed/angular-tooltip": "^18.0.0",
@@ -82,6 +85,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "nx": "22.7.1",
     "postcss": "^8.4.5",
+    "source-map-explorer": "^2.5.3",
     "tailwindcss": "^3.0.2",
     "ts-node": "^10.9.2",
     "typescript": "5.9.3"
