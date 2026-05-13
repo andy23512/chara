@@ -32,7 +32,7 @@ function getInitialLanguageSetting(): LanguageSetting {
 }
 
 export const LanguageSettingStore = signalStore(
-  { providedIn: 'root' },
+  { providedIn: 'root', protectedState: false },
   withDevtools('languageSetting'),
   withStorageSync({
     key: prefixStorageKey('languageSetting'),

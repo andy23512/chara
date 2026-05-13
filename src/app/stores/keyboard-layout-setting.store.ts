@@ -19,7 +19,7 @@ import {
 import { prefixStorageKey } from '../utils/store.utils';
 
 export const KeyboardLayoutSettingStore = signalStore(
-  { providedIn: 'root' },
+  { providedIn: 'root', protectedState: false },
   withDevtools('keyboardLayoutSetting'),
   withStorageSync(prefixStorageKey('keyboardLayoutSetting')),
   withState({

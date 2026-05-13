@@ -12,7 +12,7 @@ const INITIAL_MISC_SETTING: MiscSetting = {
 };
 
 export const MiscSettingStore = signalStore(
-  { providedIn: 'root' },
+  { providedIn: 'root', protectedState: false },
   withDevtools('miscSetting'),
   withStorageSync({
     key: prefixStorageKey('miscSetting'),

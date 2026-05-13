@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -25,7 +24,6 @@ import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component'
   templateUrl: './nav.component.html',
   standalone: true,
   imports: [
-    AsyncPipe,
     FormsModule,
     MatIcon,
     MatButton,

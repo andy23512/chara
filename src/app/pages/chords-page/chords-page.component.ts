@@ -67,12 +67,7 @@ const tableTheme = themeQuartz.withPart(colorSchemeDark);
   selector: 'app-chords-page',
   templateUrl: 'chords-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    MatButtonModule,
-    AgGridAngular,
-    ChordKeyLabelsRendererComponent,
-    AncestorsKeyLabelsRendererComponent,
-  ],
+  imports: [MatButtonModule, AgGridAngular],
   standalone: true,
 })
 export class ChordsPageComponent {

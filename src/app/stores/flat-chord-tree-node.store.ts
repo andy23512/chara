@@ -8,7 +8,7 @@ import { ChordTreeNode } from 'tangent-cc-lib';
 import { prefixStorageKey } from '../utils/store.utils';
 
 export const FlatChordTreeNodeStore = signalStore(
-  { providedIn: 'root' },
+  { providedIn: 'root', protectedState: false },
   withDevtools('flatChordTreeNode'),
   withStorageSync(prefixStorageKey('flatChordTreeNode')),
   withEntities<ChordTreeNode>(),

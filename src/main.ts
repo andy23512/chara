@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { APP_INITIALIZER, inject } from '@angular/core';
+import { APP_INITIALIZER, inject, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
@@ -23,7 +23,7 @@ export function initializeLlmFactory() {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(APP_ROUTES, withComponentInputBinding()),
+    provideZoneChangeDetection(),provideRouter(APP_ROUTES, withComponentInputBinding()),
     provideAnimations(),
     provideHttpClient(),
     provideTranslateService({
