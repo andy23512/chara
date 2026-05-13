@@ -26,6 +26,7 @@ import {
   ModuleRegistry,
   NumberFilterModule,
   RowSelectionModule,
+  RowSelectionOptions,
   TextFilterModule,
   themeQuartz,
 } from 'ag-grid-community';
@@ -114,7 +115,6 @@ export class ChordsPageComponent {
     );
   });
 
-  // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef<ChordData>[] = [
     {
       field: 'inputKeyLabels',
@@ -136,6 +136,9 @@ export class ChordsPageComponent {
       cellRenderer: AncestorsKeyLabelsRendererComponent,
     },
   ];
+  rowSelection: RowSelectionOptions = {
+    mode: 'multiRow',
+  };
 
   public async loadChordsFromDevice() {
     const serialPortHandler = new SerialPortHandler();
