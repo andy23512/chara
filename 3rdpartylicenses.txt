@@ -1,3 +1,6 @@
+@ag-grid-community/locale
+MIT
+
 @angular-architects/ngrx-toolkit
 MIT
 
