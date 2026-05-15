@@ -23,4 +23,6 @@
   [columnDefs]="colDefs"
   [localeText]="localeText()"
   [rowSelection]="rowSelection"
+  [getRowId]="getRowId"
+  (selectionChanged)="onSelectionChanged($event)"
 />

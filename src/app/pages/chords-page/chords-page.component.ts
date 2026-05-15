@@ -7,10 +7,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   ElementRef,
   HostBinding,
   inject,
   isDevMode,
+  signal,
   viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,11 +24,16 @@ import {
   ColDef,
   colorSchemeDark,
   ExternalFilterModule,
+  GetRowIdFunc,
+  GetRowIdParams,
+  GridApi,
+  GridReadyEvent,
   LocaleModule,
   ModuleRegistry,
   NumberFilterModule,
   RowSelectionModule,
   RowSelectionOptions,
+  SelectionChangedEvent,
   TextFilterModule,
   themeQuartz,
 } from 'ag-grid-community';
@@ -81,6 +88,7 @@ export class ChordsPageComponent {
   public languageSettingStore = inject(LanguageSettingStore);
   public fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
+  public gridApi!: GridApi;
 
   public localeText = computed(() => {
     const uiLanguage = this.languageSettingStore.uiLanguage();
@@ -109,6 +117,7 @@ export class ChordsPageComponent {
       operatingSystem,
     );
   });
+  public selectedIdList = signal<number[]>([]);
 
   colDefs: ColDef<ChordData>[] = [
     {
@@ -133,7 +142,38 @@ export class ChordsPageComponent {
   ];
   rowSelection: RowSelectionOptions = {
     mode: 'multiRow',
+    headerCheckbox: false,
   };
+
+  constructor() {
+    effect(() => {
+      const selectIdSet = new Set(this.selectedIdList());
+      if (this.gridApi) {
+        this.gridApi.forEachNode((node) => {
+          if (!node.id) {
+            return;
+          }
+          const isSelectedInTable = node.isSelected();
+          const inSelectedIdSet = selectIdSet.has(+node.id);
+          if (isSelectedInTable !== inSelectedIdSet) {
+            node.setSelected(inSelectedIdSet);
+          }
+        });
+      }
+    });
+    effect(() => {
+      const _chordDataList = this.chordDataList();
+      this.selectedIdList.set([]);
+    });
+  }
+
+  public getRowId: GetRowIdFunc = (params: GetRowIdParams) => {
+    return params.data.id.toString();
+  };
+
+  public onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
+  }
 
   public async loadChordsFromDevice() {
     const serialPortHandler = new SerialPortHandler();
@@ -179,5 +219,14 @@ export class ChordsPageComponent {
     const chordTreeNodes = convertChordsToChordTreeNodes(chords);
     const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
     patchState(this.flatChordTreeNodeStore, setEntities(flatChordTreeNodes));
+  }
+
+  onSelectionChanged(event: SelectionChangedEvent) {
+    const selectedNodes = event.api.getSelectedNodes();
+    this.selectedIdList.set(
+      (selectedNodes.map((n) => n.id).filter((v) => !!v) as string[]).map(
+        (id: string) => +id,
+      ),
+    );
   }
 }
