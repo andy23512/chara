@@ -3,12 +3,11 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import {
-  APP_INITIALIZER,
   inject,
+  provideAppInitializer,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideLoadingBarInterceptor } from '@ngx-loading-bar/http-client';
 import { provideLoadingBarRouter } from '@ngx-loading-bar/router';
@@ -19,22 +18,10 @@ import { APP_ROUTES } from './app/app.routes';
 import { LlmService } from './app/services/llm.service';
 import { LanguageSettingStore } from './app/stores/language-setting.store';
 
-export function initializeAppFactory() {
-  const _languageSettingStore = inject(LanguageSettingStore);
-  return () => {};
-}
-
-export function initializeLlmFactory() {
-  const llmService = inject(LlmService);
-  llmService.initEngine();
-  return () => {};
-}
-
 bootstrapApplication(AppComponent, {
   providers: [
     provideZoneChangeDetection(),
     provideRouter(APP_ROUTES, withComponentInputBinding()),
-    provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
     provideLoadingBarInterceptor(),
     provideLoadingBarRouter(),
@@ -46,17 +33,13 @@ bootstrapApplication(AppComponent, {
         suffix: '.json',
       }),
     }),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeAppFactory,
-      deps: [TranslateService, LanguageSettingStore],
-      multi: true,
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeLlmFactory,
-      multi: true,
-      deps: [LlmService],
-    },
+    provideAppInitializer(() => {
+      const _languageSettingStore = inject(LanguageSettingStore);
+      const _translateService = inject(TranslateService);
+    }),
+    provideAppInitializer(() => {
+      const llmService = inject(LlmService);
+      llmService.initEngine();
+    }),
   ],
 }).catch((err) => console.error(err));
