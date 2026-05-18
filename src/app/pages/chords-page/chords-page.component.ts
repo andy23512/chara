@@ -16,8 +16,10 @@ import {
   viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { patchState } from '@ngrx/signals';
 import { setEntities } from '@ngrx/signals/entities';
+import { TranslateService } from '@ngx-translate/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
   ClientSideRowModelModule,
@@ -37,9 +39,13 @@ import {
   TextFilterModule,
   themeQuartz,
 } from 'ag-grid-community';
-import { lastValueFrom } from 'rxjs';
+import { throttleTime } from 'rxjs';
 import { AncestorsKeyLabelsRendererComponent } from 'src/app/components/ancestors-key-labels-renderer/ancestors-key-labels-renderer.component';
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
+import {
+  ProgressSnackBarComponent,
+  ProgressSnackBarData,
+} from 'src/app/components/progress-snack-bar/progress-snack-bar.component';
 import { ChordData } from 'src/app/models/chord.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { OperatingSystemService } from 'src/app/services/operating-system.service';
@@ -86,6 +92,8 @@ export class ChordsPageComponent {
   public keyboardLayout = inject(KeyboardLayoutSettingStore).selectedEntity;
   public operatingSystem = inject(OperatingSystemService);
   public languageSettingStore = inject(LanguageSettingStore);
+  private readonly matSnackBar = inject(MatSnackBar);
+  private readonly translateService = inject(TranslateService);
   public fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
   public gridApi!: GridApi;
@@ -179,14 +187,44 @@ export class ChordsPageComponent {
     const serialPortHandler = new SerialPortHandler();
     const serialHandler = new SerialHandler(serialPortHandler);
     await serialHandler.connect();
-    const { chords } = await lastValueFrom(serialHandler.loadChords());
-    await serialHandler.disconnect();
-    if (!chords) {
-      return;
-    }
-    const chordTreeNodes = convertChordsToChordTreeNodes(chords);
-    const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
-    patchState(this.flatChordTreeNodeStore, setEntities(flatChordTreeNodes));
+    const snackBarRef = this.matSnackBar.openFromComponent<
+      ProgressSnackBarComponent,
+      ProgressSnackBarData
+    >(ProgressSnackBarComponent, {
+      data: {
+        message: this.translateService.instant(
+          'chords-page.chords-loading-message',
+        ),
+        progress: 0,
+      },
+    });
+    serialHandler
+      .loadChords()
+      .pipe(throttleTime(300, undefined, { trailing: true }))
+      .subscribe(async (r) => {
+        console.log(r);
+        if (r.complete) {
+          await serialHandler.disconnect();
+          snackBarRef.dismiss();
+          const chords = r.chords;
+          if (!chords) {
+            return;
+          }
+          const chordTreeNodes = convertChordsToChordTreeNodes(chords);
+          const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
+          patchState(
+            this.flatChordTreeNodeStore,
+            setEntities(flatChordTreeNodes),
+          );
+          this.matSnackBar.open(
+            this.translateService.instant('chords-page.chords-loaded-message'),
+            undefined,
+            { duration: 3000 },
+          );
+        } else {
+          snackBarRef.instance.updateProgress((r.loaded / r.total) * 100);
+        }
+      });
   }
 
   public openFileSelectionDialog() {

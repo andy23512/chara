@@ -41,5 +41,9 @@
     "search-no-entry": "No matching layout was found.",
     "open-reference-button-tooltip": "open reference website for this layout",
     "reset-button-tooltip": "reset"
+  },
+  "chords-page": {
+    "chords-loading-message": "Loading chords...",
+    "chords-loaded-message": "Chords are loaded successfully."
   }
 }
