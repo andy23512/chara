@@ -40,5 +40,9 @@
     "search-no-entry": "一致するレイアウトが見つかりませんでした。",
     "open-reference-button-tooltip": "このレイアウトの参考ウェブサイトを開く",
     "reset-button-tooltip": "リセット"
+  },
+  "chords-page": {
+    "chords-loading-message": "和音を読み込んでいます...",
+    "chords-loaded-message": "和音の読み込みに成功しました。"
   }
 }

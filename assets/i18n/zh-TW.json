@@ -40,5 +40,9 @@
     "search-no-entry": "找不到符合的佈局。",
     "open-reference-button-tooltip": "開啟此佈局的參考網站",
     "reset-button-tooltip": "重置"
+  },
+  "chords-page": {
+    "chords-loading-message": "載入和弦中...",
+    "chords-loaded-message": "和弦已成功載入。"
   }
 }
