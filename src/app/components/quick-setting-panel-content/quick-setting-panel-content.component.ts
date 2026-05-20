@@ -1,8 +1,8 @@
-import { Component, HostBinding, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { TranslatePipe } from '@ngx-translate/core';
-import { DeviceLayoutStore } from 'src/app/stores/device-layout.store';
-import { VisibilitySettingStore } from 'src/app/stores/visibility-setting.store';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { SerialHandlerService } from 'src/app/services/serial-handler.service';
 
 interface QuickSetting {
   name: string;
@@ -13,36 +13,31 @@ interface QuickSetting {
 @Component({
   selector: 'app-quick-setting-panel-content',
   templateUrl: './quick-setting-panel-content.component.html',
-  styleUrls: ['./quick-setting-panel-content.component.scss'],
   standalone: true,
   imports: [MatButton, TranslatePipe],
 })
 export class QuickSettingPanelContentComponent {
-  @HostBinding('class') classes = 'flex flex-col gap-3 items-start';
+  private readonly serialHandlerService = inject(SerialHandlerService);
+  private readonly translateService = inject(TranslateService);
+  private readonly matSnackBar = inject(MatSnackBar);
 
-  public visibilitySettingStore = inject(VisibilitySettingStore);
-  public deviceLayoutStore = inject(DeviceLayoutStore);
-  public quickSettings: QuickSetting[] = [
-    {
-      name: 'quick-setting.cc1-cc2-default-layout',
-      deviceLayoutId: 'default',
-      layoutThumb3SwitchVisibility: true,
-    },
-    {
-      name: 'quick-setting.m4g-default-layout',
-      deviceLayoutId: 'm4g-default',
-      layoutThumb3SwitchVisibility: false,
-    },
-  ];
-
-  public onQuickSettingButtonClick({
-    deviceLayoutId,
-    layoutThumb3SwitchVisibility,
-  }: QuickSetting) {
-    this.deviceLayoutStore.setSelectedId(deviceLayoutId);
-    this.visibilitySettingStore.set(
-      'layoutThumb3Switch',
-      layoutThumb3SwitchVisibility,
+  public async loadDeviceLayoutAndChordsFromDevice() {
+    await this.serialHandlerService.connect();
+    await this.serialHandlerService.loadProfileLayoutMapWithProgressSnackBar({
+      step: 1,
+      total: 2,
+    });
+    await this.serialHandlerService.loadChordsWithProgressSnackBar({
+      step: 2,
+      total: 2,
+    });
+    await this.serialHandlerService.disconnect();
+    this.matSnackBar.open(
+      this.translateService.instant(
+        'quick-setting.device-layout-and-chords-loaded-message',
+      ),
+      undefined,
+      { duration: 3000 },
     );
   }
 }

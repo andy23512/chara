@@ -1,4 +1,11 @@
 {
+  "general": {
+    "step-info": "步驟 {{step}}/{{total}}: ",
+    "chords-loading-message": "載入和弦中...",
+    "chords-loaded-message": "和弦已成功載入。",
+    "device-layout-loading-message": "載入裝置佈局中...",
+    "device-layout-loaded-message": "裝置佈局已成功載入。"
+  },
   "home-page": {
     "website-name": "Chara 常陳四",
     "summary": [
@@ -31,18 +38,19 @@
   "settings-page": {
     "title": "設定",
     "panel-header": {
+      "quick-setting": "快捷設定",
       "os-keyboard-layout": "作業系統鍵盤佈局",
       "ui-language": "介面語言"
     }
+  },
+  "quick-setting": {
+    "load-device-layout-and-chords-from-device": "從裝置載入裝置佈局和和弦",
+    "device-layout-and-chords-loaded-message": "裝置佈局和和弦已成功載入。"
   },
   "os-keyboard-layout-setting": {
     "search-placeholder": "搜尋佈局...",
     "search-no-entry": "找不到符合的佈局。",
     "open-reference-button-tooltip": "開啟此佈局的參考網站",
     "reset-button-tooltip": "重置"
-  },
-  "chords-page": {
-    "chords-loading-message": "載入和弦中...",
-    "chords-loaded-message": "和弦已成功載入。"
   }
 }

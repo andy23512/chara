@@ -1,2 +1,7 @@
-<span>{{ data.message }} {{ data.progress }}</span>
+<span>
+  @if (data.stepInfo; as stepInfo) {
+    <span>{{ "general.step-info" | translate: stepInfo }}</span>
+  }
+  <span>{{ data.message }}</span>
+</span>
 <mat-progress-bar mode="determinate" [value]="data.progress"></mat-progress-bar>

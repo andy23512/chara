@@ -11,6 +11,7 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { OsKeyboardLayoutSettingPanelContentComponent } from 'src/app/components/os-keyboard-layout-setting-panel-content/os-keyboard-layout-setting-panel-content.component';
+import { QuickSettingPanelContentComponent } from 'src/app/components/quick-setting-panel-content/quick-setting-panel-content.component';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
@@ -26,6 +27,7 @@ import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
     RealTitleCasePipe,
     MatExpansionModule,
     OsKeyboardLayoutSettingPanelContentComponent,
+    QuickSettingPanelContentComponent,
   ],
   templateUrl: './settings-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

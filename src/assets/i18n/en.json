@@ -1,4 +1,11 @@
 {
+  "general": {
+    "step-info": "Step {{step}}/{{total}}: ",
+    "chords-loading-message": "Loading chords...",
+    "chords-loaded-message": "The chords are loaded successfully.",
+    "device-layout-loading-message": "Loading device layout...",
+    "device-layout-loaded-message": "The device layout is loaded successfully."
+  },
   "home-page": {
     "website-name": "Chara",
     "summary": [
@@ -32,18 +39,19 @@
   "settings-page": {
     "title": "settings",
     "panel-header": {
+      "quick-setting": "quick setting",
       "os-keyboard-layout": "OS keyboard layout",
       "ui-language": "UI language"
     }
+  },
+  "quick-setting": {
+    "load-device-layout-and-chords-from-device": "Load the device layout and the chords from device",
+    "device-layout-and-chords-loaded-message": "The device layout and the chords are loaded successfully."
   },
   "os-keyboard-layout-setting": {
     "search-placeholder": "Find layout...",
     "search-no-entry": "No matching layout was found.",
     "open-reference-button-tooltip": "open reference website for this layout",
     "reset-button-tooltip": "reset"
-  },
-  "chords-page": {
-    "chords-loading-message": "Loading chords...",
-    "chords-loaded-message": "Chords are loaded successfully."
   }
 }
