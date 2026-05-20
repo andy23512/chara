@@ -1,4 +1,11 @@
 {
+  "general": {
+    "step-info": "ステップ {{step}}/{{total}}：",
+    "chords-loading-message": "和音を読み込んでいます...",
+    "chords-loaded-message": "和音の読み込みに成功しました。",
+    "device-layout-loading-message": "デバイスレイアウトを読み込んでいます...",
+    "device-layout-loaded-message": "デバイスレイアウトの読み込みに成功しました。"
+  },
   "home-page": {
     "website-name": "Chara カラ",
     "summary": [
@@ -31,18 +38,19 @@
   "settings-page": {
     "title": "設定",
     "panel-header": {
+      "quick-setting": "クイック設定",
       "os-keyboard-layout": "OS キーボードレイアウト",
       "ui-language": "UI 言語"
     }
+  },
+  "quick-setting": {
+    "load-device-layout-and-chords-from-device": "デバイスからデバイスレイアウトと和音を読み込む",
+    "device-layout-and-chords-loaded-message": "デバイスレイアウトと和音の読み込みに成功しました。"
   },
   "os-keyboard-layout-setting": {
     "search-placeholder": "レイアウトを検索...",
     "search-no-entry": "一致するレイアウトが見つかりませんでした。",
     "open-reference-button-tooltip": "このレイアウトの参考ウェブサイトを開く",
     "reset-button-tooltip": "リセット"
-  },
-  "chords-page": {
-    "chords-loading-message": "和音を読み込んでいます...",
-    "chords-loaded-message": "和音の読み込みに成功しました。"
   }
 }
