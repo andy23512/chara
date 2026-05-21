@@ -45,7 +45,10 @@
   },
   "quick-setting": {
     "load-device-layout-and-chords-from-device": "從裝置載入裝置佈局和和弦",
-    "device-layout-and-chords-loaded-message": "裝置佈局和和弦已成功載入。"
+    "device-layout-and-chords-loaded-message": "裝置佈局和和弦已成功載入。",
+    "device-layout-non-loaded": "未載入裝置佈局",
+    "device-layout-loaded": "已載入裝置佈局",
+    "chord-stats": "{count} 個已載入的和弦"
   },
   "os-keyboard-layout-setting": {
     "search-placeholder": "搜尋佈局...",

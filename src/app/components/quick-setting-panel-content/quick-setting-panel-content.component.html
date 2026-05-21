@@ -6,3 +6,40 @@
 >
   {{ "quick-setting.load-device-layout-and-chords-from-device" | translate }}
 </button>
+<br />
+<mat-list>
+  @if (isDeviceLayoutLoaded()) {
+    <mat-list-item>
+      <mat-icon matListItemIcon>{{ "check_box" | iconGuard }}</mat-icon>
+      <span matListItemTitle>{{
+        "quick-setting.device-layout-loaded" | translate
+      }}</span>
+    </mat-list-item>
+  } @else {
+    <mat-list-item>
+      <mat-icon matListItemIcon class="!text-red-500">{{
+        "check_box_outline_blank" | iconGuard
+      }}</mat-icon>
+      <span matListItemTitle class="!text-red-500">{{
+        "quick-setting.device-layout-non-loaded" | translate
+      }}</span>
+    </mat-list-item>
+  }
+  @if (chordCount() > 0) {
+    <mat-list-item>
+      <mat-icon matListItemIcon>{{ "check_box" | iconGuard }}</mat-icon>
+      <span matListItemTitle>{{
+        "quick-setting.chord-stats" | translate: { count: chordCount() }
+      }}</span>
+    </mat-list-item>
+  } @else {
+    <mat-list-item>
+      <mat-icon matListItemIcon class="!text-red-500">{{
+        "check_box_outline_blank" | iconGuard
+      }}</mat-icon>
+      <span matListItemTitle class="!text-red-500">{{
+        "quick-setting.chord-stats" | translate: { count: chordCount() }
+      }}</span>
+    </mat-list-item>
+  }
+</mat-list>

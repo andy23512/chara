@@ -46,7 +46,10 @@
   },
   "quick-setting": {
     "load-device-layout-and-chords-from-device": "Load the device layout and the chords from device",
-    "device-layout-and-chords-loaded-message": "The device layout and the chords are loaded successfully."
+    "device-layout-and-chords-loaded-message": "The device layout and the chords are loaded successfully.",
+    "device-layout-non-loaded": "Device layout non-loaded",
+    "device-layout-loaded": "Device layout loaded",
+    "chord-stats": "{count, plural, =0 {No loaded chords} one {1 loaded chord} other {{count} loaded chords}}"
   },
   "os-keyboard-layout-setting": {
     "search-placeholder": "Find layout...",

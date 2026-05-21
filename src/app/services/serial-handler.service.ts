@@ -10,6 +10,7 @@ import {
   ProgressSnackBarData,
   ProgressSnackBarStepInfo,
 } from '../components/progress-snack-bar/progress-snack-bar.component';
+import { DeviceLayoutStore } from '../stores/device-layout.store';
 import { FlatChordTreeNodeStore } from '../stores/flat-chord-tree-node.store';
 import { flattenChordTreeNodes } from '../utils/chord.utils';
 import { SerialPortHandlerService } from './serial-port-handler.service';
@@ -19,6 +20,7 @@ export class SerialHandlerService extends SerialHandler {
   private readonly matSnackBar = inject(MatSnackBar);
   private readonly translateService = inject(TranslateService);
   private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
+  private readonly deviceLayoutStore = inject(DeviceLayoutStore);
 
   constructor(protected serialPortHandlerService: SerialPortHandlerService) {
     super(serialPortHandlerService);
@@ -49,7 +51,7 @@ export class SerialHandlerService extends SerialHandler {
             if (!profileLayoutMap) {
               return;
             }
-            console.log(profileLayoutMap); // TODO - save profile layout map to store
+            this.deviceLayoutStore.setProfileLayoutMap(profileLayoutMap);
             if (!stepInfo) {
               this.matSnackBar.open(
                 this.translateService.instant(

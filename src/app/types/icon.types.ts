@@ -6,6 +6,8 @@ export type Icon =
   | 'abc'
   | 'arrow_right'
   | 'article'
+  | 'check_box'
+  | 'check_box_outline_blank'
   | 'chevron_left'
   | 'chevron_right'
   | 'close'

@@ -2,7 +2,7 @@
   {{ "settings-page.title" | translate | realTitleCase }}
 </h2>
 <mat-accordion>
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header class="!text-xl">{{
       "settings-page.panel-header.quick-setting" | translate | realTitleCase
     }}</mat-expansion-panel-header>

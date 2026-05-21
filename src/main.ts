@@ -11,8 +11,13 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideLoadingBarInterceptor } from '@ngx-loading-bar/http-client';
 import { provideLoadingBarRouter } from '@ngx-loading-bar/router';
-import { provideTranslateService, TranslateService } from '@ngx-translate/core';
+import {
+  provideTranslateService,
+  TranslateCompiler,
+  TranslateService,
+} from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import { AppComponent } from './app/app.component';
 import { APP_ROUTES } from './app/app.routes';
 import { LlmService } from './app/services/llm.service';
@@ -41,5 +46,6 @@ bootstrapApplication(AppComponent, {
       const llmService = inject(LlmService);
       llmService.initEngine();
     }),
+    { provide: TranslateCompiler, useClass: TranslateMessageFormatCompiler },
   ],
 }).catch((err) => console.error(err));

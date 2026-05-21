@@ -1,8 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import {
+  MatList,
+  MatListItem,
+  MatListItemIcon,
+  MatListItemTitle,
+} from '@angular/material/list';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { SerialHandlerService } from 'src/app/services/serial-handler.service';
+import { DeviceLayoutStore } from 'src/app/stores/device-layout.store';
+import { FlatChordTreeNodeStore } from 'src/app/stores/flat-chord-tree-node.store';
 
 interface QuickSetting {
   name: string;
@@ -14,12 +24,33 @@ interface QuickSetting {
   selector: 'app-quick-setting-panel-content',
   templateUrl: './quick-setting-panel-content.component.html',
   standalone: true,
-  imports: [MatButton, TranslatePipe],
+  imports: [
+    MatButton,
+    TranslatePipe,
+    MatList,
+    MatListItem,
+    MatListItemIcon,
+    IconGuardPipe,
+    MatIcon,
+    MatListItemTitle,
+  ],
 })
 export class QuickSettingPanelContentComponent {
   private readonly serialHandlerService = inject(SerialHandlerService);
   private readonly translateService = inject(TranslateService);
   private readonly matSnackBar = inject(MatSnackBar);
+  private readonly deviceLayoutStore = inject(DeviceLayoutStore);
+  private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
+
+  public isDeviceLayoutLoaded = computed(() => {
+    const profileLayoutMap = this.deviceLayoutStore.profileLayoutMap();
+    return Object.keys(profileLayoutMap).length > 0;
+  });
+
+  public chordCount = computed(() => {
+    const flatChordTreeNodes = this.flatChordTreeNodeStore.entities();
+    return flatChordTreeNodes.length;
+  });
 
   public async loadDeviceLayoutAndChordsFromDevice() {
     await this.serialHandlerService.connect();
