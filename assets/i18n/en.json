@@ -4,7 +4,10 @@
     "chords-loading-message": "Loading chords...",
     "chords-loaded-message": "The chords are loaded successfully.",
     "device-layout-loading-message": "Loading device layout...",
-    "device-layout-loaded-message": "The device layout is loaded successfully."
+    "device-layout-loaded-message": "The device layout is loaded successfully.",
+    "cancel-action": "cancel",
+    "delete-confirm-button": "Yes. Delete them.",
+    "delete-single-confirm-button": "Yes. Delete it."
   },
   "home-page": {
     "website-name": "Chara",
@@ -41,6 +44,7 @@
     "panel-header": {
       "quick-setting": "quick setting",
       "os-keyboard-layout": "OS keyboard layout",
+      "data-deletion": "data deletion",
       "ui-language": "UI language"
     }
   },
@@ -56,5 +60,17 @@
     "search-no-entry": "No matching layout was found.",
     "open-reference-button-tooltip": "open reference website for this layout",
     "reset-button-tooltip": "reset"
+  },
+  "data-deletion-setting": {
+    "delete-loaded-device-layout": "delete loaded device layout",
+    "delete-all-loaded-chords": "delete all loaded chords",
+    "device-layout-deleted": "The loaded device layouts have been deleted.",
+    "chords-deleted": "All loaded chords have been deleted."
+  },
+  "delete-device-layout-confirm-dialog": {
+    "description": "Are you sure to delete the loaded device layout?"
+  },
+  "delete-chords-confirm-dialog": {
+    "description": "Are you sure to delete all loaded chords?"
   }
 }
