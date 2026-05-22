@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  inject,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SwitchComponent } from 'src/app/components/switch/switch.component';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
+import { QuickSettingService } from 'src/app/services/quick-setting.service';
 import { Layer } from 'tangent-cc-lib';
 
 function getHighlightPositionCodes() {
@@ -41,8 +47,14 @@ function getHighlightPositionCodes() {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent {
+  private readonly quickSettingService = inject(QuickSettingService);
+
   highlightPositionCodes: number[] = getHighlightPositionCodes();
 
   @HostBinding('class') classes = 'block relative h-full';
   readonly Layer = Layer;
+
+  public loadDeviceLayoutAndChordsFromDevice() {
+    this.quickSettingService.loadDeviceLayoutAndChordsFromDevice();
+  }
 }

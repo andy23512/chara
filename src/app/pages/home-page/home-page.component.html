@@ -46,6 +46,18 @@
     <div>{{ "home-page.summary.2" | translate }}</div>
   </div>
   <div>
+    <button
+      type="button"
+      matButton="outlined"
+      color="primary"
+      (click)="loadDeviceLayoutAndChordsFromDevice()"
+    >
+      {{
+        "quick-setting.load-device-layout-and-chords-from-device" | translate
+      }}
+    </button>
+  </div>
+  <div>
     <a href="https://github.com/andy23512/chara" target="_blank" rel="noopener">
       <button type="button" mat-button>
         <mat-icon>{{ "code" | iconGuard }}</mat-icon>

@@ -7,10 +7,9 @@ import {
   MatListItemIcon,
   MatListItemTitle,
 } from '@angular/material/list';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
-import { SerialHandlerService } from 'src/app/services/serial-handler.service';
+import { QuickSettingService } from 'src/app/services/quick-setting.service';
 import { DeviceLayoutStore } from 'src/app/stores/device-layout.store';
 import { FlatChordTreeNodeStore } from 'src/app/stores/flat-chord-tree-node.store';
 
@@ -36,9 +35,7 @@ interface QuickSetting {
   ],
 })
 export class QuickSettingPanelContentComponent {
-  private readonly serialHandlerService = inject(SerialHandlerService);
-  private readonly translateService = inject(TranslateService);
-  private readonly matSnackBar = inject(MatSnackBar);
+  private readonly quickSettingService = inject(QuickSettingService);
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
   private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
 
@@ -46,23 +43,7 @@ export class QuickSettingPanelContentComponent {
     this.deviceLayoutStore.hasLoadedProfileLayoutMap;
   public chordCount = this.flatChordTreeNodeStore.entityCount;
 
-  public async loadDeviceLayoutAndChordsFromDevice() {
-    await this.serialHandlerService.connect();
-    await this.serialHandlerService.loadProfileLayoutMapWithProgressSnackBar({
-      step: 1,
-      total: 2,
-    });
-    await this.serialHandlerService.loadChordsWithProgressSnackBar({
-      step: 2,
-      total: 2,
-    });
-    await this.serialHandlerService.disconnect();
-    this.matSnackBar.open(
-      this.translateService.instant(
-        'quick-setting.device-layout-and-chords-loaded-message',
-      ),
-      undefined,
-      { duration: 3000 },
-    );
+  public loadDeviceLayoutAndChordsFromDevice() {
+    this.quickSettingService.loadDeviceLayoutAndChordsFromDevice();
   }
 }
