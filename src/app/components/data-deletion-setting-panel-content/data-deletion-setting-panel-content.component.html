@@ -1,0 +1,30 @@
+<div class="flex flex-col items-start gap-3">
+  <button
+    type="button"
+    [color]="'warn'"
+    mat-flat-button
+    (click)="openDeleteDeviceLayoutConfirmDialog()"
+    [disabled]="!isDeviceLayoutLoaded()"
+  >
+    <mat-icon>{{ "delete" | iconGuard }}</mat-icon>
+    {{
+      "data-deletion-setting.delete-loaded-device-layout"
+        | translate
+        | sentenceCase
+    }}
+  </button>
+  <button
+    type="button"
+    [color]="'warn'"
+    mat-flat-button
+    (click)="openDeleteChordsConfirmDialog()"
+    [disabled]="chordCount() === 0"
+  >
+    <mat-icon>{{ "delete" | iconGuard }}</mat-icon>
+    {{
+      "data-deletion-setting.delete-all-loaded-chords"
+        | translate
+        | sentenceCase
+    }}
+  </button>
+</div>

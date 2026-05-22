@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { DataDeletionSettingPanelContentComponent } from 'src/app/components/data-deletion-setting-panel-content/data-deletion-setting-panel-content.component';
 import { OsKeyboardLayoutSettingPanelContentComponent } from 'src/app/components/os-keyboard-layout-setting-panel-content/os-keyboard-layout-setting-panel-content.component';
 import { QuickSettingPanelContentComponent } from 'src/app/components/quick-setting-panel-content/quick-setting-panel-content.component';
 import { UiLanguage } from 'src/app/models/language-setting.models';
@@ -28,6 +29,7 @@ import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
     MatExpansionModule,
     OsKeyboardLayoutSettingPanelContentComponent,
     QuickSettingPanelContentComponent,
+    DataDeletionSettingPanelContentComponent,
   ],
   templateUrl: './settings-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

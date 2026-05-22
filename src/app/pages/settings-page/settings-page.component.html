@@ -22,6 +22,14 @@
   </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header class="!text-xl">{{
+      "settings-page.panel-header.data-deletion" | translate | realTitleCase
+    }}</mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <app-data-deletion-setting-panel-content></app-data-deletion-setting-panel-content>
+    </ng-template>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header class="!text-xl">{{
       "settings-page.panel-header.ui-language" | translate | realTitleCase
     }}</mat-expansion-panel-header>
     <ng-template matExpansionPanelContent>

@@ -1,0 +1,16 @@
+<mat-dialog-content class="whitespace-pre-wrap">{{
+  "delete-chords-confirm-dialog.description" | translate
+}}</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button type="button" mat-button mat-dialog-close>
+    {{ "general.cancel-action" | translate | sentenceCase }}
+  </button>
+  <button
+    type="button"
+    mat-button
+    [color]="'warn'"
+    [mat-dialog-close]="{ confirmed: true }"
+  >
+    {{ "general.delete-confirm-button" | translate | sentenceCase }}
+  </button>
+</mat-dialog-actions>

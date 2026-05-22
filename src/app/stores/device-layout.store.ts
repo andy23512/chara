@@ -2,7 +2,14 @@ import {
   withDevtools,
   withStorageSync,
 } from '@angular-architects/ngrx-toolkit';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { computed } from '@angular/core';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { ProfileLayoutMap } from 'tangent-cc-lib';
 import { prefixStorageKey } from '../utils/store.utils';
 
@@ -14,9 +21,18 @@ export const DeviceLayoutStore = signalStore(
   withState({
     profileLayoutMap: {} as ProfileLayoutMap,
   }),
+  withComputed((state) => ({
+    hasLoadedProfileLayoutMap: computed(() => {
+      const profileLayoutMap = state.profileLayoutMap();
+      return Object.keys(profileLayoutMap).length > 0;
+    }),
+  })),
   withMethods((store) => ({
     setProfileLayoutMap(profileLayoutMap: ProfileLayoutMap) {
       patchState(store, (state) => ({ ...state, profileLayoutMap }));
+    },
+    deleteProfileLayoutMap() {
+      patchState(store, (state) => ({ ...state, profileLayoutMap: {} }));
     },
   })),
 );

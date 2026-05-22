@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -42,15 +42,9 @@ export class QuickSettingPanelContentComponent {
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
   private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
 
-  public isDeviceLayoutLoaded = computed(() => {
-    const profileLayoutMap = this.deviceLayoutStore.profileLayoutMap();
-    return Object.keys(profileLayoutMap).length > 0;
-  });
-
-  public chordCount = computed(() => {
-    const flatChordTreeNodes = this.flatChordTreeNodeStore.entities();
-    return flatChordTreeNodes.length;
-  });
+  public isDeviceLayoutLoaded =
+    this.deviceLayoutStore.hasLoadedProfileLayoutMap;
+  public chordCount = this.flatChordTreeNodeStore.entityCount;
 
   public async loadDeviceLayoutAndChordsFromDevice() {
     await this.serialHandlerService.connect();

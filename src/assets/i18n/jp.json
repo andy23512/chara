@@ -4,7 +4,10 @@
     "chords-loading-message": "和音を読み込んでいます...",
     "chords-loaded-message": "和音の読み込みに成功しました。",
     "device-layout-loading-message": "デバイスレイアウトを読み込んでいます...",
-    "device-layout-loaded-message": "デバイスレイアウトの読み込みに成功しました。"
+    "device-layout-loaded-message": "デバイスレイアウトの読み込みに成功しました。",
+    "cancel-action": "キャンセル",
+    "delete-confirm-button": "はい、削除します。",
+    "delete-single-confirm-button": "はい、削除します。"
   },
   "home-page": {
     "website-name": "Chara カラ",
@@ -40,6 +43,7 @@
     "panel-header": {
       "quick-setting": "クイック設定",
       "os-keyboard-layout": "OS キーボードレイアウト",
+      "data-deletion": "データ削除",
       "ui-language": "UI 言語"
     }
   },
@@ -48,12 +52,24 @@
     "device-layout-and-chords-loaded-message": "デバイスレイアウトと和音の読み込みに成功しました。",
     "device-layout-non-loaded": "デバイスレイアウト未読込",
     "device-layout-loaded": "デバイスレイアウト読込済",
-    "chord-stats": "{{count}} 個の読み込みされた和音"
+    "chord-stats": "{count} 個の読み込みされた和音"
   },
   "os-keyboard-layout-setting": {
     "search-placeholder": "レイアウトを検索...",
     "search-no-entry": "一致するレイアウトが見つかりませんでした。",
     "open-reference-button-tooltip": "このレイアウトの参考ウェブサイトを開く",
     "reset-button-tooltip": "リセット"
+  },
+  "data-deletion-setting": {
+    "delete-loaded-device-layout": "読み込みされたデバイスレイアウトを削除",
+    "delete-all-loaded-chords": "すべての読み込みされた和音を削除",
+    "device-layout-deleted": "読み込みされたデバイスレイアウトが削除されました。",
+    "chords-deleted": "すべての読み込みされた和音が削除されました。"
+  },
+  "delete-device-layout-confirm-dialog": {
+    "description": "読み込みされたデバイスレイアウトを削除してもよろしいですか？"
+  },
+  "delete-chords-confirm-dialog": {
+    "description": "読み込みされた和音をすべて削除してもよろしいですか？"
   }
 }
