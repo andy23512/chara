@@ -21,7 +21,6 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import { AppComponent } from './app/app.component';
 import { APP_ROUTES } from './app/app.routes';
-import { LlmService } from './app/services/llm.service';
 import { LanguageSettingStore } from './app/stores/language-setting.store';
 
 bootstrapApplication(AppComponent, {
@@ -40,12 +39,8 @@ bootstrapApplication(AppComponent, {
       }),
     }),
     provideAppInitializer(() => {
-      const _languageSettingStore = inject(LanguageSettingStore);
-      const _translateService = inject(TranslateService);
-    }),
-    provideAppInitializer(() => {
-      const llmService = inject(LlmService);
-      llmService.initEngine();
+      inject(LanguageSettingStore);
+      inject(TranslateService);
     }),
     { provide: TranslateCompiler, useClass: TranslateMessageFormatCompiler },
     {
