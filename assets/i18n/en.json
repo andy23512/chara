@@ -36,6 +36,17 @@
         "title": "info",
         "tooltip": "Go to Information page",
         "aria-label": "information page link"
+      },
+      "chords": {
+        "title": "chords",
+        "tooltip": "Go to Chords page",
+        "aria-label": "chords page link"
+      },
+      "adaptation": {
+        "title": "adapt",
+        "tooltip": "Go to Adaptation page",
+        "aria-label": "adaptation page link",
+        "disabledTooltip": "Go to settings page and load device layout and chords to use the adaption page."
       }
     }
   },
