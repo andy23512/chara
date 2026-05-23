@@ -46,6 +46,16 @@
         "tooltip": "適応ページへ移動",
         "aria-label": "適応ページリンク",
         "lock-message": "設定ページでデバイスのレイアウトとコードを読み込んで、適応ページを使用してください。"
+      },
+      "realization": {
+        "title": "実現",
+        "tooltip": "実現ページへ移動",
+        "aria-label": "実現ページリンク"
+      },
+      "accumulation": {
+        "title": "蓄積",
+        "tooltip": "蓄積ページへ移動",
+        "aria-label": "蓄積ページリンク"
       }
     }
   },

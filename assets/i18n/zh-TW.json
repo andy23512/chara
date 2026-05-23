@@ -46,6 +46,16 @@
         "tooltip": "前往適應頁面",
         "aria-label": "適應頁面連結",
         "lock-message": "在設定頁面載入裝置佈局和和弦，以使用適應頁面。"
+      },
+      "realization": {
+        "title": "實現",
+        "tooltip": "前往實現頁面",
+        "aria-label": "實現頁面連結"
+      },
+      "accumulation": {
+        "title": "積累",
+        "tooltip": "前往積累頁面",
+        "aria-label": "積累頁面連結"
       }
     }
   },
