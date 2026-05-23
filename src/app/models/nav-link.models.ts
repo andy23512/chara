@@ -9,6 +9,6 @@ export interface NavLink {
   routerLinkActiveOptions: RouterLinkActive['routerLinkActiveOptions'];
   ariaLabel: string;
   tooltipMessage: string;
-  disabledTooltipMessage?: string;
+  lockMessage?: string;
   icon: Icon;
 }

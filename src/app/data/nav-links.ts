@@ -48,7 +48,7 @@ export const MAIN_NAV_LINKS: NavLink[] = [
     routerLinkActiveOptions: { exact: false },
     ariaLabel: 'nav.page.adapt.aria-label',
     tooltipMessage: 'nav.page.adaptation.tooltip',
-    disabledTooltipMessage: 'nav.page.adaptation.disabledTooltip',
+    lockMessage: 'nav.page.adaptation.lock-message',
     icon: 'published_with_changes',
   },
   {

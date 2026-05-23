@@ -52,10 +52,8 @@
             #rla="routerLinkActive"
             [attr.aria-label]="navLink.ariaLabel | translate"
             [matTooltip]="
-              (navLink.enabled()
-                ? navLink.tooltipMessage
-                : navLink.disabledTooltipMessage
-              ) | translate
+              (navLink.enabled() ? navLink.tooltipMessage : navLink.lockMessage)
+                | translate
             "
             [matTooltipPosition]="'right'"
             [class.!bg-chara-500]="rla.isActive"

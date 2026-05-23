@@ -46,7 +46,7 @@
         "title": "adapt",
         "tooltip": "Go to Adaptation page",
         "aria-label": "adaptation page link",
-        "disabledTooltip": "Go to settings page and load device layout and chords to use the adaption page."
+        "lock-message": "Load device layout and chords on settings page to use the adaption page."
       }
     }
   },
