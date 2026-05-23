@@ -35,6 +35,17 @@
         "title": "情報",
         "tooltip": "情報ページへ移動",
         "aria-label": "情報ページリンク"
+      },
+      "chords": {
+        "title": "和音",
+        "tooltip": "和音ページへ移動",
+        "aria-label": "和音ページリンク"
+      },
+      "adaptation": {
+        "title": "適応",
+        "tooltip": "適応ページへ移動",
+        "aria-label": "適応ページリンク",
+        "disabledTooltip": "設定ページへ移動し、デバイスのレイアウトとコードを読み込んで適応ページを使用してください。"
       }
     }
   },

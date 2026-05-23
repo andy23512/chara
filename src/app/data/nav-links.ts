@@ -1,7 +1,9 @@
 import { NavLink } from '../models/nav-link.models';
+import { Page } from '../models/page.models';
 
 export const NAV_LINKS: NavLink[] = [
   {
+    page: Page.Home,
     title: 'nav.page.home.title',
     routerLink: '/',
     routerLinkActiveOptions: { exact: true },
@@ -10,6 +12,7 @@ export const NAV_LINKS: NavLink[] = [
     icon: 'home',
   },
   {
+    page: Page.Settings,
     title: 'nav.page.settings.title',
     routerLink: '/settings',
     routerLinkActiveOptions: { exact: false },
@@ -18,6 +21,7 @@ export const NAV_LINKS: NavLink[] = [
     icon: 'settings',
   },
   {
+    page: Page.Information,
     title: 'nav.page.information.title',
     routerLink: '/information',
     routerLinkActiveOptions: { exact: false },
@@ -29,7 +33,8 @@ export const NAV_LINKS: NavLink[] = [
 
 export const MAIN_NAV_LINKS: NavLink[] = [
   {
-    title: 'Chords',
+    page: Page.Chords,
+    title: 'nav.page.chords.title',
     routerLink: '/chords',
     routerLinkActiveOptions: { exact: false },
     ariaLabel: 'nav.page.chords.aria-label',
@@ -37,14 +42,17 @@ export const MAIN_NAV_LINKS: NavLink[] = [
     icon: 'piano',
   },
   {
-    title: 'Adapt',
+    page: Page.Adaptation,
+    title: 'nav.page.adaptation.title',
     routerLink: '/adaptation',
     routerLinkActiveOptions: { exact: false },
     ariaLabel: 'nav.page.adapt.aria-label',
-    tooltipMessage: 'nav.page.adapt.tooltip',
+    tooltipMessage: 'nav.page.adaptation.tooltip',
+    disabledTooltipMessage: 'nav.page.adaptation.disabledTooltip',
     icon: 'published_with_changes',
   },
   {
+    page: Page.Realization,
     title: 'Realize',
     routerLink: '/realization',
     routerLinkActiveOptions: { exact: false },
@@ -53,6 +61,7 @@ export const MAIN_NAV_LINKS: NavLink[] = [
     icon: 'model_training',
   },
   {
+    page: Page.Accumulation,
     title: 'Accum',
     routerLink: '/accumulation',
     routerLinkActiveOptions: { exact: false },

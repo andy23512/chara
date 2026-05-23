@@ -35,6 +35,17 @@
         "title": "資訊",
         "tooltip": "前往資訊頁面",
         "aria-label": "資訊頁面連結"
+      },
+      "chords": {
+        "title": "和弦",
+        "tooltip": "前往和弦頁面",
+        "aria-label": "和弦頁面連結"
+      },
+      "adaptation": {
+        "title": "適應",
+        "tooltip": "前往適應頁面",
+        "aria-label": "適應頁面連結",
+        "disabledTooltip": "到設定頁面載入裝置佈局和和弦，以使用適應頁面。"
       }
     }
   },

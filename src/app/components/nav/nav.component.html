@@ -13,7 +13,7 @@
       <div class="flex flex-wrap">
         @for (navLink of navLinks; track $index) {
           <a
-            [routerLink]="navLink.routerLink"
+            [routerLink]="navLink.enabled() ? navLink.routerLink : null"
             routerLinkActive
             [routerLinkActiveOptions]="navLink.routerLinkActiveOptions"
             #rla="routerLinkActive"
@@ -23,7 +23,11 @@
             [class.!bg-chara-500]="rla.isActive"
             [class.!text-gray-900]="rla.isActive"
           >
-            <button type="button" mat-icon-button>
+            <button
+              type="button"
+              mat-icon-button
+              [disabled]="!navLink.enabled()"
+            >
               <mat-icon>{{ navLink.icon | iconGuard }}</mat-icon>
             </button>
           </a>
@@ -42,12 +46,17 @@
 
         @for (navLink of mainNavLinks; track $index) {
           <a
-            [routerLink]="navLink.routerLink"
+            [routerLink]="navLink.enabled() ? navLink.routerLink : null"
             routerLinkActive
             [routerLinkActiveOptions]="navLink.routerLinkActiveOptions"
             #rla="routerLinkActive"
             [attr.aria-label]="navLink.ariaLabel | translate"
-            [matTooltip]="navLink.tooltipMessage | translate"
+            [matTooltip]="
+              (navLink.enabled()
+                ? navLink.tooltipMessage
+                : navLink.disabledTooltipMessage
+              ) | translate
+            "
             [matTooltipPosition]="'right'"
             [class.!bg-chara-500]="rla.isActive"
           >
@@ -56,11 +65,12 @@
               mat-button
               class="!size-24 flex-col gap-1"
               [class.!text-gray-900]="rla.isActive"
+              [disabled]="!navLink.enabled()"
             >
               <mat-icon class="!m-0 !size-8 !text-4xl">{{
                 navLink.icon | iconGuard
               }}</mat-icon>
-              <span>{{ navLink.title }}</span>
+              <span>{{ navLink.title | translate | realTitleCase }}</span>
             </button>
           </a>
         }

@@ -17,6 +17,8 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { MAIN_NAV_LINKS, NAV_LINKS } from 'src/app/data/nav-links';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
+import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
+import { PageLockService } from 'src/app/services/page-lock.service';
 import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component';
 
 @Component({
@@ -37,11 +39,20 @@ import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component'
     RouterOutlet,
     IconGuardPipe,
     TranslatePipe,
+    RealTitleCasePipe,
   ],
 })
 export class NavComponent {
-  public navLinks = NAV_LINKS;
-  public mainNavLinks = MAIN_NAV_LINKS;
+  private readonly pageLockService = inject(PageLockService);
+
+  public navLinks = NAV_LINKS.map((link) => ({
+    ...link,
+    enabled: this.pageLockService.canAccessPage(link.page),
+  }));
+  public mainNavLinks = MAIN_NAV_LINKS.map((link) => ({
+    ...link,
+    enabled: this.pageLockService.canAccessPage(link.page),
+  }));
 
   private readonly matDialog = inject(MatDialog);
 
