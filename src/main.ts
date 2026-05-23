@@ -7,6 +7,7 @@ import {
   provideAppInitializer,
   provideZoneChangeDetection,
 } from '@angular/core';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideLoadingBarInterceptor } from '@ngx-loading-bar/http-client';
@@ -47,5 +48,9 @@ bootstrapApplication(AppComponent, {
       llmService.initEngine();
     }),
     { provide: TranslateCompiler, useClass: TranslateMessageFormatCompiler },
+    {
+      provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
+      useValue: { disableTooltipInteractivity: true },
+    },
   ],
 }).catch((err) => console.error(err));
