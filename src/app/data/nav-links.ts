@@ -70,3 +70,5 @@ export const MAIN_NAV_LINKS: NavLink[] = [
     icon: 'merge',
   },
 ];
+
+export const ALL_NAV_LINKS = [...NAV_LINKS, ...MAIN_NAV_LINKS];
