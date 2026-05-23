@@ -18,7 +18,10 @@
             [routerLinkActiveOptions]="navLink.routerLinkActiveOptions"
             #rla="routerLinkActive"
             [attr.aria-label]="navLink.ariaLabel | translate"
-            [matTooltip]="navLink.tooltipMessage | translate"
+            [matTooltip]="
+              (navLink.enabled() ? navLink.tooltipMessage : navLink.lockMessage)
+                | translate
+            "
             [matTooltipPosition]="'right'"
             [class.!bg-chara-500]="rla.isActive"
             [class.!text-gray-900]="rla.isActive"
@@ -39,6 +42,7 @@
             aria-label="button that opens hotkey dialog"
             (click)="openHotkeyDialog()"
             matTooltip="Open Hotkey Dialog"
+            [disabled]="true"
           >
             <mat-icon>{{ "keyboard" | iconGuard }}</mat-icon>
           </button></a

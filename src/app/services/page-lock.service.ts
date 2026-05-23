@@ -19,6 +19,7 @@ export class PageLockService {
         });
       case Page.Realization:
       case Page.Accumulation:
+      case Page.Information:
         return signal(false);
       default:
         return signal(true);
