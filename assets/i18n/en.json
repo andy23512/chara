@@ -1,6 +1,6 @@
 {
   "general": {
-    "step-info": "Step {{step}}/{{total}}: ",
+    "step-info": "Step {step}/{total}: ",
     "chords-loading-message": "Loading chords...",
     "chords-loaded-message": "The chords are loaded successfully.",
     "device-layout-loading-message": "Loading device layout...",
