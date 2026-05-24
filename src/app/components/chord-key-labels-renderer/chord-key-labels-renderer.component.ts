@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ICellEditorRendererAngularComp } from 'ag-grid-angular';
-import { ICellEditorRendererParams } from 'ag-grid-community';
+import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ICellRendererParams } from 'ag-grid-community';
 import { ChordKeyLabel } from 'src/app/models/chord.models';
 import { ChordKeyLabelComponent } from '../chord-key-label/chord-key-label.component';
 
@@ -12,11 +12,16 @@ import { ChordKeyLabelComponent } from '../chord-key-label/chord-key-label.compo
   imports: [ChordKeyLabelComponent],
 })
 export class ChordKeyLabelsRendererComponent
-  implements ICellEditorRendererAngularComp
+  implements ICellRendererAngularComp
 {
   public chordKeyLabels!: ChordKeyLabel[];
 
-  agInit(params: ICellEditorRendererParams<any, any, any>): void {
+  agInit(params: ICellRendererParams<any, any, any>): void {
     this.chordKeyLabels = params.value;
+  }
+
+  refresh(params: ICellRendererParams<any, any, any>): boolean {
+    this.chordKeyLabels = params.value;
+    return true;
   }
 }

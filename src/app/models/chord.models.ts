@@ -46,3 +46,8 @@ export interface ChordData extends Chord {
   ancestorsKeyLabels: ChordKeyLabel[][];
   textOutput: string;
 }
+
+export interface ChordDataWithLabelState extends ChordData {
+  bookmarked: boolean;
+  blocked: boolean;
+}

@@ -38,15 +38,18 @@ import {
   themeQuartz,
 } from 'ag-grid-community';
 import { AncestorsKeyLabelsRendererComponent } from 'src/app/components/ancestors-key-labels-renderer/ancestors-key-labels-renderer.component';
+import { ChordActionButtonsRendererComponent } from 'src/app/components/chord-action-buttons-renderer/chord-action-buttons-renderer.component';
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
-import { ChordData } from 'src/app/models/chord.models';
+import { ChordDataWithLabelState } from 'src/app/models/chord.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { OperatingSystemService } from 'src/app/services/operating-system.service';
 import { SerialHandlerService } from 'src/app/services/serial-handler.service';
+import { ChordLabelStore } from 'src/app/stores/chord-label.store';
 import { FlatChordTreeNodeStore } from 'src/app/stores/flat-chord-tree-node.store';
 import { KeyboardLayoutSettingStore } from 'src/app/stores/keyboard-layout-setting.store';
 import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
 import {
+  appendLabelStateToChordData,
   convertFlattenedChordTreeNodesToChordData,
   flattenChordTreeNodes,
 } from 'src/app/utils/chord.utils';
@@ -79,12 +82,14 @@ export class ChordsPageComponent {
   @HostBinding('class') public hostClasses = ['flex', 'flex-col', 'h-full'];
   public tableTheme = tableTheme;
   public isDevMode = isDevMode();
+
   public flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
   public flatChordTreeNodes = this.flatChordTreeNodeStore.entities;
   public keyboardLayout = inject(KeyboardLayoutSettingStore).selectedEntity;
   public operatingSystem = inject(OperatingSystemService);
   public languageSettingStore = inject(LanguageSettingStore);
   private readonly serialHandlerService = inject(SerialHandlerService);
+  private readonly chordLabelStore = inject(ChordLabelStore);
 
   public fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
@@ -108,7 +113,7 @@ export class ChordsPageComponent {
     }
   });
 
-  public chordDataList = computed(() => {
+  private readonly chordDataList = computed(() => {
     const keyboardLayout = this.keyboardLayout();
     const operatingSystem = this.operatingSystem.getOS();
     return convertFlattenedChordTreeNodesToChordData(
@@ -117,9 +122,23 @@ export class ChordsPageComponent {
       operatingSystem,
     );
   });
+
+  public chordDataListWithLabelState = computed(() => {
+    const bookmarkedHashSet = this.chordLabelStore.bookmarkedHashSet();
+    const blockedHashSet = this.chordLabelStore.blockedHashSet();
+    return this.chordDataList().map((c) =>
+      appendLabelStateToChordData(c, bookmarkedHashSet, blockedHashSet),
+    );
+  });
+
   public selectedIdList = signal<number[]>([]);
 
-  colDefs: ColDef<ChordData>[] = [
+  colDefs: ColDef<ChordDataWithLabelState>[] = [
+    {
+      width: 100,
+      headerName: '',
+      cellRenderer: ChordActionButtonsRendererComponent,
+    },
     {
       field: 'inputKeyLabels',
       headerName: 'Input',

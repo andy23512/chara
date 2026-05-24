@@ -11,6 +11,7 @@ import {
 } from 'tangent-cc-lib';
 import {
   ChordData,
+  ChordDataWithLabelState,
   ChordKeyLabel,
   ChordKeyLabelType,
 } from '../models/chord.models';
@@ -161,6 +162,7 @@ export function convertFlattenedChordTreeNodesToChordData(
     actions: node.actions,
     output: node.output,
     parentId: node.parentId,
+    actionAndPhraseHash: node.actionAndPhraseHash,
     inputKeyLabels: inputKeyLabelsMap.get(node.id)!,
     outputKeyLabels: outputKeyLabelsMap.get(node.id)!,
     ancestorsKeyLabels: node.ancestors.map(
@@ -250,4 +252,16 @@ function calculateTextOutputFromChordOutput(
     releaseCurrent = false;
   });
   return textOutput;
+}
+
+export function appendLabelStateToChordData(
+  chordData: ChordData,
+  bookmarkedHashSet: Set<string>,
+  blockedHashSet: Set<string>,
+): ChordDataWithLabelState {
+  return {
+    ...chordData,
+    bookmarked: bookmarkedHashSet.has(chordData.actionAndPhraseHash),
+    blocked: blockedHashSet.has(chordData.actionAndPhraseHash),
+  };
 }

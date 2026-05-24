@@ -1,0 +1,16 @@
+<div class="flex h-full items-center gap-2">
+  <mat-icon
+    [class.opacity-20]="!chord.bookmarked"
+    [class.text-chara-500]="chord.bookmarked"
+    class="cursor-pointer hover:opacity-100"
+    (click)="toggleBookmarkedState(chord)"
+    >{{ "bookmark" | iconGuard }}</mat-icon
+  >
+  <mat-icon
+    [class.opacity-20]="!chord.blocked"
+    [class.text-red-500]="chord.blocked"
+    class="cursor-pointer hover:opacity-100"
+    (click)="toggleBlockedState(chord)"
+    >{{ "block" | iconGuard }}</mat-icon
+  >
+</div>
