@@ -42,17 +42,11 @@ import { ChordActionButtonsRendererComponent } from 'src/app/components/chord-ac
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
 import { ChordDataWithLabelState } from 'src/app/models/chord.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
-import { OperatingSystemService } from 'src/app/services/operating-system.service';
+import { ChordDataService } from 'src/app/services/chord-data.service';
 import { SerialHandlerService } from 'src/app/services/serial-handler.service';
-import { ChordLabelStore } from 'src/app/stores/chord-label.store';
 import { FlatChordTreeNodeStore } from 'src/app/stores/flat-chord-tree-node.store';
-import { KeyboardLayoutSettingStore } from 'src/app/stores/keyboard-layout-setting.store';
 import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
-import {
-  appendLabelStateToChordData,
-  convertFlattenedChordTreeNodesToChordData,
-  flattenChordTreeNodes,
-} from 'src/app/utils/chord.utils';
+import { flattenChordTreeNodes } from 'src/app/utils/chord.utils';
 import {
   Chord,
   ChordInNumberListForm,
@@ -83,17 +77,14 @@ export class ChordsPageComponent {
   public tableTheme = tableTheme;
   public isDevMode = isDevMode();
 
-  public flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
-  public flatChordTreeNodes = this.flatChordTreeNodeStore.entities;
-  public keyboardLayout = inject(KeyboardLayoutSettingStore).selectedEntity;
-  public operatingSystem = inject(OperatingSystemService);
-  public languageSettingStore = inject(LanguageSettingStore);
+  private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
+  private readonly languageSettingStore = inject(LanguageSettingStore);
   private readonly serialHandlerService = inject(SerialHandlerService);
-  private readonly chordLabelStore = inject(ChordLabelStore);
+  private readonly chordDataService = inject(ChordDataService);
 
-  public fileInput =
+  private readonly fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
-  public gridApi!: GridApi;
+  private gridApi!: GridApi;
 
   public localeText = computed(() => {
     const uiLanguage = this.languageSettingStore.uiLanguage();
@@ -113,27 +104,13 @@ export class ChordsPageComponent {
     }
   });
 
-  private readonly chordDataList = computed(() => {
-    const keyboardLayout = this.keyboardLayout();
-    const operatingSystem = this.operatingSystem.getOS();
-    return convertFlattenedChordTreeNodesToChordData(
-      this.flatChordTreeNodes(),
-      keyboardLayout,
-      operatingSystem,
-    );
-  });
+  private readonly chordDataList = this.chordDataService.chordDataList;
+  public readonly chordDataListWithLabelState =
+    this.chordDataService.chordDataListWithLabelState;
 
-  public chordDataListWithLabelState = computed(() => {
-    const bookmarkedHashSet = this.chordLabelStore.bookmarkedHashSet();
-    const blockedHashSet = this.chordLabelStore.blockedHashSet();
-    return this.chordDataList().map((c) =>
-      appendLabelStateToChordData(c, bookmarkedHashSet, blockedHashSet),
-    );
-  });
+  private readonly selectedIdList = signal<number[]>([]);
 
-  public selectedIdList = signal<number[]>([]);
-
-  colDefs: ColDef<ChordDataWithLabelState>[] = [
+  public readonly colDefs: ColDef<ChordDataWithLabelState>[] = [
     {
       width: 100,
       headerName: '',
@@ -159,7 +136,7 @@ export class ChordsPageComponent {
       cellRenderer: AncestorsKeyLabelsRendererComponent,
     },
   ];
-  rowSelection: RowSelectionOptions = {
+  public readonly rowSelection: RowSelectionOptions = {
     mode: 'multiRow',
     headerCheckbox: false,
   };
@@ -232,7 +209,7 @@ export class ChordsPageComponent {
     patchState(this.flatChordTreeNodeStore, setEntities(flatChordTreeNodes));
   }
 
-  onSelectionChanged(event: SelectionChangedEvent) {
+  public onSelectionChanged(event: SelectionChangedEvent) {
     const selectedNodes = event.api.getSelectedNodes();
     this.selectedIdList.set(
       (selectedNodes.map((n) => n.id).filter((v) => !!v) as string[]).map(
