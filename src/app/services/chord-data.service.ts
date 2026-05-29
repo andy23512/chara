@@ -1,4 +1,5 @@
 import { computed, inject, Injectable } from '@angular/core';
+import { ENGLISH_WORD_RANK_MAP } from '../data/english-word-rank';
 import { ChordLabelStore } from '../stores/chord-label.store';
 import { FlatChordTreeNodeStore } from '../stores/flat-chord-tree-node.store';
 import { KeyboardLayoutSettingStore } from '../stores/keyboard-layout-setting.store';
@@ -32,5 +33,14 @@ export class ChordDataService {
     return this.chordDataList().map((c) =>
       appendLabelStateToChordData(c, bookmarkedHashSet, blockedHashSet),
     );
+  });
+
+  public chordDataListWithLabelStateAndEnglishWordRank = computed(() => {
+    return this.chordDataListWithLabelState().map((c) => {
+      const englishWordRank =
+        ENGLISH_WORD_RANK_MAP.get(c.textOutput.trim().toLocaleLowerCase()) ??
+        Infinity;
+      return { ...c, englishWordRank };
+    });
   });
 }

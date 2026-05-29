@@ -51,3 +51,8 @@ export interface ChordDataWithLabelState extends ChordData {
   bookmarked: boolean;
   blocked: boolean;
 }
+
+export interface ChordDataWithLabelStateAndEnglishWordRank
+  extends ChordDataWithLabelState {
+  englishWordRank: number;
+}
