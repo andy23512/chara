@@ -40,7 +40,6 @@ export const AdaptationPageStore = signalStore(
             queue: [...queue.slice(1), pickRandomItem(chords)],
             history: [...history, queue[0]],
             lastCorrectChordTime: time,
-            buffer: [],
           };
         }
         return {};
