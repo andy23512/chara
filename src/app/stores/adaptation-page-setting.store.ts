@@ -7,7 +7,7 @@ import { AdaptationPageSetting } from '../models/adaptation-page-setting.models'
 import { prefixStorageKey } from '../utils/store.utils';
 
 const INITIAL_ADAPTATION_PAGE_SETTING: AdaptationPageSetting = {
-  practiceSetSize: 3,
+  practiceSetSize: 5,
   minRepsToPass: 10,
   minSpeedToPass: 10,
 };
