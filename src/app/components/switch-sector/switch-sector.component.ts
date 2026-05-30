@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { cos, sin } from 'src/app/utils/math.utils';
 import { KeyLabel } from 'tangent-cc-lib';
-import { KeyLabelComponent } from '../key-label/key-label.component';
 
 const o = 8;
 const R1 = 65;
@@ -15,7 +14,6 @@ const R2 = 175;
 @Component({
   selector: '[appSwitchSector]',
   standalone: true,
-  imports: [KeyLabelComponent],
   templateUrl: './switch-sector.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

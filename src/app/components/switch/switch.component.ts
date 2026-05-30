@@ -5,13 +5,12 @@ import {
   input,
 } from '@angular/core';
 import { DirectionMap, KeyLabel } from 'tangent-cc-lib';
-import { KeyLabelComponent } from '../key-label/key-label.component';
 import { SwitchSectorComponent } from '../switch-sector/switch-sector.component';
 
 @Component({
   selector: '[appSwitch]',
   standalone: true,
-  imports: [SwitchSectorComponent, KeyLabelComponent],
+  imports: [SwitchSectorComponent],
   templateUrl: './switch.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
