@@ -8,7 +8,8 @@
     "cancel-action": "キャンセル",
     "close-action": "閉じる",
     "delete-confirm-button": "はい、削除します。",
-    "delete-single-confirm-button": "はい、削除します。"
+    "delete-single-confirm-button": "はい、削除します。",
+    "start-action": "開始"
   },
   "home-page": {
     "website-name": "Chara カラ",

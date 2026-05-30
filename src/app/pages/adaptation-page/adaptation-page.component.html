@@ -35,7 +35,9 @@
       class="absolute inset-0 flex cursor-pointer items-center justify-center gap-2 bg-gray-500 text-white peer-focus:pointer-events-none peer-focus:opacity-0"
     >
       <button mat-flat-button (click)="startPractice()">
-        <mat-icon class="text-white">{{ "play_arrow" | iconGuard }}</mat-icon>
+        <mat-icon class="!size-6 !text-[24px] text-white">{{
+          "play_arrow" | iconGuard
+        }}</mat-icon>
         {{ "general.start-action" | translate | realTitleCase }}
       </button>
     </div>
@@ -44,5 +46,5 @@
 <app-layout
   class="box-border block flex-1 overflow-hidden px-5 pb-5"
   [showThumb3Switch]="visibilitySettingStore.layoutThumb3Switch()"
-  [highlightedPositionCodes]="highlightedPositionCodes()"
+  [highlightedPositionCodes]="isFocus() ? highlightedPositionCodes() : []"
 ></app-layout>

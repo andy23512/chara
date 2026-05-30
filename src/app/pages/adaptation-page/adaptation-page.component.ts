@@ -11,6 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -41,6 +42,7 @@ import { VisibilitySettingStore } from 'src/app/stores/visibility-setting.store'
     IconGuardPipe,
     TranslatePipe,
     RealTitleCasePipe,
+    MatButton,
   ],
   providers: [AdaptationPageStore],
 })

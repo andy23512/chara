@@ -8,7 +8,8 @@
     "cancel-action": "cancel",
     "close-action": "close",
     "delete-confirm-button": "Yes. Delete them.",
-    "delete-single-confirm-button": "Yes. Delete it."
+    "delete-single-confirm-button": "Yes. Delete it.",
+    "start-action": "start"
   },
   "home-page": {
     "website-name": "Chara",
