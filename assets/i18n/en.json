@@ -6,6 +6,7 @@
     "device-layout-loading-message": "Loading device layout...",
     "device-layout-loaded-message": "The device layout is loaded successfully.",
     "cancel-action": "cancel",
+    "close-action": "close",
     "delete-confirm-button": "Yes. Delete them.",
     "delete-single-confirm-button": "Yes. Delete it."
   },
@@ -66,6 +67,7 @@
       "quick-setting": "quick setting",
       "os-keyboard-layout": "OS keyboard layout",
       "data-deletion": "data deletion",
+      "visibility": "visibility",
       "ui-language": "UI language"
     }
   },
@@ -93,5 +95,13 @@
   },
   "delete-chords-confirm-dialog": {
     "description": "Are you sure to delete all loaded chords?"
+  },
+  "visibility-setting": {
+    "thumb-3-switch-help-button-aria-label": "open help dialog for thumb 3 switch",
+    "layout-thumb-3-switch": "layout - thumb 3 switch"
+  },
+  "thumb-3-switch-help-dialog": {
+    "title": "thumb 3 switch",
+    "content": "Master Forge doesn't have the thumb 3 switches as CharaChorder One, CharaChorder Two and CCU. If you use Master Forge, or you use CharaChorder One, CharaChorder Two or CCU but don't use the thumb 3 switches, you can uncheck this setting to hide them in the layout."
   }
 }
