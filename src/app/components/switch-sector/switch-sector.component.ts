@@ -5,7 +5,7 @@ import {
   input,
 } from '@angular/core';
 import { cos, sin } from 'src/app/utils/math.utils';
-import { HighlightKeyCombination, KeyLabel } from 'tangent-cc-lib';
+import { KeyLabel } from 'tangent-cc-lib';
 import { KeyLabelComponent } from '../key-label/key-label.component';
 
 const o = 8;
@@ -27,11 +27,8 @@ export class SwitchSectorComponent {
   readonly positionCode = input.required<number>();
   readonly fontSize = input<number>(80);
   readonly keyLabel = input<KeyLabel[]>([]);
-  readonly highlightKeyCombination = input<HighlightKeyCombination | null>(
-    null,
-  );
+  readonly highlightPositionCodes = input<number[]>([]);
   readonly highlightOpacity = input<number>(0.5);
-  readonly secondaryHighlightPositions = input<number[]>([]);
 
   readonly r1 = computed(() => {
     return R1;

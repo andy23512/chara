@@ -6,6 +6,7 @@
     "device-layout-loading-message": "デバイスレイアウトを読み込んでいます...",
     "device-layout-loaded-message": "デバイスレイアウトの読み込みに成功しました。",
     "cancel-action": "キャンセル",
+    "close-action": "閉じる",
     "delete-confirm-button": "はい、削除します。",
     "delete-single-confirm-button": "はい、削除します。"
   },
@@ -65,6 +66,7 @@
       "quick-setting": "クイック設定",
       "os-keyboard-layout": "OS キーボードレイアウト",
       "data-deletion": "データ削除",
+      "visibility": "表示",
       "ui-language": "UI 言語"
     }
   },
@@ -92,5 +94,13 @@
   },
   "delete-chords-confirm-dialog": {
     "description": "読み込みされた和音をすべて削除してもよろしいですか？"
+  },
+  "visibility-setting": {
+    "thumb-3-switch-help-button-aria-label": "親指後列スイッチのヘルプダイアログを開く",
+    "layout-thumb-3-switch": "レイアウト - 親指後列スイッチ"
+  },
+  "thumb-3-switch-help-dialog": {
+    "title": "親指後列スイッチ",
+    "content": "Master Forge には、CharaChorder One、CharaChorder Two および CCU のような親指後列スイッチがありません。Master Forge をご利用の場合、または CharaChorder One、CharaChorder Two または CCU をご利用で親指後列スイッチを使用しない場合は、この設定のチェックを外してレイアウトから非表示にすることができます。"
   }
 }

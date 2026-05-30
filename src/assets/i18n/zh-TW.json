@@ -6,6 +6,7 @@
     "device-layout-loading-message": "載入裝置佈局中...",
     "device-layout-loaded-message": "裝置佈局已成功載入。",
     "cancel-action": "取消",
+    "close-action": "關閉",
     "delete-confirm-button": "是，我確定要刪除。",
     "delete-single-confirm-button": "是，我確定要刪除。"
   },
@@ -65,6 +66,7 @@
       "quick-setting": "快捷設定",
       "os-keyboard-layout": "作業系統鍵盤佈局",
       "data-deletion": "資料刪除",
+      "visibility": "顯示",
       "ui-language": "介面語言"
     }
   },
@@ -92,5 +94,13 @@
   },
   "delete-chords-confirm-dialog": {
     "description": "你確定要刪除所有已載入的和弦嗎？"
+  },
+  "visibility-setting": {
+    "thumb-3-switch-help-button-aria-label": "開啟拇指第三搖桿的幫助視窗",
+    "layout-thumb-3-switch": "佈局 - 拇指第三搖桿"
+  },
+  "thumb-3-switch-help-dialog": {
+    "title": "拇指第三搖桿",
+    "content": "Master Forge 不像 CharaChorder One、CharaChorder Two 及 CCU 有拇指第三搖桿。如果你使用的是 Master Forge，或你使用的是 CharaChorder One、CharaChorder Two 或 CCU 但沒有用到拇指第三搖桿的話，你可以取消勾選這個設定來在佈局顯示上隱藏它們。"
   }
 }

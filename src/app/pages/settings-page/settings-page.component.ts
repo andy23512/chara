@@ -13,6 +13,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { DataDeletionSettingPanelContentComponent } from 'src/app/components/data-deletion-setting-panel-content/data-deletion-setting-panel-content.component';
 import { OsKeyboardLayoutSettingPanelContentComponent } from 'src/app/components/os-keyboard-layout-setting-panel-content/os-keyboard-layout-setting-panel-content.component';
 import { QuickSettingPanelContentComponent } from 'src/app/components/quick-setting-panel-content/quick-setting-panel-content.component';
+import { VisibilitySettingPanelContentComponent } from 'src/app/components/visibility-setting-panel-content/visibility-setting-panel-content.component';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
@@ -30,6 +31,7 @@ import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
     OsKeyboardLayoutSettingPanelContentComponent,
     QuickSettingPanelContentComponent,
     DataDeletionSettingPanelContentComponent,
+    VisibilitySettingPanelContentComponent,
   ],
   templateUrl: './settings-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,11 +4,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import {
-  DirectionMap,
-  HighlightKeyCombination,
-  KeyLabel,
-} from 'tangent-cc-lib';
+import { DirectionMap, KeyLabel } from 'tangent-cc-lib';
 import { KeyLabelComponent } from '../key-label/key-label.component';
 import { SwitchSectorComponent } from '../switch-sector/switch-sector.component';
 
@@ -34,10 +30,7 @@ export class SwitchComponent {
   ];
   readonly positionCodeMap = input.required<DirectionMap<number>>();
   readonly keyLabelMap = input<Record<number, KeyLabel[]>>({});
-  readonly highlightKeyCombination = input<HighlightKeyCombination | null>(
-    null,
-  );
-  readonly secondaryHighlightPositions = input<number[]>([]);
+  readonly highlightPositionCodes = input<number[]>([]);
   readonly r = computed(() => {
     return (this.rotationDirection() === 'cw' ? 1 : -1) * this.rotation();
   });
