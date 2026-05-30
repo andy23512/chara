@@ -232,6 +232,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 @ngneat/hotkeys
 MIT
 
+@ngneat/until-destroy
+MIT
+
 @ngrx/signals
 MIT
 The MIT License (MIT)
