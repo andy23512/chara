@@ -52,12 +52,7 @@ export const AdaptationPageStore = signalStore(
             return {
               queue: [
                 ...queue.slice(1),
-                pickRandomItem(
-                  chords.filter(
-                    (c) =>
-                      c.textOutput.trim() !== queue.at(-1)?.textOutput.trim(),
-                  ),
-                ),
+                pickRandomItem(chords.filter((c) => c.id !== queue.at(-1)?.id)),
               ],
               history: [...history, queue[0]],
               lastCorrectChordTime: time,
