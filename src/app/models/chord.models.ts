@@ -52,7 +52,9 @@ export interface ChordDataWithLabelState extends ChordData {
   blocked: boolean;
 }
 
-export interface ChordDataWithLabelStateAndEnglishWordRank
-  extends ChordDataWithLabelState {
+export interface ChordGroup {
+  textOutput: string;
   englishWordRank: number;
+  bookmarked: boolean;
+  nonBlockedChords: ChordDataWithLabelState[];
 }

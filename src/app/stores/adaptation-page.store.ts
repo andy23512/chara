@@ -1,14 +1,16 @@
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { ChordDataWithLabelStateAndEnglishWordRank } from '../models/chord.models';
+import {
+  ChordGroup
+} from '../models/chord.models';
 import { Phase } from '../models/phase.models';
 import { pickRandomItem, pickRandomItemNTimes } from '../utils/random.utils';
 import { PracticeStatisticStore } from './practice-statistic.store';
 
 interface AdaptationPageState {
-  queue: ChordDataWithLabelStateAndEnglishWordRank[];
-  history: ChordDataWithLabelStateAndEnglishWordRank[];
+  queue: ChordGroup[];
+  history: ChordGroup[];
   lastCorrectChordTime: number | null;
 }
 
@@ -29,16 +31,12 @@ export const AdaptationPageStore = signalStore(
       restore() {
         patchState(store, () => initialState);
       },
-      fillQueue(chords: ChordDataWithLabelStateAndEnglishWordRank[]) {
+      fillQueue(chordGroups: ChordGroup[]) {
         patchState(store, () => ({
-          queue: pickRandomItemNTimes(chords, QUEUE_SIZE),
+          queue: pickRandomItemNTimes(chordGroups, QUEUE_SIZE),
         }));
       },
-      checkText(
-        text: string,
-        time: number,
-        chords: ChordDataWithLabelStateAndEnglishWordRank[],
-      ) {
+      checkText(text: string, time: number, chordGroups: ChordGroup[]) {
         patchState(store, ({ queue, history, lastCorrectChordTime }) => {
           if (text.trim() === queue[0].textOutput.trim()) {
             if (lastCorrectChordTime) {
@@ -52,7 +50,11 @@ export const AdaptationPageStore = signalStore(
             return {
               queue: [
                 ...queue.slice(1),
-                pickRandomItem(chords.filter((c) => c.id !== queue.at(-1)?.id)),
+                pickRandomItem(
+                  chordGroups.filter(
+                    (c) => c.textOutput !== queue.at(-1)?.textOutput,
+                  ),
+                ),
               ],
               history: [...history, queue[0]],
               lastCorrectChordTime: time,

@@ -18,7 +18,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ascend, descend, prop, sortWith } from 'ramda';
 import { debounceTime, Subject } from 'rxjs';
 import { LayoutComponent } from 'src/app/components/layout/layout.component';
-import { ChordDataWithLabelStateAndEnglishWordRank } from 'src/app/models/chord.models';
+import { ChordGroup } from 'src/app/models/chord.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 import { ChordDataService } from 'src/app/services/chord-data.service';
@@ -75,9 +75,9 @@ export class AdaptationPageComponent implements OnInit {
       return [];
     }
     const profileAPrimaryLayer = profileLayoutMap['A'][0];
-    const inputActionCodes = (
-      this.adaptationPageStore.queue()[0]?.input || []
-    ).filter((a) => a !== 0);
+    const inputActionCodes: number[] = (
+      this.adaptationPageStore.queue()[0]?.nonBlockedChords[0]?.input || []
+    ).filter((a: number) => a !== 0);
     const positionCodes = inputActionCodes.map((actionCode) =>
       profileAPrimaryLayer.indexOf(actionCode),
     );
@@ -90,18 +90,16 @@ export class AdaptationPageComponent implements OnInit {
     }
     return positionCodes;
   });
-
-  private readonly sortedChords = computed(() => {
-    const chords =
-      this.chordDataService.chordDataListWithLabelStateAndEnglishWordRank();
-    const unblockedChords = chords.filter((c) => !c.blocked);
-    return sortWith<ChordDataWithLabelStateAndEnglishWordRank>([
+  private readonly sortedChordGroups = computed(() => {
+    const chordGroups = this.chordDataService.chordGroups();
+    return sortWith<ChordGroup>([
       descend(prop('bookmarked')),
       ascend(prop('englishWordRank')),
-    ])(unblockedChords);
+    ])(chordGroups);
   });
+
   public readonly practiceSet = computed(() =>
-    this.sortedChords().slice(
+    this.sortedChordGroups().slice(
       0,
       this.adaptationPageSettingStore.practiceSetSize(),
     ),

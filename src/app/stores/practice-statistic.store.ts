@@ -1,6 +1,6 @@
 import { withStorageSync } from '@angular-architects/ngrx-toolkit';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { ChordDataWithLabelStateAndEnglishWordRank } from '../models/chord.models';
+import { ChordGroup } from '../models/chord.models';
 import { Phase } from '../models/phase.models';
 import { PracticeStatisticState } from '../models/practice-statistic-state.models';
 import { prefixStorageKey } from '../utils/store.utils';
@@ -28,13 +28,9 @@ export const PracticeStatisticStore = signalStore(
   }),
   withState(INITIAL_PRACTICE_STATISTIC_STATE),
   withMethods((store) => ({
-    saveSpeedRecord(
-      phase: Phase,
-      chord: ChordDataWithLabelStateAndEnglishWordRank,
-      interval: number,
-    ) {
+    saveSpeedRecord(phase: Phase, chordGroup: ChordGroup, interval: number) {
       patchState(store, (state) => {
-        const target = state[phase][chord.textOutput];
+        const target = state[phase][chordGroup.textOutput];
         const lastTenIntervals = [
           ...(target?.lastTenIntervals || []),
           interval,
@@ -49,7 +45,7 @@ export const PracticeStatisticStore = signalStore(
           ...state,
           [phase]: {
             ...state[phase],
-            [chord.textOutput]: {
+            [chordGroup.textOutput]: {
               lastTenIntervals,
               lastTenAverageChordPerMinute,
               correctCount,
