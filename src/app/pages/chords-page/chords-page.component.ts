@@ -20,8 +20,10 @@ import { patchState } from '@ngrx/signals';
 import { setEntities } from '@ngrx/signals/entities';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
+  CellStyleModule,
   ClientSideRowModelModule,
   ColDef,
+  ColGroupDef,
   colorSchemeDark,
   ExternalFilterModule,
   GetRowIdFunc,
@@ -40,7 +42,7 @@ import {
 import { AncestorsKeyLabelsRendererComponent } from 'src/app/components/ancestors-key-labels-renderer/ancestors-key-labels-renderer.component';
 import { ChordActionButtonsRendererComponent } from 'src/app/components/chord-action-buttons-renderer/chord-action-buttons-renderer.component';
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
-import { ChordDataWithLabelState } from 'src/app/models/chord.models';
+import { ChordDataWithLabelStateAndStatistic } from 'src/app/models/chord.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { ChordDataService } from 'src/app/services/chord-data.service';
 import { SerialHandlerService } from 'src/app/services/serial-handler.service';
@@ -61,6 +63,7 @@ ModuleRegistry.registerModules([
   RowSelectionModule,
   LocaleModule,
   ClientSideRowModelModule,
+  CellStyleModule,
 ]);
 
 const tableTheme = themeQuartz.withPart(colorSchemeDark);
@@ -105,35 +108,60 @@ export class ChordsPageComponent {
   });
 
   private readonly chordDataList = this.chordDataService.chordDataList;
-  public readonly chordDataListWithLabelState =
-    this.chordDataService.chordDataListWithLabelState;
+  public readonly chordDataListWithLabelStateAndStatistic =
+    this.chordDataService.chordDataListWithLabelStateAndStatistic;
 
   private readonly selectedIdList = signal<number[]>([]);
 
-  public readonly colDefs: ColDef<ChordDataWithLabelState>[] = [
+  public readonly colDefs: (
+    | ColDef<ChordDataWithLabelStateAndStatistic>
+    | ColGroupDef<ChordDataWithLabelStateAndStatistic>
+  )[] = [
     {
       width: 100,
       headerName: '',
       cellRenderer: ChordActionButtonsRendererComponent,
     },
     {
-      field: 'inputKeyLabels',
-      headerName: 'Input',
-      cellRenderer: ChordKeyLabelsRendererComponent,
+      headerName: 'Chord',
+      children: [
+        {
+          field: 'inputKeyLabels',
+          headerName: 'Input',
+          cellRenderer: ChordKeyLabelsRendererComponent,
+        },
+        {
+          field: 'textOutput',
+          headerName: 'Output (text)',
+        },
+        {
+          field: 'outputKeyLabels',
+          headerName: 'Output (keys)',
+          cellRenderer: ChordKeyLabelsRendererComponent,
+        },
+        {
+          field: 'ancestorsKeyLabels',
+          headerName: 'Ancestors',
+          cellRenderer: AncestorsKeyLabelsRendererComponent,
+        },
+      ],
     },
     {
-      field: 'textOutput',
-      headerName: 'Output (text)',
-    },
-    {
-      field: 'outputKeyLabels',
-      headerName: 'Output (keys)',
-      cellRenderer: ChordKeyLabelsRendererComponent,
-    },
-    {
-      field: 'ancestorsKeyLabels',
-      headerName: 'Ancestors',
-      cellRenderer: AncestorsKeyLabelsRendererComponent,
+      headerName: 'Adaptation',
+      children: [
+        {
+          headerName: 'ChPM',
+          field: 'adaptation.lastTenAverageChordPerMinute',
+          width: 75,
+          cellStyle: { textAlign: 'right' },
+        },
+        {
+          headerName: 'Count',
+          field: 'adaptation.correctCount',
+          width: 75,
+          cellStyle: { textAlign: 'right' },
+        },
+      ],
     },
   ];
   public readonly rowSelection: RowSelectionOptions = {

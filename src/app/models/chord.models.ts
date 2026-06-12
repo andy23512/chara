@@ -52,6 +52,15 @@ export interface ChordDataWithLabelState extends ChordData {
   blocked: boolean;
 }
 
+export interface ChordDataWithLabelStateAndStatistic
+  extends ChordDataWithLabelState {
+  adaptation: {
+    correctCount: number | null;
+    lastTenAverageChordPerMinute: number | null;
+    passed: boolean;
+  };
+}
+
 export interface ChordGroup {
   textOutput: string;
   englishWordRank: number;

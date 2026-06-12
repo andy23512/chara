@@ -108,8 +108,8 @@ export class AdaptationPageComponent implements OnInit {
           };
         }
         const passed =
-          statistic.correctCount > minRepToPass &&
-          statistic.lastTenAverageChordPerMinute > minSpeedToPass;
+          statistic.correctCount >= minRepToPass &&
+          statistic.lastTenAverageChordPerMinute >= minSpeedToPass;
         return {
           ...cg,
           passed,
