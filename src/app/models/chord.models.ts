@@ -58,3 +58,8 @@ export interface ChordGroup {
   bookmarked: boolean;
   nonBlockedChords: ChordDataWithLabelState[];
 }
+
+export interface ChordGroupWithStats extends ChordGroup {
+  passed: boolean;
+  lastTenAverageChordPerMinute: number;
+}

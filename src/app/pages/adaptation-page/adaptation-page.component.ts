@@ -18,13 +18,14 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ascend, descend, prop, sortWith } from 'ramda';
 import { debounceTime, Subject } from 'rxjs';
 import { LayoutComponent } from 'src/app/components/layout/layout.component';
-import { ChordGroup } from 'src/app/models/chord.models';
+import { ChordGroupWithStats } from 'src/app/models/chord.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 import { ChordDataService } from 'src/app/services/chord-data.service';
 import { AdaptationPageSettingStore } from 'src/app/stores/adaptation-page-setting.store';
 import { AdaptationPageStore } from 'src/app/stores/adaptation-page.store';
 import { DeviceLayoutStore } from 'src/app/stores/device-layout.store';
+import { PracticeStatisticStore } from 'src/app/stores/practice-statistic.store';
 import { VisibilitySettingStore } from 'src/app/stores/visibility-setting.store';
 
 @UntilDestroy()
@@ -54,6 +55,7 @@ export class AdaptationPageComponent implements OnInit {
     AdaptationPageSettingStore,
   );
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
+  private readonly practiceStatisticStore = inject(PracticeStatisticStore);
 
   public input = viewChild.required<ElementRef<HTMLInputElement>>('input');
 
@@ -90,11 +92,40 @@ export class AdaptationPageComponent implements OnInit {
     }
     return positionCodes;
   });
+  private readonly chordGroupsWithStats = computed<ChordGroupWithStats[]>(
+    () => {
+      const chordGroups = this.chordDataService.chordGroups();
+      const practiceStatistic = this.practiceStatisticStore.adaptation();
+      const minSpeedToPass = this.adaptationPageSettingStore.minRepsToPass();
+      const minRepToPass = this.adaptationPageSettingStore.minRepsToPass();
+      return chordGroups.map((cg) => {
+        const statistic = practiceStatistic[cg.textOutput];
+        if (!statistic) {
+          return {
+            ...cg,
+            passed: false,
+            lastTenAverageChordPerMinute: 0,
+          };
+        }
+        const passed =
+          statistic.correctCount > minRepToPass &&
+          statistic.lastTenAverageChordPerMinute > minSpeedToPass;
+        return {
+          ...cg,
+          passed,
+          lastTenAverageChordPerMinute: statistic.lastTenAverageChordPerMinute,
+        };
+      });
+    },
+  );
+
   private readonly sortedChordGroups = computed(() => {
-    const chordGroups = this.chordDataService.chordGroups();
-    return sortWith<ChordGroup>([
+    const chordGroups = this.chordGroupsWithStats();
+    return sortWith<ChordGroupWithStats>([
+      ascend(prop('passed')),
       descend(prop('bookmarked')),
       ascend(prop('englishWordRank')),
+      descend(prop('lastTenAverageChordPerMinute')),
     ])(chordGroups);
   });
 
