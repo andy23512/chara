@@ -22,6 +22,7 @@ import { setEntities } from '@ngrx/signals/entities';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
+  CellClassParams,
   CellStyleModule,
   ClientSideRowModelModule,
   ColDef,
@@ -200,6 +201,9 @@ export class ChordsPageComponent implements OnInit {
             field: 'adaptation.lastTenAverageChordPerMinute',
             width: 75,
             cellStyle: { textAlign: 'right' },
+            cellClass: (
+              param: CellClassParams<ChordDataWithLabelStateAndStatistic>,
+            ) => (param.data?.adaptation?.passed ? 'bg-chara-500/20' : ''),
           },
           {
             headerName: this.translateService.instant(
@@ -208,6 +212,9 @@ export class ChordsPageComponent implements OnInit {
             field: 'adaptation.correctCount',
             width: 75,
             cellStyle: { textAlign: 'right' },
+            cellClass: (
+              param: CellClassParams<ChordDataWithLabelStateAndStatistic>,
+            ) => (param.data?.adaptation?.passed ? 'bg-chara-500/20' : ''),
           },
         ],
       },
