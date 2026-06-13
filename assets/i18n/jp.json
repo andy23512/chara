@@ -68,7 +68,8 @@
       "os-keyboard-layout": "OS キーボードレイアウト",
       "data-deletion": "データ削除",
       "visibility": "表示",
-      "ui-language": "UI 言語"
+      "ui-language": "UI 言語",
+      "adaptation-page": "適応ページ"
     }
   },
   "quick-setting": {
@@ -103,6 +104,20 @@
   "thumb-3-switch-help-dialog": {
     "title": "親指後列スイッチ",
     "content": "Master Forge には、CharaChorder One、CharaChorder Two および CCU のような親指後列スイッチがありません。Master Forge をご利用の場合、または CharaChorder One、CharaChorder Two または CCU をご利用で親指後列スイッチを使用しない場合は、この設定のチェックを外してレイアウトから非表示にすることができます。"
+  },
+  "adaptation-page-setting": {
+    "practice-set-size": {
+      "label": "練習セットサイズ",
+      "hint": "同時に練習する和音の数"
+    },
+    "min-reps-to-pass": {
+      "label": "合格するための最小反復回数",
+      "hint": "ある和音を合格と見なすために必要な最小反復回数"
+    },
+    "min-speed-to-pass": {
+      "label": "合格するための最小速度（分速）",
+      "hint": "ある和音を合格と見なすために必要な最小速度（分速）"
+    }
   },
   "chords-page": {
     "load-chords-from-device-button": "デバイスから和音を読み込む",

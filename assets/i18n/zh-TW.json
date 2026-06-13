@@ -68,7 +68,8 @@
       "os-keyboard-layout": "作業系統鍵盤佈局",
       "data-deletion": "資料刪除",
       "visibility": "顯示",
-      "ui-language": "介面語言"
+      "ui-language": "介面語言",
+      "adaptation-page": "適應頁面"
     }
   },
   "quick-setting": {
@@ -103,6 +104,20 @@
   "thumb-3-switch-help-dialog": {
     "title": "拇指第三搖桿",
     "content": "Master Forge 不像 CharaChorder One、CharaChorder Two 及 CCU 有拇指第三搖桿。如果你使用的是 Master Forge，或你使用的是 CharaChorder One、CharaChorder Two 或 CCU 但沒有用到拇指第三搖桿的話，你可以取消勾選這個設定來在佈局顯示上隱藏它們。"
+  },
+  "adaptation-page-setting": {
+    "practice-set-size": {
+      "label": "練習組大小",
+      "hint": "同時練習的和弦數量"
+    },
+    "min-reps-to-pass": {
+      "label": "最小練習次數",
+      "hint": "一個和弦要通過適應階段需要達到的練習次數"
+    },
+    "min-speed-to-pass": {
+      "label": "最小通過速度（分速）",
+      "hint": "一個和弦要通過適應階段需要達到的輸入速度"
+    }
   },
   "chords-page": {
     "load-chords-from-device-button": "從裝置載入和弦",
