@@ -1,12 +1,12 @@
 import { computed, inject, Injectable, signal, Signal } from '@angular/core';
 import { Page } from '../models/page.models';
+import { ChordStore } from '../stores/chord.store';
 import { DeviceLayoutStore } from '../stores/device-layout.store';
-import { FlatChordTreeNodeStore } from '../stores/flat-chord-tree-node.store';
 
 @Injectable({ providedIn: 'root' })
 export class PageLockService {
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
-  private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
+  private readonly chordStore = inject(ChordStore);
 
   public canAccessPage(page: Page): Signal<boolean> {
     switch (page) {
@@ -14,7 +14,7 @@ export class PageLockService {
         return computed(() => {
           return (
             this.deviceLayoutStore.hasLoadedProfileLayoutMap() &&
-            this.flatChordTreeNodeStore.entityCount() > 0
+            this.chordStore.entityCount() > 0
           );
         });
       case Page.Realization:

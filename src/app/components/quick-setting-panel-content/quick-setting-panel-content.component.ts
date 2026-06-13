@@ -10,8 +10,8 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { QuickSettingService } from 'src/app/services/quick-setting.service';
+import { ChordStore } from 'src/app/stores/chord.store';
 import { DeviceLayoutStore } from 'src/app/stores/device-layout.store';
-import { FlatChordTreeNodeStore } from 'src/app/stores/flat-chord-tree-node.store';
 
 interface QuickSetting {
   name: string;
@@ -37,11 +37,11 @@ interface QuickSetting {
 export class QuickSettingPanelContentComponent {
   private readonly quickSettingService = inject(QuickSettingService);
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
-  private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
+  private readonly chordStore = inject(ChordStore);
 
   public isDeviceLayoutLoaded =
     this.deviceLayoutStore.hasLoadedProfileLayoutMap;
-  public chordCount = this.flatChordTreeNodeStore.entityCount;
+  public chordCount = this.chordStore.entityCount;
 
   public loadDeviceLayoutAndChordsFromDevice() {
     this.quickSettingService.loadDeviceLayoutAndChordsFromDevice();

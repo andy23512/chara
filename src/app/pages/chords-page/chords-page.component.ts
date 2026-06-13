@@ -49,14 +49,12 @@ import { ChordDataWithLabelStateAndStatistic } from 'src/app/models/chord.models
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { ChordDataService } from 'src/app/services/chord-data.service';
 import { SerialHandlerService } from 'src/app/services/serial-handler.service';
-import { FlatChordTreeNodeStore } from 'src/app/stores/flat-chord-tree-node.store';
+import { ChordStore } from 'src/app/stores/chord.store';
 import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
-import { flattenChordTreeNodes } from 'src/app/utils/chord.utils';
 import {
   Chord,
   ChordInNumberListForm,
-  convertChordInNumberListFormToChord,
-  convertChordsToChordTreeNodes,
+  convertChordInNumberListFormToChord
 } from 'tangent-cc-lib';
 
 ModuleRegistry.registerModules([
@@ -83,7 +81,7 @@ export class ChordsPageComponent implements OnInit {
   public tableTheme = tableTheme;
   public isDevMode = isDevMode();
 
-  private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
+  private readonly chordStore = inject(ChordStore);
   private readonly languageSettingStore = inject(LanguageSettingStore);
   private readonly serialHandlerService = inject(SerialHandlerService);
   private readonly chordDataService = inject(ChordDataService);
@@ -262,9 +260,7 @@ export class ChordsPageComponent implements OnInit {
     const chords: Chord[] = (data.chords as ChordInNumberListForm[]).map(
       convertChordInNumberListFormToChord,
     );
-    const chordTreeNodes = convertChordsToChordTreeNodes(chords);
-    const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
-    patchState(this.flatChordTreeNodeStore, setEntities(flatChordTreeNodes));
+    patchState(this.chordStore, setEntities(chords));
   }
 
   public onSelectionChanged(event: SelectionChangedEvent) {

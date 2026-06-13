@@ -7,7 +7,7 @@ import {
 } from '../models/chord.models';
 import { AdaptationPageSettingStore } from '../stores/adaptation-page-setting.store';
 import { ChordLabelStore } from '../stores/chord-label.store';
-import { FlatChordTreeNodeStore } from '../stores/flat-chord-tree-node.store';
+import { ChordStore } from '../stores/chord.store';
 import { KeyboardLayoutSettingStore } from '../stores/keyboard-layout-setting.store';
 import { PracticeStatisticStore } from '../stores/practice-statistic.store';
 import {
@@ -21,7 +21,7 @@ export class ChordDataService {
   private readonly keyboardLayout = inject(KeyboardLayoutSettingStore)
     .selectedEntity;
   private readonly operatingSystem = inject(OperatingSystemService);
-  private readonly flatChordTreeNodes = inject(FlatChordTreeNodeStore).entities;
+  private readonly chordStore = inject(ChordStore);
   private readonly chordLabelStore = inject(ChordLabelStore);
   private readonly practiceStatisticStore = inject(PracticeStatisticStore);
   private readonly adaptationPageSettingStore = inject(
@@ -32,7 +32,7 @@ export class ChordDataService {
     const keyboardLayout = this.keyboardLayout();
     const operatingSystem = this.operatingSystem.getOS();
     return convertFlattenedChordTreeNodesToChordData(
-      this.flatChordTreeNodes(),
+      this.chordStore.flatChordTreeNodes(),
       keyboardLayout,
       operatingSystem,
     );

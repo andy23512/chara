@@ -4,22 +4,21 @@ import { patchState } from '@ngrx/signals';
 import { setEntities } from '@ngrx/signals/entities';
 import { TranslateService } from '@ngx-translate/core';
 import { lastValueFrom, tap, throttleTime } from 'rxjs';
-import { convertChordsToChordTreeNodes, SerialHandler } from 'tangent-cc-lib';
+import { SerialHandler } from 'tangent-cc-lib';
 import {
   ProgressSnackBarComponent,
   ProgressSnackBarData,
   ProgressSnackBarStepInfo,
 } from '../components/progress-snack-bar/progress-snack-bar.component';
+import { ChordStore } from '../stores/chord.store';
 import { DeviceLayoutStore } from '../stores/device-layout.store';
-import { FlatChordTreeNodeStore } from '../stores/flat-chord-tree-node.store';
-import { flattenChordTreeNodes } from '../utils/chord.utils';
 import { SerialPortHandlerService } from './serial-port-handler.service';
 
 @Injectable({ providedIn: 'root' })
 export class SerialHandlerService extends SerialHandler {
   private readonly matSnackBar = inject(MatSnackBar);
   private readonly translateService = inject(TranslateService);
-  private readonly flatChordTreeNodeStore = inject(FlatChordTreeNodeStore);
+  private readonly chordStore = inject(ChordStore);
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
 
   constructor(protected serialPortHandlerService: SerialPortHandlerService) {
@@ -94,12 +93,7 @@ export class SerialHandlerService extends SerialHandler {
             if (!chords) {
               return;
             }
-            const chordTreeNodes = convertChordsToChordTreeNodes(chords);
-            const flatChordTreeNodes = flattenChordTreeNodes(chordTreeNodes);
-            patchState(
-              this.flatChordTreeNodeStore,
-              setEntities(flatChordTreeNodes),
-            );
+            patchState(this.chordStore, setEntities(chords));
             if (!stepInfo) {
               this.matSnackBar.open(
                 this.translateService.instant('general.chords-loaded-message'),

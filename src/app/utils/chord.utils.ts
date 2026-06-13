@@ -1,3 +1,4 @@
+import { pick } from 'ramda';
 import {
   ACTIONS,
   ActionType,
@@ -157,17 +158,16 @@ export function convertFlattenedChordTreeNodesToChordData(
   });
 
   return chordTreeNodes.map((node) => ({
-    id: node.id,
-    input: node.input,
-    actions: node.actions,
-    output: node.output,
-    parentId: node.parentId,
-    actionAndPhraseHash: node.actionAndPhraseHash,
+    ...pick(
+      ['id', 'input', 'actions', 'output', 'parentId', 'actionAndPhraseHash'],
+      node,
+    ),
     inputKeyLabels: inputKeyLabelsMap.get(node.id)!,
     outputKeyLabels: outputKeyLabelsMap.get(node.id)!,
     ancestorsKeyLabels: node.ancestors.map(
       (ancestor) => inputKeyLabelsMap.get(ancestor.id)!,
     ),
+    ancestorsInputs: node.ancestors.map((ancestor) => ancestor.input),
     textOutput: calculateTextOutputFromChordOutput(node.output, keyboardLayout),
   }));
 }
