@@ -103,5 +103,20 @@
   "thumb-3-switch-help-dialog": {
     "title": "親指後列スイッチ",
     "content": "Master Forge には、CharaChorder One、CharaChorder Two および CCU のような親指後列スイッチがありません。Master Forge をご利用の場合、または CharaChorder One、CharaChorder Two または CCU をご利用で親指後列スイッチを使用しない場合は、この設定のチェックを外してレイアウトから非表示にすることができます。"
+  },
+  "chords-page": {
+    "load-chords-from-device-button": "デバイスから和音を読み込む",
+    "load-chords-from-file-button": "ファイルから和音を読み込む",
+    "file-input-aria-label": "このアプリケーションに読み込む和音ライブラリファイルを選択するためのファイル入力",
+    "table-column": {
+      "chord": "和音",
+      "input": "入力",
+      "output-text": "出力 (文字)",
+      "output-keys": "出力 (キー)",
+      "ancestors": "上位和音",
+      "adaptation": "適応",
+      "chpm": "分速",
+      "count": "回数"
+    }
   }
 }

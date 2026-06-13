@@ -1,17 +1,17 @@
 <div class="flex gap-2">
   <button mat-flat-button color="primary" (click)="loadChordsFromDevice()">
-    Load chords from device
+    {{ "chords-page.load-chords-from-device-button" | translate }}
   </button>
   @if (isDevMode) {
     <button mat-flat-button color="primary" (click)="openFileSelectionDialog()">
-      Load chords from file
+      {{ "chords-page.load-chords-from-file-button" | translate }}
     </button>
     <input
       #fileInput
       class="hidden"
       type="file"
       accept=".json"
-      aria-label="file input for selecting a chord library file to load into this editor"
+      [attr.aria-label]="'chords-page.file-input-aria-label' | translate"
       (change)="onFileInputChange()"
     />
   }

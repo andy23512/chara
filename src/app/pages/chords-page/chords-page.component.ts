@@ -12,12 +12,14 @@ import {
   HostBinding,
   inject,
   isDevMode,
+  OnInit,
   signal,
   viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { patchState } from '@ngrx/signals';
 import { setEntities } from '@ngrx/signals/entities';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
   CellStyleModule,
@@ -72,10 +74,10 @@ const tableTheme = themeQuartz.withPart(colorSchemeDark);
   selector: 'app-chords-page',
   templateUrl: 'chords-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatButtonModule, AgGridAngular],
+  imports: [MatButtonModule, AgGridAngular, TranslatePipe],
   standalone: true,
 })
-export class ChordsPageComponent {
+export class ChordsPageComponent implements OnInit {
   @HostBinding('class') public hostClasses = ['flex', 'flex-col', 'h-full'];
   public tableTheme = tableTheme;
   public isDevMode = isDevMode();
@@ -84,6 +86,7 @@ export class ChordsPageComponent {
   private readonly languageSettingStore = inject(LanguageSettingStore);
   private readonly serialHandlerService = inject(SerialHandlerService);
   private readonly chordDataService = inject(ChordDataService);
+  private readonly translateService = inject(TranslateService);
 
   private readonly fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
@@ -113,57 +116,10 @@ export class ChordsPageComponent {
 
   private readonly selectedIdList = signal<number[]>([]);
 
-  public readonly colDefs: (
+  public colDefs: (
     | ColDef<ChordDataWithLabelStateAndStatistic>
     | ColGroupDef<ChordDataWithLabelStateAndStatistic>
-  )[] = [
-    {
-      width: 100,
-      headerName: '',
-      cellRenderer: ChordActionButtonsRendererComponent,
-    },
-    {
-      headerName: 'Chord',
-      children: [
-        {
-          field: 'inputKeyLabels',
-          headerName: 'Input',
-          cellRenderer: ChordKeyLabelsRendererComponent,
-        },
-        {
-          field: 'textOutput',
-          headerName: 'Output (text)',
-        },
-        {
-          field: 'outputKeyLabels',
-          headerName: 'Output (keys)',
-          cellRenderer: ChordKeyLabelsRendererComponent,
-        },
-        {
-          field: 'ancestorsKeyLabels',
-          headerName: 'Ancestors',
-          cellRenderer: AncestorsKeyLabelsRendererComponent,
-        },
-      ],
-    },
-    {
-      headerName: 'Adaptation',
-      children: [
-        {
-          headerName: 'ChPM',
-          field: 'adaptation.lastTenAverageChordPerMinute',
-          width: 75,
-          cellStyle: { textAlign: 'right' },
-        },
-        {
-          headerName: 'Count',
-          field: 'adaptation.correctCount',
-          width: 75,
-          cellStyle: { textAlign: 'right' },
-        },
-      ],
-    },
-  ];
+  )[] = [];
   public readonly rowSelection: RowSelectionOptions = {
     mode: 'multiRow',
     headerCheckbox: false,
@@ -189,6 +145,73 @@ export class ChordsPageComponent {
       const _chordDataList = this.chordDataList();
       this.selectedIdList.set([]);
     });
+  }
+
+  public ngOnInit(): void {
+    this.colDefs = [
+      {
+        width: 100,
+        headerName: '',
+        cellRenderer: ChordActionButtonsRendererComponent,
+      },
+      {
+        headerName: this.translateService.instant(
+          'chords-page.table-column.chord',
+        ),
+        children: [
+          {
+            field: 'inputKeyLabels',
+            headerName: this.translateService.instant(
+              'chords-page.table-column.input',
+            ),
+            cellRenderer: ChordKeyLabelsRendererComponent,
+          },
+          {
+            field: 'textOutput',
+            headerName: this.translateService.instant(
+              'chords-page.table-column.output-text',
+            ),
+          },
+          {
+            field: 'outputKeyLabels',
+            headerName: this.translateService.instant(
+              'chords-page.table-column.output-keys',
+            ),
+            cellRenderer: ChordKeyLabelsRendererComponent,
+          },
+          {
+            field: 'ancestorsKeyLabels',
+            headerName: this.translateService.instant(
+              'chords-page.table-column.ancestors',
+            ),
+            cellRenderer: AncestorsKeyLabelsRendererComponent,
+          },
+        ],
+      },
+      {
+        headerName: this.translateService.instant(
+          'chords-page.table-column.adaptation',
+        ),
+        children: [
+          {
+            headerName: this.translateService.instant(
+              'chords-page.table-column.chpm',
+            ),
+            field: 'adaptation.lastTenAverageChordPerMinute',
+            width: 75,
+            cellStyle: { textAlign: 'right' },
+          },
+          {
+            headerName: this.translateService.instant(
+              'chords-page.table-column.count',
+            ),
+            field: 'adaptation.correctCount',
+            width: 75,
+            cellStyle: { textAlign: 'right' },
+          },
+        ],
+      },
+    ];
   }
 
   public getRowId: GetRowIdFunc = (params: GetRowIdParams) => {

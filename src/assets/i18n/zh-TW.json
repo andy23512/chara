@@ -103,5 +103,20 @@
   "thumb-3-switch-help-dialog": {
     "title": "拇指第三搖桿",
     "content": "Master Forge 不像 CharaChorder One、CharaChorder Two 及 CCU 有拇指第三搖桿。如果你使用的是 Master Forge，或你使用的是 CharaChorder One、CharaChorder Two 或 CCU 但沒有用到拇指第三搖桿的話，你可以取消勾選這個設定來在佈局顯示上隱藏它們。"
+  },
+  "chords-page": {
+    "load-chords-from-device-button": "從裝置載入和弦",
+    "load-chords-from-file-button": "從檔案載入和弦",
+    "file-input-aria-label": "檔案輸入，用於選擇要載入到此應用程式的和弦庫檔案",
+    "table-column": {
+      "chord": "和弦",
+      "input": "輸入",
+      "output-text": "輸出 (文字)",
+      "output-keys": "輸出 (鍵)",
+      "ancestors": "上層和弦",
+      "adaptation": "適應",
+      "chpm": "分速",
+      "count": "次數"
+    }
   }
 }
