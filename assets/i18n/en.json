@@ -104,5 +104,20 @@
   "thumb-3-switch-help-dialog": {
     "title": "thumb 3 switch",
     "content": "Master Forge doesn't have the thumb 3 switches as CharaChorder One, CharaChorder Two and CCU. If you use Master Forge, or you use CharaChorder One, CharaChorder Two or CCU but don't use the thumb 3 switches, you can uncheck this setting to hide them in the layout."
+  },
+  "chords-page": {
+    "load-chords-from-device-button": "load chords from device",
+    "load-chords-from-file-button": "load chords from file",
+    "file-input-aria-label": "file input for selecting a chord library file to load into this application",
+    "table-column": {
+      "chord": "Chord",
+      "input": "Input",
+      "output-text": "Output (text)",
+      "output-keys": "Output (keys)",
+      "ancestors": "Ancestors",
+      "adaptation": "Adaptation",
+      "chpm": "ChPM",
+      "count": "Count"
+    }
   }
 }
