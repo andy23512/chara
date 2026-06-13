@@ -30,6 +30,14 @@
   </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header class="!text-xl">{{
+      "settings-page.panel-header.adaptation-page" | translate | realTitleCase
+    }}</mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <app-adaptation-page-setting-panel-content></app-adaptation-page-setting-panel-content>
+    </ng-template>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header class="!text-xl">{{
       "settings-page.panel-header.visibility" | translate | realTitleCase
     }}</mat-expansion-panel-header>
     <ng-template matExpansionPanelContent>
