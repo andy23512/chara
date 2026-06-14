@@ -19,6 +19,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ascend, descend, prop, sortWith } from 'ramda';
 import { debounceTime, Subject, switchMap, timer } from 'rxjs';
 import { LayoutComponent } from 'src/app/components/layout/layout.component';
+import { StepperComponent } from 'src/app/components/stepper/stepper.component';
 import { ChordGroupWithStats } from 'src/app/models/chord.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
@@ -45,6 +46,7 @@ import { VisibilitySettingStore } from 'src/app/stores/visibility-setting.store'
     TranslatePipe,
     RealTitleCasePipe,
     MatButton,
+    StepperComponent,
   ],
   providers: [AdaptationPageStore],
 })
@@ -78,14 +80,14 @@ export class AdaptationPageComponent implements OnInit {
       .pipe(switchMap(() => timer(0, 2000))),
   );
   private currentChord = computed(() => this.queue()[0]?.nonBlockedChords[0]);
-  private totalSteps = computed(() => {
+  protected totalSteps = computed(() => {
     const currentChord = this.currentChord();
     if (!currentChord) {
       return 0;
     }
     return currentChord.ancestorsInputs.length + 1;
   });
-  private chordStepIndex = computed(() => {
+  protected chordStepIndex = computed(() => {
     const totalSteps = this.totalSteps();
     const animationFrameIndex = this.animationFrameIndex();
     if (!totalSteps || animationFrameIndex === undefined) {

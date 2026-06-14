@@ -48,3 +48,10 @@
   [showThumb3Switch]="visibilitySettingStore.layoutThumb3Switch()"
   [highlightedPositionCodes]="isFocus() ? highlightedPositionCodes() : []"
 ></app-layout>
+@if (isFocus() && totalSteps() > 1) {
+  <app-stepper
+    class="absolute bottom-2 left-1/2 -translate-x-1/2"
+    [totalSteps]="totalSteps()"
+    [stepIndex]="chordStepIndex()"
+  ></app-stepper>
+}

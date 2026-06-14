@@ -1,0 +1,6 @@
+@for (item of steps(); track $index) {
+  <div
+    class="box-border size-4 rounded-full border border-solid border-chara-500"
+    [class.bg-chara-500]="item === stepIndex()"
+  ></div>
+}
