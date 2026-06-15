@@ -9,7 +9,9 @@
     "close-action": "關閉",
     "delete-confirm-button": "是，我確定要刪除。",
     "delete-single-confirm-button": "是，我確定要刪除。",
-    "start-action": "開始"
+    "start-action": "開始",
+    "load-device-layout-and-chords-from-device": "從裝置載入裝置佈局和和弦",
+    "device-layout-and-chords-loaded-message": "裝置佈局和和弦已成功載入。"
   },
   "home-page": {
     "website-name": "Chara 常陳四",
@@ -73,8 +75,6 @@
     }
   },
   "quick-setting": {
-    "load-device-layout-and-chords-from-device": "從裝置載入裝置佈局和和弦",
-    "device-layout-and-chords-loaded-message": "裝置佈局和和弦已成功載入。",
     "device-layout-non-loaded": "未載入裝置佈局",
     "device-layout-loaded": "已載入裝置佈局",
     "chord-stats": "{count} 個已載入的和弦"

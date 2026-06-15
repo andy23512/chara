@@ -22,7 +22,7 @@ export class QuickSettingService {
     await this.serialHandlerService.disconnect();
     this.matSnackBar.open(
       this.translateService.instant(
-        'quick-setting.device-layout-and-chords-loaded-message',
+        'general.device-layout-and-chords-loaded-message',
       ),
       undefined,
       { duration: 3000 },

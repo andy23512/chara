@@ -1,7 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { patchState } from '@ngrx/signals';
-import { setEntities } from '@ngrx/signals/entities';
+import {
+  setAllEntities
+} from '@ngrx/signals/entities';
 import { TranslateService } from '@ngx-translate/core';
 import { lastValueFrom, tap, throttleTime } from 'rxjs';
 import { SerialHandler } from 'tangent-cc-lib';
@@ -93,7 +95,7 @@ export class SerialHandlerService extends SerialHandler {
             if (!chords) {
               return;
             }
-            patchState(this.chordStore, setEntities(chords));
+            patchState(this.chordStore, setAllEntities(chords));
             if (!stepInfo) {
               this.matSnackBar.open(
                 this.translateService.instant('general.chords-loaded-message'),

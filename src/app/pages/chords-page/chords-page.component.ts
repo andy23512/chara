@@ -48,7 +48,7 @@ import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-la
 import { ChordDataWithLabelStateAndStatistic } from 'src/app/models/chord.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { ChordDataService } from 'src/app/services/chord-data.service';
-import { SerialHandlerService } from 'src/app/services/serial-handler.service';
+import { QuickSettingService } from 'src/app/services/quick-setting.service';
 import { ChordStore } from 'src/app/stores/chord.store';
 import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
 import {
@@ -83,9 +83,9 @@ export class ChordsPageComponent implements OnInit {
 
   private readonly chordStore = inject(ChordStore);
   private readonly languageSettingStore = inject(LanguageSettingStore);
-  private readonly serialHandlerService = inject(SerialHandlerService);
   private readonly chordDataService = inject(ChordDataService);
   private readonly translateService = inject(TranslateService);
+  private readonly quickSettingService = inject(QuickSettingService);
 
   private readonly fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
@@ -227,10 +227,8 @@ export class ChordsPageComponent implements OnInit {
     this.gridApi = params.api;
   }
 
-  public async loadChordsFromDevice() {
-    await this.serialHandlerService.connect();
-    await this.serialHandlerService.loadChordsWithProgressSnackBar();
-    await this.serialHandlerService.disconnect();
+  public async loadDeviceLayoutAndChordsFromDevice() {
+    this.quickSettingService.loadDeviceLayoutAndChordsFromDevice();
   }
 
   public openFileSelectionDialog() {

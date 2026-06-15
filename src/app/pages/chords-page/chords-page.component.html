@@ -1,6 +1,11 @@
 <div class="flex gap-2">
-  <button mat-flat-button color="primary" (click)="loadChordsFromDevice()">
-    {{ "chords-page.load-chords-from-device-button" | translate }}
+  <button
+    type="button"
+    mat-flat-button
+    color="primary"
+    (click)="loadDeviceLayoutAndChordsFromDevice()"
+  >
+    {{ "general.load-device-layout-and-chords-from-device" | translate }}
   </button>
   @if (isDevMode) {
     <button mat-flat-button color="primary" (click)="openFileSelectionDialog()">

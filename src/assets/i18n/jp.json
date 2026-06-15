@@ -9,7 +9,9 @@
     "close-action": "閉じる",
     "delete-confirm-button": "はい、削除します。",
     "delete-single-confirm-button": "はい、削除します。",
-    "start-action": "開始"
+    "start-action": "開始",
+    "load-device-layout-and-chords-from-device": "デバイスからデバイスレイアウトと和音を読み込む",
+    "device-layout-and-chords-loaded-message": "デバイスレイアウトと和音の読み込みに成功しました。"
   },
   "home-page": {
     "website-name": "Chara カラ",
@@ -73,8 +75,6 @@
     }
   },
   "quick-setting": {
-    "load-device-layout-and-chords-from-device": "デバイスからデバイスレイアウトと和音を読み込む",
-    "device-layout-and-chords-loaded-message": "デバイスレイアウトと和音の読み込みに成功しました。",
     "device-layout-non-loaded": "デバイスレイアウト未読込",
     "device-layout-loaded": "デバイスレイアウト読込済",
     "chord-stats": "{count} 個の読み込みされた和音"
