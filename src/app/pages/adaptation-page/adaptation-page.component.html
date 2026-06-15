@@ -48,10 +48,21 @@
   [showThumb3Switch]="visibilitySettingStore.layoutThumb3Switch()"
   [highlightedPositionCodes]="isFocus() ? highlightedPositionCodes() : []"
 ></app-layout>
-@if (isFocus() && totalSteps() > 1) {
-  <app-stepper
-    class="absolute bottom-2 left-1/2 -translate-x-1/2"
-    [totalSteps]="totalSteps()"
-    [stepIndex]="chordStepIndex()"
-  ></app-stepper>
+@if (isFocus()) {
+  <div
+    class="absolute bottom-2 left-1/2 flex -translate-x-1/2 items-center gap-1"
+  >
+    @if (currentChordDynamicLibraryAncestors().length > 0) {
+      <app-dynamic-library-ancestors-chip
+        [dynamicLibraryAncestors]="currentChordDynamicLibraryAncestors()"
+      ></app-dynamic-library-ancestors-chip>
+    }
+    @if (totalSteps() > 1) {
+      <app-stepper
+        class="absolute bottom-2 left-1/2 -translate-x-1/2"
+        [totalSteps]="totalSteps()"
+        [stepIndex]="chordStepIndex()"
+      ></app-stepper>
+    }
+  </div>
 }

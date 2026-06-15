@@ -1,0 +1,7 @@
+<span>DLib:&nbsp;</span>
+@for (ancestor of dynamicLibraryAncestors(); track $index; let isLast = $last) {
+  <span>{{ ancestor.textOutput }}</span>
+  @if (!isLast) {
+    <span>&gt;</span>
+  }
+}

@@ -43,13 +43,17 @@ export type ChordKeyLabel = (
 export interface ChordData extends Chord {
   inputKeyLabels: ChordKeyLabel[];
   outputKeyLabels: ChordKeyLabel[];
-  ancestors: {
-    inputKeyLabels: ChordKeyLabel[];
-    input: number[];
-    textOutput: string;
-    isDynamicLibraryChord: boolean;
-  }[];
+  ancestors: AncestorData[];
+  dynamicLibraryAncestors: AncestorData[];
+  compoundAncestors: AncestorData[];
   textOutput: string;
+}
+
+export interface AncestorData {
+  inputKeyLabels: ChordKeyLabel[];
+  input: number[];
+  textOutput: string;
+  isDynamicLibraryChord: boolean;
 }
 
 export interface ChordDataWithLabelState extends ChordData {

@@ -18,6 +18,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ascend, descend, prop, sortWith } from 'ramda';
 import { debounceTime, Subject, switchMap, timer } from 'rxjs';
+import { DynamicLibraryAncestorsChipComponent } from 'src/app/components/dynamic-library-ancestors-chip/dynamic-library-ancestors-chip.component';
 import { LayoutComponent } from 'src/app/components/layout/layout.component';
 import { StepperComponent } from 'src/app/components/stepper/stepper.component';
 import { ChordGroupWithStats } from 'src/app/models/chord.models';
@@ -47,6 +48,7 @@ import { VisibilitySettingStore } from 'src/app/stores/visibility-setting.store'
     RealTitleCasePipe,
     MatButton,
     StepperComponent,
+    DynamicLibraryAncestorsChipComponent,
   ],
   providers: [AdaptationPageStore],
 })
@@ -79,13 +81,20 @@ export class AdaptationPageComponent implements OnInit {
       .asObservable()
       .pipe(switchMap(() => timer(0, 2000))),
   );
-  private currentChord = computed(() => this.queue()[0]?.nonBlockedChords[0]);
+  protected currentChord = computed(() => this.queue()[0]?.nonBlockedChords[0]);
+  protected currentChordDynamicLibraryAncestors = computed(() => {
+    const currentChord = this.currentChord();
+    if (!currentChord) {
+      return [];
+    }
+    return currentChord.dynamicLibraryAncestors;
+  });
   protected totalSteps = computed(() => {
     const currentChord = this.currentChord();
     if (!currentChord) {
       return 0;
     }
-    return currentChord.ancestors.length + 1;
+    return currentChord.compoundAncestors.length + 1;
   });
   protected chordStepIndex = computed(() => {
     const totalSteps = this.totalSteps();
@@ -108,7 +117,7 @@ export class AdaptationPageComponent implements OnInit {
     const input =
       chordStepIndex === totalSteps - 1
         ? currentChord.input
-        : currentChord.ancestors[chordStepIndex].input;
+        : currentChord.compoundAncestors[chordStepIndex].input;
     const inputActionCodes: number[] = input.filter((a: number) => a !== 0);
     const positionCodes = inputActionCodes.map((actionCode) =>
       profileAPrimaryLayer.indexOf(actionCode),

@@ -11,6 +11,7 @@ import {
   OS_2_META_KEY_LABEL_MAP,
 } from 'tangent-cc-lib';
 import {
+  AncestorData,
   ChordData,
   ChordDataWithLabelState,
   ChordKeyLabel,
@@ -157,22 +158,8 @@ export function convertFlattenedChordTreeNodesToChordData(
     calculateInputKeyLabelsFromChordTreeNode(node);
   });
 
-  return chordTreeNodes.map((node) => ({
-    ...pick(
-      [
-        'id',
-        'input',
-        'actions',
-        'output',
-        'parentId',
-        'actionAndPhraseHash',
-        'isDynamicLibraryChord',
-      ],
-      node,
-    ),
-    inputKeyLabels: inputKeyLabelsMap.get(node.id)!,
-    outputKeyLabels: outputKeyLabelsMap.get(node.id)!,
-    ancestors: node.ancestors.map((ancestor) => ({
+  return chordTreeNodes.map((node) => {
+    const ancestors = node.ancestors.map((ancestor) => ({
       inputKeyLabels: inputKeyLabelsMap.get(ancestor.id)!,
       input: ancestor.input,
       textOutput: calculateTextOutputFromChordOutput(
@@ -180,9 +167,42 @@ export function convertFlattenedChordTreeNodesToChordData(
         keyboardLayout,
       ),
       isDynamicLibraryChord: ancestor.isDynamicLibraryChord,
-    })),
-    textOutput: calculateTextOutputFromChordOutput(node.output, keyboardLayout),
-  }));
+    }));
+    const firstCompoundAncestorIndex = ancestors.findIndex(
+      (a) => !a.isDynamicLibraryChord,
+    );
+    let compoundAncestors: AncestorData[] = [];
+    let dynamicLibraryAncestors: AncestorData[] = [];
+    if (firstCompoundAncestorIndex !== -1) {
+      dynamicLibraryAncestors = ancestors.slice(0, firstCompoundAncestorIndex);
+      compoundAncestors = ancestors.slice(firstCompoundAncestorIndex);
+    } else {
+      dynamicLibraryAncestors = ancestors;
+    }
+    return {
+      ...pick(
+        [
+          'id',
+          'input',
+          'actions',
+          'output',
+          'parentId',
+          'actionAndPhraseHash',
+          'isDynamicLibraryChord',
+        ],
+        node,
+      ),
+      inputKeyLabels: inputKeyLabelsMap.get(node.id)!,
+      outputKeyLabels: outputKeyLabelsMap.get(node.id)!,
+      ancestors,
+      dynamicLibraryAncestors,
+      compoundAncestors,
+      textOutput: calculateTextOutputFromChordOutput(
+        node.output,
+        keyboardLayout,
+      ),
+    };
+  });
 }
 
 function calculateTextOutputFromChordOutput(
