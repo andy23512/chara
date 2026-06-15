@@ -3,7 +3,7 @@ import {
   Chord,
   FontLogo,
   KeyLabelIcon,
-  KeyLabelType
+  KeyLabelType,
 } from 'tangent-cc-lib';
 
 export enum ChordKeyLabelType {
@@ -43,8 +43,12 @@ export type ChordKeyLabel = (
 export interface ChordData extends Chord {
   inputKeyLabels: ChordKeyLabel[];
   outputKeyLabels: ChordKeyLabel[];
-  ancestorsKeyLabels: ChordKeyLabel[][];
-  ancestorsInputs: number[][];
+  ancestors: {
+    inputKeyLabels: ChordKeyLabel[];
+    input: number[];
+    textOutput: string;
+    isDynamicLibraryChord: boolean;
+  }[];
   textOutput: string;
 }
 

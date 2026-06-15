@@ -42,7 +42,7 @@ import {
   TextFilterModule,
   themeQuartz,
 } from 'ag-grid-community';
-import { AncestorsKeyLabelsRendererComponent } from 'src/app/components/ancestors-key-labels-renderer/ancestors-key-labels-renderer.component';
+import { AncestorsRendererComponent } from 'src/app/components/ancestors-renderer/ancestors-renderer.component';
 import { ChordActionButtonsRendererComponent } from 'src/app/components/chord-action-buttons-renderer/chord-action-buttons-renderer.component';
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
 import { ChordDataWithLabelStateAndStatistic } from 'src/app/models/chord.models';
@@ -54,7 +54,7 @@ import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
 import {
   Chord,
   ChordInNumberListForm,
-  convertChordInNumberListFormToChord
+  convertChordInNumberListFormToChord,
 } from 'tangent-cc-lib';
 
 ModuleRegistry.registerModules([
@@ -179,11 +179,11 @@ export class ChordsPageComponent implements OnInit {
             cellRenderer: ChordKeyLabelsRendererComponent,
           },
           {
-            field: 'ancestorsKeyLabels',
+            field: 'ancestors',
             headerName: this.translateService.instant(
               'chords-page.table-column.ancestors',
             ),
-            cellRenderer: AncestorsKeyLabelsRendererComponent,
+            cellRenderer: AncestorsRendererComponent,
           },
         ],
       },

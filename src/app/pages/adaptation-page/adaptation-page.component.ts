@@ -85,7 +85,7 @@ export class AdaptationPageComponent implements OnInit {
     if (!currentChord) {
       return 0;
     }
-    return currentChord.ancestorsInputs.length + 1;
+    return currentChord.ancestors.length + 1;
   });
   protected chordStepIndex = computed(() => {
     const totalSteps = this.totalSteps();
@@ -108,7 +108,7 @@ export class AdaptationPageComponent implements OnInit {
     const input =
       chordStepIndex === totalSteps - 1
         ? currentChord.input
-        : currentChord.ancestorsInputs[chordStepIndex];
+        : currentChord.ancestors[chordStepIndex].input;
     const inputActionCodes: number[] = input.filter((a: number) => a !== 0);
     const positionCodes = inputActionCodes.map((actionCode) =>
       profileAPrimaryLayer.indexOf(actionCode),

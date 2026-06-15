@@ -159,15 +159,28 @@ export function convertFlattenedChordTreeNodesToChordData(
 
   return chordTreeNodes.map((node) => ({
     ...pick(
-      ['id', 'input', 'actions', 'output', 'parentId', 'actionAndPhraseHash'],
+      [
+        'id',
+        'input',
+        'actions',
+        'output',
+        'parentId',
+        'actionAndPhraseHash',
+        'isDynamicLibraryChord',
+      ],
       node,
     ),
     inputKeyLabels: inputKeyLabelsMap.get(node.id)!,
     outputKeyLabels: outputKeyLabelsMap.get(node.id)!,
-    ancestorsKeyLabels: node.ancestors.map(
-      (ancestor) => inputKeyLabelsMap.get(ancestor.id)!,
-    ),
-    ancestorsInputs: node.ancestors.map((ancestor) => ancestor.input),
+    ancestors: node.ancestors.map((ancestor) => ({
+      inputKeyLabels: inputKeyLabelsMap.get(ancestor.id)!,
+      input: ancestor.input,
+      textOutput: calculateTextOutputFromChordOutput(
+        ancestor.output,
+        keyboardLayout,
+      ),
+      isDynamicLibraryChord: ancestor.isDynamicLibraryChord,
+    })),
     textOutput: calculateTextOutputFromChordOutput(node.output, keyboardLayout),
   }));
 }
