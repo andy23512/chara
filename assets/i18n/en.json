@@ -9,7 +9,9 @@
     "close-action": "close",
     "delete-confirm-button": "Yes. Delete them.",
     "delete-single-confirm-button": "Yes. Delete it.",
-    "start-action": "start"
+    "start-action": "start",
+    "load-device-layout-and-chords-from-device": "Load the device layout and the chords from device",
+    "device-layout-and-chords-loaded-message": "The device layout and the chords are loaded successfully."
   },
   "home-page": {
     "website-name": "Chara",
@@ -74,8 +76,6 @@
     }
   },
   "quick-setting": {
-    "load-device-layout-and-chords-from-device": "Load the device layout and the chords from device",
-    "device-layout-and-chords-loaded-message": "The device layout and the chords are loaded successfully.",
     "device-layout-non-loaded": "Device layout non-loaded",
     "device-layout-loaded": "Device layout loaded",
     "chord-stats": "{count, plural, =0 {No loaded chords} one {1 loaded chord} other {{count} loaded chords}}"
