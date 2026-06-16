@@ -81,6 +81,13 @@ export class ChordDataService {
     });
   });
 
+  public adaptationPhaseRemainedChordCount = computed<number>(
+    () =>
+      this.chordDataListWithLabelStateAndStatistic().filter(
+        (c) => !c.adaptation.passed,
+      ).length,
+  );
+
   public chordGroups = computed<ChordGroup[]>(() => {
     const chords = this.chordDataListWithLabelState();
     return toPairs(groupBy(prop('textOutput'), chords))

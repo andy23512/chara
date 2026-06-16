@@ -1,7 +1,7 @@
 <mat-sidenav-container class="h-full" autosize>
   <mat-sidenav
     #drawer
-    class="!w-[97px] !bg-gray-450"
+    class="!w-[97px] !rounded-none !bg-gray-450"
     fixedInViewport
     role="navigation"
     mode="side"
@@ -27,6 +27,7 @@
             [class.!text-gray-900]="rla.isActive"
           >
             <button
+              class="!size-12"
               type="button"
               mat-icon-button
               [disabled]="!navLink.enabled()"
@@ -38,6 +39,7 @@
         <a>
           <button
             type="button"
+            class="!size-12"
             mat-icon-button
             aria-label="button that opens hotkey dialog"
             (click)="openHotkeyDialog()"
@@ -69,9 +71,11 @@
               [class.!text-gray-900]="rla.isActive"
               [disabled]="!navLink.enabled()"
             >
-              <mat-icon class="!m-0 !size-8 !text-4xl">{{
-                navLink.icon | iconGuard
-              }}</mat-icon>
+              <mat-icon
+                class="!m-0 !size-8 !text-4xl"
+                [matBadge]="navLink.count() || null"
+                >{{ navLink.icon | iconGuard }}</mat-icon
+              >
               <span>{{ navLink.title | translate | realTitleCase }}</span>
             </button>
           </a>
