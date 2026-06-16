@@ -23,11 +23,11 @@
                 | translate
             "
             [matTooltipPosition]="'right'"
-            [class.!bg-chara-500]="rla.isActive"
-            [class.!text-gray-900]="rla.isActive"
           >
             <button
               class="!size-12"
+              [class.!bg-chara-500]="rla.isActive"
+              [class.!text-gray-900]="rla.isActive"
               type="button"
               mat-icon-button
               [disabled]="!navLink.enabled()"

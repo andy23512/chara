@@ -75,15 +75,17 @@ html {
   --mat-badge-text-size: 14px;
   --mat-sidenav-content-text-color: white;
   --mat-sidenav-content-background-color: transparent;
+  --mat-tooltip-supporting-text-color: black;
+  --mat-expansion-container-background-color: #242424;
+  --mat-expansion-container-text-color: white;
+  --mat-button-filled-label-text-color: black;
+  --mat-form-field-filled-container-color: #242424;
+  --mat-button-toggle-selected-state-background-color: #fae700;
+  --mat-button-toggle-selected-state-text-color: black;
 }
 
 .list-item-active {
   background: rgba(var(--mat-primary-rgb), 0.5) !important;
-}
-
-.mat-button-toggle-checked {
-  background-color: var(--mat-primary) !important;
-  color: var(--mat-on-primary) !important;
 }
 
 /* You can add global styles to this file, and also import other style files */
