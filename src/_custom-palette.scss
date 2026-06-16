@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $primary-map: (
   50: #fffde5,
   100: #fff9c0,
@@ -32,10 +34,6 @@ $accent-map: (
   700 : #b91c1c,
   800 : #991b1b,
   900 : #991b1b,
-  A100 : #ffffff,
-  A200 : #ffe7e7,
-  A400 : #ffb4b4,
-  A700 : #ff9b9b,
   contrast: (50 : #000000,
     100 : #000000,
     200 : #000000,
@@ -46,8 +44,142 @@ $accent-map: (
     700 : #ffffff,
     800 : #ffffff,
     900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  ))
+  ));
+
+// Convert a legacy m2-style map (50,100..900 + contrast) into a simple M3-style
+// palette map with keys commonly used by Material 3 tokens. This is a pragmatic
+// mapping to allow `mat.define-theme()` to accept the palette and generate
+// system tokens. It maps the lightest m2 values to higher M3 keys (100..90..)
+// and the darker m2 values to lower M3 keys (10..30..).
+
+// Helper to safely read from an m2 map with fallback.
+@function m2-get($m2, $k, $fallback: null) {
+  @if map.has-key($m2, $k) {
+    @return map.get($m2, $k);
+  }
+  @return $fallback;
+}
+
+@function _m2-to-m3($m2) {
+  // Main palette colors (0, 10, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 95, 98, 99, 100)
+  $m3: (
+    0: m2-get($m2, 900, m2-get($m2, 800)),
+    10: m2-get($m2, 900, m2-get($m2, 800)),
+    20: m2-get($m2, 900, m2-get($m2, 800)),
+    25: m2-get($m2, 900, m2-get($m2, 800)),
+    30: m2-get($m2, 900, m2-get($m2, 800)),
+    35: m2-get($m2, 800, m2-get($m2, 900)),
+    40: m2-get($m2, 800, m2-get($m2, 900)),
+    50: m2-get($m2, 700, m2-get($m2, 800)),
+    60: m2-get($m2, 600, m2-get($m2, 700)),
+    70: m2-get($m2, 500, m2-get($m2, 600)),
+    80: m2-get($m2, 400, m2-get($m2, 500)),
+    90: m2-get($m2, 300, m2-get($m2, 400)),
+    95: m2-get($m2, 200, m2-get($m2, 300)),
+    98: m2-get($m2, 100, m2-get($m2, 200)),
+    99: m2-get($m2, 100, m2-get($m2, 50)),
+    100: m2-get($m2, 50, m2-get($m2, 100)),
+  );
+
+  // Secondary palette (same structure)
+  $secondary: (
+    0: m2-get($m2, 900, m2-get($m2, 800)),
+    10: m2-get($m2, 900, m2-get($m2, 800)),
+    20: m2-get($m2, 900, m2-get($m2, 800)),
+    25: m2-get($m2, 900, m2-get($m2, 800)),
+    30: m2-get($m2, 900, m2-get($m2, 800)),
+    35: m2-get($m2, 800, m2-get($m2, 900)),
+    40: m2-get($m2, 800, m2-get($m2, 900)),
+    50: m2-get($m2, 700, m2-get($m2, 800)),
+    60: m2-get($m2, 600, m2-get($m2, 700)),
+    70: m2-get($m2, 500, m2-get($m2, 600)),
+    80: m2-get($m2, 400, m2-get($m2, 500)),
+    90: m2-get($m2, 300, m2-get($m2, 400)),
+    95: m2-get($m2, 200, m2-get($m2, 300)),
+    98: m2-get($m2, 100, m2-get($m2, 200)),
+    99: m2-get($m2, 100, m2-get($m2, 50)),
+    100: m2-get($m2, 50, m2-get($m2, 100)),
+  );
+
+  // Neutral palette with extra keys for surface variants
+  $neutral: (
+    0: m2-get($m2, 900, m2-get($m2, 800)),
+    4: m2-get($m2, 900, m2-get($m2, 800)),
+    6: m2-get($m2, 900, m2-get($m2, 800)),
+    10: m2-get($m2, 900, m2-get($m2, 800)),
+    12: m2-get($m2, 900, m2-get($m2, 800)),
+    17: m2-get($m2, 900, m2-get($m2, 800)),
+    20: m2-get($m2, 900, m2-get($m2, 800)),
+    22: m2-get($m2, 900, m2-get($m2, 800)),
+    24: m2-get($m2, 900, m2-get($m2, 800)),
+    25: m2-get($m2, 900, m2-get($m2, 800)),
+    30: m2-get($m2, 900, m2-get($m2, 800)),
+    35: m2-get($m2, 800, m2-get($m2, 900)),
+    40: m2-get($m2, 800, m2-get($m2, 900)),
+    50: m2-get($m2, 700, m2-get($m2, 800)),
+    60: m2-get($m2, 600, m2-get($m2, 700)),
+    70: m2-get($m2, 500, m2-get($m2, 600)),
+    80: m2-get($m2, 400, m2-get($m2, 500)),
+    87: m2-get($m2, 300, m2-get($m2, 400)),
+    90: m2-get($m2, 300, m2-get($m2, 400)),
+    92: m2-get($m2, 200, m2-get($m2, 300)),
+    94: m2-get($m2, 200, m2-get($m2, 300)),
+    95: m2-get($m2, 200, m2-get($m2, 300)),
+    96: m2-get($m2, 100, m2-get($m2, 200)),
+    98: m2-get($m2, 100, m2-get($m2, 200)),
+    99: m2-get($m2, 100, m2-get($m2, 50)),
+    100: m2-get($m2, 50, m2-get($m2, 100)),
+  );
+
+  // Neutral-variant palette (standard keys)
+  $neutral-variant: (
+    0: m2-get($m2, 900, m2-get($m2, 800)),
+    10: m2-get($m2, 900, m2-get($m2, 800)),
+    20: m2-get($m2, 900, m2-get($m2, 800)),
+    25: m2-get($m2, 900, m2-get($m2, 800)),
+    30: m2-get($m2, 900, m2-get($m2, 800)),
+    35: m2-get($m2, 800, m2-get($m2, 900)),
+    40: m2-get($m2, 800, m2-get($m2, 900)),
+    50: m2-get($m2, 700, m2-get($m2, 800)),
+    60: m2-get($m2, 600, m2-get($m2, 700)),
+    70: m2-get($m2, 500, m2-get($m2, 600)),
+    80: m2-get($m2, 400, m2-get($m2, 500)),
+    90: m2-get($m2, 300, m2-get($m2, 400)),
+    95: m2-get($m2, 200, m2-get($m2, 300)),
+    98: m2-get($m2, 100, m2-get($m2, 200)),
+    99: m2-get($m2, 100, m2-get($m2, 50)),
+    100: m2-get($m2, 50, m2-get($m2, 100)),
+  );
+
+  // Error palette (standard keys)
+  $error: (
+    0: #000000,
+    10: #410002,
+    20: #690005,
+    25: #7e0007,
+    30: #93000a,
+    35: #a80710,
+    40: #ba1a1a,
+    50: #de3730,
+    60: #ff5449,
+    70: #ff897d,
+    80: #ffb4ab,
+    90: #ffdad6,
+    95: #ffedea,
+    98: #fff8f7,
+    99: #fffbff,
+    100: #ffffff,
+  );
+
+  // Return the complete palette structure
+  @return map.merge($m3, (
+    secondary: $secondary,
+    neutral: $neutral,
+    'neutral-variant': $neutral-variant,
+    error: $error,
+  ));
+}
+
+// Expose converted palettes for styles.scss to use
+$primary-m3: _m2-to-m3($primary-map);
+$accent-m3: _m2-to-m3($accent-map);
