@@ -1,7 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
-@use "custom-palette" as cp;
+@use "./theme-colors" as cp;
 @import '../node_modules/font-logos/assets/font-logos.css';
 
 @tailwind base;
@@ -46,8 +46,8 @@
 // hue. Available color palettes: https://material.io/design/color/
 // Use Material M3 theming API (define-theme).
 // Use converted M3-compatible palettes from custom-palette.
-$chara-primary: cp.$primary-m3;
-$chara-accent: cp.$accent-m3;
+$chara-primary: cp.$primary-palette;
+$chara-accent: cp.$tertiary-palette;
 
 // The warn palette is optional (defaults to red).
 $chara-warn: mat.$red-palette;
@@ -73,15 +73,6 @@ html {
   --mat-toolbar-title-text-tracking: 0.0125em;
   --mat-toolbar-title-text-weight: 500;
   --mat-badge-text-size: 14px;
-  --mat-sidenav-content-text-color: white;
-  --mat-sidenav-content-background-color: transparent;
-  --mat-tooltip-supporting-text-color: black;
-  --mat-expansion-container-background-color: #242424;
-  --mat-expansion-container-text-color: white;
-  --mat-button-filled-label-text-color: black;
-  --mat-form-field-filled-container-color: #242424;
-  --mat-button-toggle-selected-state-background-color: #fae700;
-  --mat-button-toggle-selected-state-text-color: black;
 }
 
 .list-item-active {
