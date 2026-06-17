@@ -64,7 +64,11 @@ $chara-theme: mat.define-theme((
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($chara-theme);
+:root {
+  @include mat.all-component-themes($chara-theme);
+  @include mat.system-level-colors($chara-theme);
+  @include mat.system-level-typography($chara-theme);
+}
 
 html {
   --mat-toolbar-title-text-font: Roboto, sans-serif;

@@ -41,6 +41,24 @@ module.exports = {
           800: "#1e1e1e",
           900: "#131313",
         },
+        primary: {
+          DEFAULT: "var(--mat-sys-primary)",
+          container: "var(--mat-sys-primary-container)",
+        },
+        secondary: {
+          DEFAULT: "var(--mat-sys-secondary)",
+          container: "var(--mat-sys-secondary-container)",
+        },
+        tertiary: {
+          DEFAULT: "var(--mat-sys-tertiary)",
+          container: "var(--mat-sys-tertiary-container)",
+        },
+        surface: {
+          DEFAULT: "var(--mat-sys-surface)",
+          variant: "var(--mat-sys-surface-variant)",
+          container: "var(--mat-sys-surface-container)",
+        },
+        error: "var(--mat-sys-error)",
       },
     },
   },
