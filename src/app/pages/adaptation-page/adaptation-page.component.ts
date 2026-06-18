@@ -25,9 +25,9 @@ import { ChordGroupWithStats } from 'src/app/models/chord.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 import { ChordDataService } from 'src/app/services/chord-data.service';
-import { AdaptationPageSettingStore } from 'src/app/stores/adaptation-page-setting.store';
 import { AdaptationPageStore } from 'src/app/stores/adaptation-page.store';
 import { DeviceLayoutStore } from 'src/app/stores/device-layout.store';
+import { PhaseSettingStore } from 'src/app/stores/phase-setting.store';
 import { PracticeStatisticStore } from 'src/app/stores/practice-statistic.store';
 import { VisibilitySettingStore } from 'src/app/stores/visibility-setting.store';
 
@@ -56,9 +56,7 @@ export class AdaptationPageComponent implements OnInit {
   public readonly visibilitySettingStore = inject(VisibilitySettingStore);
   private readonly adaptationPageStore = inject(AdaptationPageStore);
   private readonly chordDataService = inject(ChordDataService);
-  private readonly adaptationPageSettingStore = inject(
-    AdaptationPageSettingStore,
-  );
+  private readonly phaseSettingStore = inject(PhaseSettingStore);
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
   private readonly practiceStatisticStore = inject(PracticeStatisticStore);
 
@@ -135,8 +133,8 @@ export class AdaptationPageComponent implements OnInit {
     () => {
       const chordGroups = this.chordDataService.chordGroups();
       const practiceStatistic = this.practiceStatisticStore.adaptation();
-      const minSpeedToPass = this.adaptationPageSettingStore.minSpeedToPass();
-      const minRepToPass = this.adaptationPageSettingStore.minRepsToPass();
+      const { minSpeedToPass, minRepsToPass } =
+        this.phaseSettingStore.adaptation();
       return chordGroups.map((cg) => {
         const statistic = practiceStatistic[cg.textOutput];
         if (!statistic) {
@@ -147,7 +145,7 @@ export class AdaptationPageComponent implements OnInit {
           };
         }
         const passed =
-          statistic.correctCount >= minRepToPass &&
+          statistic.correctCount >= minRepsToPass &&
           statistic.lastTenAverageChordPerMinute >= minSpeedToPass;
         return {
           ...cg,
@@ -171,7 +169,7 @@ export class AdaptationPageComponent implements OnInit {
   public readonly practiceSet = computed(() =>
     this.sortedChordGroups().slice(
       0,
-      this.adaptationPageSettingStore.practiceSetSize(),
+      this.phaseSettingStore.adaptation().practiceSetSize,
     ),
   );
 

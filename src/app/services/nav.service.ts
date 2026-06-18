@@ -10,6 +10,8 @@ export class NavService {
     switch (page) {
       case Page.Adaptation:
         return this.chordDataService.adaptationPhaseRemainedChordCount;
+      case Page.Realization:
+        return this.chordDataService.realizationPhaseRemainedChordCount;
       default:
         return signal(0);
     }

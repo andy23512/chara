@@ -216,6 +216,35 @@ export class ChordsPageComponent implements OnInit {
           },
         ],
       },
+      {
+        headerName: this.translateService.instant(
+          'chords-page.table-column.realization',
+        ),
+        children: [
+          {
+            headerName: this.translateService.instant(
+              'chords-page.table-column.chpm',
+            ),
+            field: 'realization.lastTenAverageChordPerMinute',
+            width: 75,
+            cellStyle: { textAlign: 'right' },
+            cellClass: (
+              param: CellClassParams<ChordDataWithLabelStateAndStatistic>,
+            ) => (param.data?.realization?.passed ? 'bg-chara-500/20' : ''),
+          },
+          {
+            headerName: this.translateService.instant(
+              'chords-page.table-column.count',
+            ),
+            field: 'realization.correctCount',
+            width: 75,
+            cellStyle: { textAlign: 'right' },
+            cellClass: (
+              param: CellClassParams<ChordDataWithLabelStateAndStatistic>,
+            ) => (param.data?.realization?.passed ? 'bg-chara-500/20' : ''),
+          },
+        ],
+      },
     ];
   }
 

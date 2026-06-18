@@ -74,6 +74,8 @@
               <mat-icon
                 class="!m-0 !size-8 !text-4xl"
                 [matBadge]="navLink.count() || null"
+                [matBadgeSize]="'large'"
+                [matBadgeHidden]="rla.isActive"
                 >{{ navLink.icon | iconGuard }}</mat-icon
               >
               <span>{{ navLink.title | translate | realTitleCase }}</span>

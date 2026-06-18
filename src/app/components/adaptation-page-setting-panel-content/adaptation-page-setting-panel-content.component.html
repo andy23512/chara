@@ -7,7 +7,7 @@
   <input
     matInput
     type="number"
-    [ngModel]="practiceSetSize()"
+    [ngModel]="adaptationPageSetting().practiceSetSize"
     (ngModelChange)="onPracticeSetSizeChange($event)"
   />
   <mat-hint>{{
@@ -21,7 +21,7 @@
   <input
     matInput
     type="number"
-    [ngModel]="minRepsToPass()"
+    [ngModel]="adaptationPageSetting().minRepsToPass"
     (ngModelChange)="onMinRepsToPassChange($event)"
   />
   <mat-hint>{{
@@ -37,7 +37,7 @@
   <input
     matInput
     type="number"
-    [ngModel]="minSpeedToPass()"
+    [ngModel]="adaptationPageSetting().minSpeedToPass"
     (ngModelChange)="onMinSpeedToPassChange($event)"
   />
   <mat-hint>{{

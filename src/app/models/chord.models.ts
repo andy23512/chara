@@ -68,6 +68,11 @@ export interface ChordDataWithLabelStateAndStatistic
     lastTenAverageChordPerMinute: number | null;
     passed: boolean;
   };
+  realization: {
+    correctCount: number | null;
+    lastTenAverageChordPerMinute: number | null;
+    passed: boolean;
+  };
 }
 
 export interface ChordGroup {

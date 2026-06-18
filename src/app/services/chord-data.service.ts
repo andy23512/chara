@@ -5,10 +5,10 @@ import {
   ChordDataWithLabelStateAndStatistic,
   ChordGroup,
 } from '../models/chord.models';
-import { AdaptationPageSettingStore } from '../stores/adaptation-page-setting.store';
 import { ChordLabelStore } from '../stores/chord-label.store';
 import { ChordStore } from '../stores/chord.store';
 import { KeyboardLayoutSettingStore } from '../stores/keyboard-layout-setting.store';
+import { PhaseSettingStore } from '../stores/phase-setting.store';
 import { PracticeStatisticStore } from '../stores/practice-statistic.store';
 import {
   appendLabelStateToChordData,
@@ -24,9 +24,7 @@ export class ChordDataService {
   private readonly chordStore = inject(ChordStore);
   private readonly chordLabelStore = inject(ChordLabelStore);
   private readonly practiceStatisticStore = inject(PracticeStatisticStore);
-  private readonly adaptationPageSettingStore = inject(
-    AdaptationPageSettingStore,
-  );
+  private readonly phaseSettingStore = inject(PhaseSettingStore);
 
   public readonly chordDataList = computed(() => {
     const keyboardLayout = this.keyboardLayout();
@@ -52,31 +50,45 @@ export class ChordDataService {
     const chords = this.chordDataListWithLabelState();
     const adaptationPracticeStatistic =
       this.practiceStatisticStore.adaptation();
-    const adaptationMinSpeedToPass =
-      this.adaptationPageSettingStore.minRepsToPass();
-    const adaptationMinRepToPass =
-      this.adaptationPageSettingStore.minRepsToPass();
+    const realizationPracticeStatistic =
+      this.practiceStatisticStore.realization();
+    const adaptationPhaseSetting = this.phaseSettingStore.adaptation();
+    const realizationPhaseSetting = this.phaseSettingStore.realization();
     return chords.map((c) => {
-      const s = adaptationPracticeStatistic[c.textOutput];
-      if (!s) {
-        return {
-          ...c,
-          adaptation: {
+      const as = adaptationPracticeStatistic[c.textOutput];
+      const rs = realizationPracticeStatistic[c.textOutput];
+      const adaptation = as
+        ? {
+            lastTenAverageChordPerMinute: as.lastTenAverageChordPerMinute,
+            correctCount: as.correctCount,
+            passed:
+              as.lastTenAverageChordPerMinute >=
+                adaptationPhaseSetting.minSpeedToPass &&
+              as.correctCount >= adaptationPhaseSetting.minRepsToPass,
+          }
+        : {
             lastTenAverageChordPerMinute: null,
             correctCount: null,
             passed: false,
-          },
-        };
-      }
+          };
+      const realization = rs
+        ? {
+            lastTenAverageChordPerMinute: rs.lastTenAverageChordPerMinute,
+            correctCount: rs.correctCount,
+            passed:
+              rs.lastTenAverageChordPerMinute >=
+                realizationPhaseSetting.minSpeedToPass &&
+              rs.correctCount >= realizationPhaseSetting.minRepsToPass,
+          }
+        : {
+            lastTenAverageChordPerMinute: null,
+            correctCount: null,
+            passed: false,
+          };
       return {
         ...c,
-        adaptation: {
-          lastTenAverageChordPerMinute: s.lastTenAverageChordPerMinute,
-          correctCount: s.correctCount,
-          passed:
-            s.lastTenAverageChordPerMinute >= adaptationMinSpeedToPass &&
-            s.correctCount >= adaptationMinRepToPass,
-        },
+        adaptation,
+        realization,
       };
     });
   });
@@ -85,6 +97,13 @@ export class ChordDataService {
     () =>
       this.chordDataListWithLabelStateAndStatistic().filter(
         (c) => !c.adaptation.passed,
+      ).length,
+  );
+
+  public realizationPhaseRemainedChordCount = computed<number>(
+    () =>
+      this.chordDataListWithLabelStateAndStatistic().filter(
+        (c) => c.adaptation.passed && !c.realization.passed,
       ).length,
   );
 
