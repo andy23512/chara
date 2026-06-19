@@ -1,8 +1,8 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  inject,
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -10,9 +10,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { AdaptationPageSettingPanelContentComponent } from 'src/app/components/adaptation-page-setting-panel-content/adaptation-page-setting-panel-content.component';
 import { DataDeletionSettingPanelContentComponent } from 'src/app/components/data-deletion-setting-panel-content/data-deletion-setting-panel-content.component';
 import { OsKeyboardLayoutSettingPanelContentComponent } from 'src/app/components/os-keyboard-layout-setting-panel-content/os-keyboard-layout-setting-panel-content.component';
+import { PhaseSettingPanelContentComponent } from 'src/app/components/phase-setting-panel-content/phase-setting-panel-content.component';
 import { QuickSettingPanelContentComponent } from 'src/app/components/quick-setting-panel-content/quick-setting-panel-content.component';
 import { VisibilitySettingPanelContentComponent } from 'src/app/components/visibility-setting-panel-content/visibility-setting-panel-content.component';
 import { UiLanguage } from 'src/app/models/language-setting.models';
@@ -33,7 +33,7 @@ import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
     QuickSettingPanelContentComponent,
     DataDeletionSettingPanelContentComponent,
     VisibilitySettingPanelContentComponent,
-    AdaptationPageSettingPanelContentComponent,
+    PhaseSettingPanelContentComponent,
   ],
   templateUrl: './settings-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

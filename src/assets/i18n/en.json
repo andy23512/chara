@@ -72,7 +72,7 @@
       "data-deletion": "data deletion",
       "visibility": "visibility",
       "ui-language": "UI language",
-      "adaptation-page": "adaptation page"
+      "phase": "phase"
     }
   },
   "quick-setting": {
@@ -106,18 +106,20 @@
     "title": "thumb 3 switch",
     "content": "Master Forge doesn't have the thumb 3 switches as CharaChorder One, CharaChorder Two and CCU. If you use Master Forge, or you use CharaChorder One, CharaChorder Two or CCU but don't use the thumb 3 switches, you can uncheck this setting to hide them in the layout."
   },
-  "adaptation-page-setting": {
+  "phase-setting": {
+    "adaptation": "adaptation",
+    "realization": "realization",
     "practice-set-size": {
       "label": "practice set size",
       "hint": "Number of chords to practice at the same time"
     },
     "min-reps-to-pass": {
       "label": "min reps to pass",
-      "hint": "Minimum number of practice for a chord required to pass the adaptation phase"
+      "hint": "Minimum number of practice for a chord required to pass the phase"
     },
     "min-speed-to-pass": {
       "label": "min speed (ChPM) to pass",
-      "hint": "Minimum entry speed for a chord required to pass the adaptation phase"
+      "hint": "Minimum entry speed for a chord required to pass the phase"
     }
   },
   "chords-page": {

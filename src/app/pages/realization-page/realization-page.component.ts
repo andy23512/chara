@@ -29,7 +29,7 @@ export class RealizationPageComponent {
   private readonly practiceStatisticStore = inject(PracticeStatisticStore);
   protected Phase = Phase;
 
-  private readonly chordGroupsPassingAdaptation = computed<ChordGroup[]>(() => {
+  private readonly chordGroups = computed<ChordGroup[]>(() => {
     const chordGroups = this.chordDataService.chordGroups();
     const adaptationPracticeStatistic =
       this.practiceStatisticStore.adaptation();
@@ -47,7 +47,7 @@ export class RealizationPageComponent {
 
   private readonly chordGroupsWithStats = computed<ChordGroupWithStats[]>(
     () => {
-      const chordGroups = this.chordDataService.chordGroups();
+      const chordGroups = this.chordGroups();
       const practiceStatistic = this.practiceStatisticStore.realization();
       const { minSpeedToPass, minRepsToPass } =
         this.phaseSettingStore.realization();

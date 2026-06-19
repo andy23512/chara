@@ -1,0 +1,37 @@
+<table class="mat-elevation-z8 w-full border-collapse">
+  <thead>
+    <tr class="mat-header-row">
+      <th>&nbsp;</th>
+      @for (phase of phases; track phase.value) {
+        <th class="mat-header-cell p-4 text-left">
+          {{ phase.name | translate | realTitleCase }}
+        </th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (setting of settings; track setting.key) {
+      <tr class="mat-row">
+        <td class="mat-cell px-2 md:w-[1%] md:whitespace-nowrap">
+          <span [matTooltip]="setting.hint | translate">
+            {{ setting.name | translate | realTitleCase }}
+          </span>
+        </td>
+        @for (phase of phases; track phase.value) {
+          <td class="mat-cell">
+            <mat-form-field class="w-full">
+              <input
+                matInput
+                type="number"
+                [ngModel]="phaseSettingStore[phase.value]()[setting.key]"
+                (ngModelChange)="
+                  onSettingValueChange(phase.value, setting.key, $event)
+                "
+              />
+            </mat-form-field>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
