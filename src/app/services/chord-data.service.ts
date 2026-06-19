@@ -100,6 +100,13 @@ export class ChordDataService {
       ).length,
   );
 
+  public adaptationPhasePassedChordCount = computed<number>(
+    () =>
+      this.chordDataListWithLabelStateAndStatistic().filter(
+        (c) => c.adaptation.passed,
+      ).length,
+  );
+
   public realizationPhaseRemainedChordCount = computed<number>(
     () =>
       this.chordDataListWithLabelStateAndStatistic().filter(

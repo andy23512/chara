@@ -1,29 +1,24 @@
-import { withDevtools } from '@angular-architects/ngrx-toolkit';
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import {
-  ChordGroup
-} from '../models/chord.models';
+import { ChordGroup } from '../models/chord.models';
 import { Phase } from '../models/phase.models';
 import { pickRandomItem, pickRandomItemNTimes } from '../utils/random.utils';
 import { PracticeStatisticStore } from './practice-statistic.store';
 
-interface AdaptationPageState {
+interface ChordPracticeViewState {
   queue: ChordGroup[];
   history: ChordGroup[];
   lastCorrectChordTime: number | null;
 }
 
-const ADAPTATION_PAGE_STORE_KEY = 'adaptationPage';
 const QUEUE_SIZE = 20;
-const initialState: AdaptationPageState = {
+const initialState: ChordPracticeViewState = {
   queue: [],
   history: [],
   lastCorrectChordTime: null,
 };
 
-export const AdaptationPageStore = signalStore(
-  withDevtools(ADAPTATION_PAGE_STORE_KEY),
+export const ChordPracticeViewStore = signalStore(
   withState(initialState),
   withMethods((store) => {
     const practiceStatisticStore = inject(PracticeStatisticStore);
@@ -36,16 +31,17 @@ export const AdaptationPageStore = signalStore(
           queue: pickRandomItemNTimes(chordGroups, QUEUE_SIZE),
         }));
       },
-      checkText(text: string, time: number, chordGroups: ChordGroup[]) {
+      checkText(
+        text: string,
+        time: number,
+        chordGroups: ChordGroup[],
+        phase: Phase,
+      ) {
         patchState(store, ({ queue, history, lastCorrectChordTime }) => {
           if (text.trim() === queue[0].textOutput.trim()) {
             if (lastCorrectChordTime) {
               const interval = time - lastCorrectChordTime;
-              practiceStatisticStore.saveSpeedRecord(
-                Phase.Adaptation,
-                queue[0],
-                interval,
-              );
+              practiceStatisticStore.saveSpeedRecord(phase, queue[0], interval);
             }
             return {
               queue: [
