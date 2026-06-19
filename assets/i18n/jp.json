@@ -71,7 +71,7 @@
       "data-deletion": "データ削除",
       "visibility": "表示",
       "ui-language": "UI 言語",
-      "adaptation-page": "適応ページ"
+      "phase": "段階"
     }
   },
   "quick-setting": {
@@ -105,7 +105,9 @@
     "title": "親指後列スイッチ",
     "content": "Master Forge には、CharaChorder One、CharaChorder Two および CCU のような親指後列スイッチがありません。Master Forge をご利用の場合、または CharaChorder One、CharaChorder Two または CCU をご利用で親指後列スイッチを使用しない場合は、この設定のチェックを外してレイアウトから非表示にすることができます。"
   },
-  "adaptation-page-setting": {
+  "phase-setting": {
+    "adaptation": "適応",
+    "realization": "実現",
     "practice-set-size": {
       "label": "練習セットサイズ",
       "hint": "同時に練習する和音の数"
