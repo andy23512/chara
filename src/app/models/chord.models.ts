@@ -73,6 +73,10 @@ export interface ChordDataWithLabelStateAndStatistic
     lastTenAverageChordPerMinute: number | null;
     passed: boolean;
   };
+  accumulation: {
+    correctCount: number | null;
+    lastTenAverageChordPerMinute: number | null;
+  };
 }
 
 export interface ChordGroup {

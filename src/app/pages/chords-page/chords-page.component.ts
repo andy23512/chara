@@ -245,6 +245,29 @@ export class ChordsPageComponent implements OnInit {
           },
         ],
       },
+      {
+        headerName: this.translateService.instant(
+          'chords-page.table-column.accumulation',
+        ),
+        children: [
+          {
+            headerName: this.translateService.instant(
+              'chords-page.table-column.chpm',
+            ),
+            field: 'accumulation.lastTenAverageChordPerMinute',
+            width: 75,
+            cellStyle: { textAlign: 'right' },
+          },
+          {
+            headerName: this.translateService.instant(
+              'chords-page.table-column.count',
+            ),
+            field: 'accumulation.correctCount',
+            width: 75,
+            cellStyle: { textAlign: 'right' },
+          },
+        ],
+      },
     ];
   }
 

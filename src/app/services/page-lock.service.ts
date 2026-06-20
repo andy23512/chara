@@ -27,6 +27,12 @@ export class PageLockService {
           );
         });
       case Page.Accumulation:
+        return computed(() => {
+          return (
+            this.deviceLayoutStore.hasLoadedProfileLayoutMap() &&
+            this.chordDataService.realizationPhasePassedChordCount() > 0
+          );
+        });
       case Page.Information:
         return signal(false);
       default:

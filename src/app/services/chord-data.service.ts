@@ -52,11 +52,14 @@ export class ChordDataService {
       this.practiceStatisticStore.adaptation();
     const realizationPracticeStatistic =
       this.practiceStatisticStore.realization();
+    const accumulationPracticeStatistic =
+      this.practiceStatisticStore.accumulation();
     const adaptationPhaseSetting = this.phaseSettingStore.adaptation();
     const realizationPhaseSetting = this.phaseSettingStore.realization();
     return chords.map((c) => {
       const as = adaptationPracticeStatistic[c.textOutput];
       const rs = realizationPracticeStatistic[c.textOutput];
+      const acs = accumulationPracticeStatistic[c.textOutput];
       const adaptation = as
         ? {
             lastTenAverageChordPerMinute: as.lastTenAverageChordPerMinute,
@@ -85,10 +88,20 @@ export class ChordDataService {
             correctCount: null,
             passed: false,
           };
+      const accumulation = acs
+        ? {
+            lastTenAverageChordPerMinute: acs.lastTenAverageChordPerMinute,
+            correctCount: acs.correctCount,
+          }
+        : {
+            lastTenAverageChordPerMinute: null,
+            correctCount: null,
+          };
       return {
         ...c,
         adaptation,
         realization,
+        accumulation,
       };
     });
   });
