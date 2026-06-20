@@ -54,12 +54,14 @@
       "realization": {
         "title": "実現",
         "tooltip": "実現ページへ移動",
-        "aria-label": "実現ページリンク"
+        "aria-label": "実現ページリンク",
+        "lock-message": "実装ページを使用するには、適応フェーズを少なくとも1つのコードでクリアする必要があります。"
       },
       "accumulation": {
         "title": "蓄積",
         "tooltip": "蓄積ページへ移動",
-        "aria-label": "蓄積ページリンク"
+        "aria-label": "蓄積ページリンク",
+        "lock-message": "蓄積ページを使用するには、実装フェーズを少なくとも1つのコードでクリアする必要があります。"
       }
     }
   },
@@ -71,7 +73,7 @@
       "data-deletion": "データ削除",
       "visibility": "表示",
       "ui-language": "UI 言語",
-      "phase": "段階"
+      "phase": "フェーズ"
     }
   },
   "quick-setting": {
