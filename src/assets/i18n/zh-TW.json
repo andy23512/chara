@@ -54,12 +54,14 @@
       "realization": {
         "title": "實現",
         "tooltip": "前往實現頁面",
-        "aria-label": "實現頁面連結"
+        "aria-label": "實現頁面連結",
+        "lock-message": "你需要至少有一個和弦通過適應階段，才能使用實現頁面。"
       },
       "accumulation": {
         "title": "積累",
         "tooltip": "前往積累頁面",
-        "aria-label": "積累頁面連結"
+        "aria-label": "積累頁面連結",
+        "lock-message": "你需要至少有一個和弦通過實現階段，才能使用積累頁面。"
       }
     }
   },

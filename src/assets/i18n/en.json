@@ -50,17 +50,19 @@
         "title": "adapt",
         "tooltip": "Go to Adaptation page",
         "aria-label": "adaptation page link",
-        "lock-message": "Load device layout and chords on Settings page to use the adaption page."
+        "lock-message": "Load device layout and chords on Settings page to use the Adaptation page."
       },
       "realization": {
         "title": "realize",
         "tooltip": "Go to Realization page",
-        "aria-label": "realization page link"
+        "aria-label": "realization page link",
+        "lock-message": "You need to have at least one chord passing the Adaptation phase to access the Realization page."
       },
       "accumulation": {
         "title": "accum",
         "tooltip": "Go to Accumulation page",
-        "aria-label": "accumulation page link"
+        "aria-label": "accumulation page link",
+        "lock-message": "You need to have at least one chord passing the Realization phase to access the Accumulation page."
       }
     }
   },

@@ -86,3 +86,7 @@ export interface ChordGroupWithStats extends ChordGroup {
   passed: boolean;
   lastTenAverageChordPerMinute: number;
 }
+
+export interface ChordGroupWithCorrectCount extends ChordGroup {
+  correctCount: number;
+}

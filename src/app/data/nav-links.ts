@@ -58,6 +58,7 @@ export const MAIN_NAV_LINKS: NavLink[] = [
     routerLinkActiveOptions: { exact: false },
     ariaLabel: 'nav.page.realization.aria-label',
     tooltipMessage: 'nav.page.realization.tooltip',
+    lockMessage: 'nav.page.realization.lock-message',
     icon: 'model_training',
   },
   {
@@ -67,6 +68,7 @@ export const MAIN_NAV_LINKS: NavLink[] = [
     routerLinkActiveOptions: { exact: false },
     ariaLabel: 'nav.page.accumulation.aria-label',
     tooltipMessage: 'nav.page.accumulation.tooltip',
+    lockMessage: 'nav.page.accumulation.lock-message',
     icon: 'merge',
   },
 ];

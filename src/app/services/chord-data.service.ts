@@ -114,6 +114,13 @@ export class ChordDataService {
       ).length,
   );
 
+  public realizationPhasePassedChordCount = computed<number>(
+    () =>
+      this.chordDataListWithLabelStateAndStatistic().filter(
+        (c) => c.adaptation.passed && c.realization.passed,
+      ).length,
+  );
+
   public chordGroups = computed<ChordGroup[]>(() => {
     const chords = this.chordDataListWithLabelState();
     return toPairs(groupBy(prop('textOutput'), chords))
