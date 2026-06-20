@@ -1,11 +1,14 @@
-
 export function pickRandomItem<T>(list: T[]) {
   const index = Math.floor(Math.random() * list.length);
   return list[index];
 }
 
-export function pickRandomItemNTimes<T>(list: T[], n: number) {
-  return getNonConsecutiveRandoms(n, 0, list.length - 1).map(
+export function pickRandomItemNTimes<T>(
+  list: T[],
+  n: number,
+  previousIndex: number | null = null,
+) {
+  return getNonConsecutiveRandoms(n, 0, list.length - 1, previousIndex).map(
     (index) => list[index],
   );
 }
@@ -30,13 +33,14 @@ function getNonConsecutiveRandoms(
   n: number,
   min: number,
   max: number,
+  initialPrevious: number | null = null,
 ): number[] {
   if (min === max) {
     return new Array(n).fill(min);
   }
 
   const results: number[] = [];
-  let previous: number | null = null;
+  let previous: number | null = initialPrevious;
 
   for (let i = 0; i < n; i++) {
     let current: number;

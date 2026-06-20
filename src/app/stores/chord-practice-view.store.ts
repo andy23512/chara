@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { ChordGroup } from '../models/chord.models';
 import { Phase } from '../models/phase.models';
-import { pickRandomItem, pickRandomItemNTimes } from '../utils/random.utils';
+import { pickRandomItemNTimes } from '../utils/random.utils';
 import { PracticeStatisticStore } from './practice-statistic.store';
 
 interface ChordPracticeViewState {
@@ -11,7 +11,8 @@ interface ChordPracticeViewState {
   lastCorrectChordTime: number | null;
 }
 
-const QUEUE_SIZE = 20;
+const QUEUE_SIZE = 40;
+const HALF_QUEUE_SIZE = QUEUE_SIZE / 2;
 const initialState: ChordPracticeViewState = {
   queue: [],
   history: [],
@@ -43,15 +44,21 @@ export const ChordPracticeViewStore = signalStore(
               const interval = time - lastCorrectChordTime;
               practiceStatisticStore.saveSpeedRecord(phase, queue[0], interval);
             }
+            let newQueueItems: ChordGroup[] = [];
+            if (queue.length <= HALF_QUEUE_SIZE) {
+              const indexOfLastItem = chordGroups.findIndex(
+                (c) => c.textOutput === queue.at(-1)?.textOutput,
+              );
+              const previousIndex =
+                indexOfLastItem === -1 ? null : indexOfLastItem;
+              newQueueItems = pickRandomItemNTimes(
+                chordGroups,
+                HALF_QUEUE_SIZE,
+                previousIndex,
+              );
+            }
             return {
-              queue: [
-                ...queue.slice(1),
-                pickRandomItem(
-                  chordGroups.filter(
-                    (c) => c.textOutput !== queue.at(-1)?.textOutput,
-                  ),
-                ),
-              ],
+              queue: [...queue.slice(1), ...newQueueItems],
               history: [...history, queue[0]],
               lastCorrectChordTime: time,
             };
