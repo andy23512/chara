@@ -33,8 +33,6 @@ export class PageLockService {
             this.chordDataService.realizationPhasePassedChordCount() > 0
           );
         });
-      case Page.Information:
-        return signal(false);
       default:
         return signal(true);
     }

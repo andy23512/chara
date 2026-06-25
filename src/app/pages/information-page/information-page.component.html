@@ -1,0 +1,87 @@
+<p>
+  {{ "information-page.description" | translate }}
+</p>
+<h2 class="pb-2 pt-5 text-xl">
+  {{ "information-page.page-introductions-title" | translate | realTitleCase }}
+</h2>
+<h3 class="pb-2 text-lg font-bold text-chara-500">
+  <a [routerLink]="'/chords'" class="flex items-center gap-1">
+    <mat-icon>{{ "piano" | iconGuard }}</mat-icon>
+    {{ "information-page.chords-page.title" | translate | realTitleCase }}
+  </a>
+</h3>
+<p class="pb-2">
+  {{ "information-page.chords-page.description.0" | translate }}
+</p>
+<p class="pb-2">
+  {{ "information-page.chords-page.description.1" | translate }}
+</p>
+<p>
+  {{ "information-page.chords-page.description.2" | translate }}
+</p>
+<h3 class="flex items-center gap-2 pb-2 pt-6 text-lg font-bold text-chara-500">
+  {{ "information-page.practice-phases.title" | translate | realTitleCase }}
+  &nbsp;-
+  <a [routerLink]="'/adaptation'" class="flex items-center gap-1">
+    <mat-icon>{{ "published_with_changes" | iconGuard }}</mat-icon>
+    {{
+      "information-page.practice-phases.adaptation-page.title"
+        | translate
+        | realTitleCase
+    }}
+  </a>
+  <a [routerLink]="'/realization'" class="flex items-center gap-1">
+    <mat-icon>{{ "model_training" | iconGuard }}</mat-icon>
+    {{
+      "information-page.practice-phases.realization-page.title"
+        | translate
+        | realTitleCase
+    }}
+  </a>
+  <a [routerLink]="'/accumulation'" class="flex items-center gap-1">
+    <mat-icon>{{ "merge" | iconGuard }}</mat-icon>
+    {{
+      "information-page.practice-phases.accumulation-page.title"
+        | translate
+        | realTitleCase
+    }}
+  </a>
+</h3>
+<p class="pb-2">
+  {{ "information-page.practice-phases.description.0" | translate }}
+  <a
+    class="underline"
+    [href]="'information-page.practice-phases.description.1.url' | translate"
+    target="_blank"
+    rel="noopener"
+    >{{ "information-page.practice-phases.description.1.text" | translate }}</a
+  >
+</p>
+<ul class="list-inside list-disc">
+  <li>
+    {{
+      "information-page.practice-phases.adaptation-page.description" | translate
+    }}
+  </li>
+  <li>
+    {{
+      "information-page.practice-phases.realization-page.description"
+        | translate
+    }}
+  </li>
+  <li>
+    {{
+      "information-page.practice-phases.accumulation-page.description"
+        | translate
+    }}
+  </li>
+</ul>
+<h3 class="flex items-center gap-2 pb-2 pt-6 text-lg font-bold text-chara-500">
+  <a [routerLink]="'/settings'" class="flex items-center gap-1">
+    <mat-icon>{{ "settings" | iconGuard }}</mat-icon>
+    {{ "information-page.settings-page.title" | translate | realTitleCase }}
+  </a>
+</h3>
+<p>
+  {{ "information-page.settings-page.description" | translate }}
+</p>
