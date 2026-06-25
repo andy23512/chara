@@ -140,5 +140,43 @@
       "chpm": "ChPM",
       "count": "Count"
     }
+  },
+  "information-page": {
+    "description": "This website, Chara, is an unofficial chord practice tool designed for CharaChorder 3D input devices, including CharaChorder One, CharaChorder Two, CCU and Master Forge.",
+    "page-introductions-title": "page introductions",
+    "chords-page": {
+      "title": "chords page",
+      "description": [
+        "At chords page, you can load and view your chord library, and check the practice statistics of each chord in each phase.",
+        "You can bookmark any chords, which make them have higher priority to enter the practice cycle.",
+        "You can block any chords, which would keep them out of the practice cycle."
+      ]
+    },
+    "practice-phases": {
+      "title": "practice phases",
+      "adaptation-page": {
+        "title": "adaptation page",
+        "description": "The adaptation page helps you get familiar with the finger action for each new chord using the visual guide."
+      },
+      "realization-page": {
+        "title": "realization page",
+        "description": "The realization page helps you further memorize the connection with each chord and its finger action by showing the visual guide after a 5-second delay."
+      },
+      "accumulation-page": {
+        "title": "accumulation page",
+        "description": "The accumulation page helps you review the chords you've learned."
+      },
+      "description": [
+        "These pages are designed around the CHARA cycle, a chord practice cycle I proposed.",
+        {
+          "url": "https://andy23512.github.io/blog/tangent-s-suggestion-for-learning-english-chorded-entry-on-charachorder-devices/#What-is-CHARA-cycle",
+          "text": "You can find more details about the CHARA cycle in this blog post."
+        }
+      ]
+    },
+    "settings-page": {
+      "title": "settings page",
+      "description": "At the Settings page, you can adjust various tool options, including device layout, chord library, OS keyboard layout, practice phase parameters, component visibility, UI language, etc."
+    }
   }
 }
