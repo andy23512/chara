@@ -139,5 +139,56 @@
       "chpm": "分速",
       "count": "回数"
     }
+  },
+  "information-page": {
+    "description": "このウェブサイト、「Chara カラ」は、CharaChorder One、CharaChorder Two、CCU、Master Forge などの CharaChorder 3D 入力デバイス用に設計された非公式和音練習ツールです。",
+    "page-introductions-title": "ページ紹介",
+    "chords-page": {
+      "title": "和音ページ",
+      "description": [
+        "和音ページでは、和音ライブラリを読み込んで表示したり、各和音の練習状況（各段階）を確認したりできます。",
+        "和音をブックマークして、練習ループで優先的に練習できます。",
+        "和音をブロックして、練習ループから除外できます。"
+      ]
+    },
+    "practice-phases": {
+      "title": "練習フェーズ",
+      "adaptation-page": {
+        "title": "適応ページ",
+        "description": "適応ページでは、画像を使って新しい和音の指の動きを習得できます。"
+      },
+      "realization-page": {
+        "title": "実現ページ",
+        "description": "実現ページでは、5秒の遅延を利用して画像を表示し、和音とその指の動きの記憶を強化します。"
+      },
+      "accumulation-page": {
+        "title": "蓄積ページ",
+        "description": "蓄積ページでは、学習した和音を復習できます。"
+      },
+      "description": [
+        "これらのページは、私が提案する和音練習ループ「CHARAループ」に基づいて設計されています。",
+        {
+          "url": "https://andy23512.github.io/blog/tangent-s-suggestion-for-learning-english-chorded-entry-on-charachorder-devices/#What-is-CHARA-cycle",
+          "text": "CHARAループに関するより詳しい情報は、こちらのブログ記事をご覧ください。"
+        }
+      ]
+    },
+    "settings-page": {
+      "title": "設定ページ",
+      "description": "設定ページでは、デバイスレイアウト、和音ライブラリ、OS キーボードレイアウト、練習フェーズパラメータ、いくつかのコンポーネントの表示、UI 言語など、ツールの様々な設定を調整できます。"
+    },
+    "disclaimers": {
+      "title": "免責事項",
+      "description": [
+        [
+          "このサイトは、CharaChorder および Forge Keyboard と提携、関連、認可、推奨、またはいかなる形でも公式な関係を有していません。それぞれの公式サイトは、 ",
+          "{{charachorder url}}",
+          " および ",
+          "{{forge keyboard url}}",
+          " でご覧いただけます。"
+        ],
+        "このツールにおける入力統計情報と設定は、ブラウザの localStorage にローカルに保存されます。このツールを介して他の場所に送信されることはありません。"
+      ]
+    }
   }
 }
