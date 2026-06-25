@@ -139,5 +139,56 @@
       "chpm": "分速",
       "count": "次數"
     }
+  },
+  "information-page": {
+    "description": "本網站，Chara 常陳四，是專為 CharaChorder One、CharaChorder Two、CCU 和 Master Forge 等 CharaChorder 3D 輸入裝置所設計的一個非官方和弦練習工具。This website, Chara, is an unofficial chord practice tool designed for CharaChorder 3D input devices, including CharaChorder One, CharaChorder Two, CCU and Master Forge.",
+    "page-introductions-title": "頁面介紹",
+    "chords-page": {
+      "title": "和弦頁面",
+      "description": [
+        "在和弦頁面，你可以載入和檢視你的和弦庫，並查看每個和弦在每個階段的練習統計。",
+        "你可以將和弦加上書籤，使它們優先進入練習循環。",
+        "你可以封鎖和弦，將它們排除於練習循環之外。"
+      ]
+    },
+    "practice-phases": {
+      "title": "練習階段",
+      "adaptation-page": {
+        "title": "適應頁面",
+        "description": "適應頁面能藉由圖像輔助，協助你熟悉新和弦的手指動作。"
+      },
+      "realization-page": {
+        "title": "實現頁面",
+        "description": "實現頁面能藉由 5 秒延遲顯示圖像補助，加深你對和弦和其對應的手指動作的記憶。"
+      },
+      "accumulation-page": {
+        "title": "積累頁面",
+        "description": "積累頁面能協助你複習你所學過的和弦。"
+      },
+      "description": [
+        "這些頁面是照著我提出的和弦練習循環，CHARA 循環，來設計的。",
+        {
+          "url": "https://andy23512.github.io/blog-zh-tw/tangent-%E5%B0%8D%E5%AD%B8%E7%BF%92%E4%BD%BF%E7%94%A8-charachorder-%E8%BC%B8%E5%85%A5%E8%A3%9D%E7%BD%AE%E8%8B%B1%E6%96%87%E5%92%8C%E5%BC%A6%E8%BC%B8%E5%85%A5%E7%9A%84%E5%BB%BA%E8%AD%B0/#CHARA-%E5%BE%AA%E7%92%B0%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F",
+          "text": "你可以在這篇部落格文章中找到更多有關 CHARA 循環的詳細說明。"
+        }
+      ]
+    },
+    "settings-page": {
+      "title": "設定頁面",
+      "description": "在設定頁面，你可以調整工具的各種設定，包含裝置佈局、和弦庫、作業系統裝置佈局、練習階段的參數、元件的可見性、介面語言等。"
+    },
+    "disclaimers": {
+      "title": "免責聲明",
+      "description": [
+        [
+          "本網站與 CharaChorder 和 Forge Keyboard 沒有隸屬、關聯、授權、認可，或任何正式關聯的關係。他們的官方網站可以在 ",
+          "{{charachorder url}}",
+          " 和 ",
+          "{{forge keyboard url}}",
+          " 上找到。"
+        ],
+        "你的打字統計和設定資料會保存在你的瀏覽器的 localStorage 之中。這些資料不會透過本工具傳送到其他任何地方。"
+      ]
+    }
   }
 }

@@ -176,7 +176,20 @@
     },
     "settings-page": {
       "title": "settings page",
-      "description": "At the Settings page, you can adjust various tool options, including device layout, chord library, OS keyboard layout, practice phase parameters, component visibility, UI language, etc."
+      "description": "At the settings page, you can adjust various tool options, including device layout, chord library, OS keyboard layout, practice phase parameters, component visibility, UI language, etc."
+    },
+    "disclaimers": {
+      "title": "disclaimers",
+      "description": [
+        [
+          "This site is not affiliated, associated, authorized, endorsed by, or in any way officially connected with CharaChorder and Forge Keyboard. Their official websites can be found at ",
+          "{{charachorder url}}",
+          " and ",
+          "{{forge keyboard url}}",
+          "."
+        ],
+        "Your typing statistics and settings in this tool are kept and stored locally in the localStorage of your browser. They are not transmitted to any other place via this tool."
+      ]
     }
   }
 }
