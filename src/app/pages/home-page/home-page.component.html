@@ -48,6 +48,16 @@
         {{ "home-page.source-code" | translate | realTitleCase }}
       </button>
     </a>
+    <a
+      [href]="'home-page.dev-note-url' | translate"
+      target="_blank"
+      rel="noopener"
+    >
+      <button type="button" mat-button>
+        <mat-icon>{{ "article" | iconGuard }}</mat-icon>
+        {{ "home-page.dev-note" | translate | realTitleCase }}
+      </button>
+    </a>
   </div>
 </main>
 <div class="absolute bottom-0 w-full text-center text-chara-500 opacity-80">
