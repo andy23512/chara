@@ -7,6 +7,7 @@ import {
   inject,
   input,
   model,
+  OnDestroy,
   OnInit,
   signal,
   viewChild,
@@ -15,6 +16,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { HotkeysService } from '@ngneat/hotkeys';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
@@ -65,10 +67,11 @@ import { StepperComponent } from '../stepper/stepper.component';
   ],
   providers: [ChordPracticeViewStore],
 })
-export class ChordPracticeViewComponent implements OnInit {
+export class ChordPracticeViewComponent implements OnInit, OnDestroy {
   public readonly visibilitySettingStore = inject(VisibilitySettingStore);
   private readonly chordPracticeViewStore = inject(ChordPracticeViewStore);
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
+  private readonly hotkeysService = inject(HotkeysService);
 
   public practiceSet = input.required<ChordGroup[]>();
   public phase = input.required<Phase>();
@@ -76,6 +79,10 @@ export class ChordPracticeViewComponent implements OnInit {
   public chpm = this.chordPracticeViewStore.chpm;
 
   public input = viewChild.required<ElementRef<HTMLInputElement>>('input');
+  public readonly shortcuts = {
+    startPractice: 'space',
+    pausePractice: 'escape',
+  };
 
   protected readonly isFocus = signal(false);
   protected readonly inputValue = model<string>('');
@@ -184,6 +191,20 @@ export class ChordPracticeViewComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.hotkeysService
+      .addShortcut({
+        keys: this.shortcuts.startPractice,
+      })
+      .subscribe(() => {
+        this.startPractice();
+      });
+    this.hotkeysService
+      .addShortcut({
+        keys: this.shortcuts.pausePractice,
+      })
+      .subscribe(() => {
+        this.input().nativeElement.blur();
+      });
     this.chordPracticeViewStore.fillQueue(this.practiceSet());
     this.debouncedEntry$
       .pipe(untilDestroyed(this))
@@ -197,10 +218,19 @@ export class ChordPracticeViewComponent implements OnInit {
       });
   }
 
+  public ngOnDestroy(): void {
+    this.hotkeysService.removeShortcuts([
+      this.shortcuts.startPractice,
+      this.shortcuts.pausePractice,
+    ]);
+  }
+
   public startPractice() {
-    this.input().nativeElement.focus();
-    this.restartAnimationSubject.next();
-    this.restartIdleTimerSubject.next();
+    if (!this.isFocus()) {
+      this.input().nativeElement.focus();
+      this.restartAnimationSubject.next();
+      this.restartIdleTimerSubject.next();
+    }
   }
 
   public onInput(event: InputEvent) {

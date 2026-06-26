@@ -39,6 +39,7 @@
           "play_arrow" | iconGuard
         }}</mat-icon>
         {{ "general.start-action" | translate | realTitleCase }}
+        <kbd class="small ml-1">space</kbd>
       </button>
     </div>
     @if (isFocus()) {
@@ -50,6 +51,7 @@
             "pause" | iconGuard
           }}</mat-icon>
           {{ "general.pause-action" | translate | realTitleCase }}
+          <kbd class="small ml-1">esc</kbd>
         </button>
       </div>
     }

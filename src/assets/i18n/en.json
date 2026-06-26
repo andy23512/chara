@@ -195,5 +195,15 @@
         "Your typing statistics and settings in this tool are kept and stored locally in the localStorage of your browser. They are not transmitted to any other place via this tool."
       ]
     }
+  },
+  "hotkey-dialog": {
+    "title": "hotkeys"
+  },
+  "hotkey": {
+    "practice-phase-pages": {
+      "name": "practice phase pages (adaptation, realization, accumulation)",
+      "start-or-resume-the-practice": "start or resume the practice",
+      "pause-the-practice": "pause the practice"
+    }
   }
 }

@@ -195,5 +195,15 @@
         "你的打字統計和設定資料會保存在你的瀏覽器的 localStorage 之中。這些資料不會透過本工具傳送到其他任何地方。"
       ]
     }
+  },
+  "hotkey-dialog": {
+    "title": "快捷鍵"
+  },
+  "hotkey": {
+    "practice-phase-pages": {
+      "name": "練習階段頁面（適應、實現、積累）",
+      "start-or-resume-the-practice": "開始或繼續練習",
+      "pause-the-practice": "暫停練習"
+    }
   }
 }
