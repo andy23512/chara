@@ -37,6 +37,7 @@ import { DeviceLayoutStore } from 'src/app/stores/device-layout.store';
 import { VisibilitySettingStore } from 'src/app/stores/visibility-setting.store';
 import { DynamicLibraryAncestorsChipComponent } from '../dynamic-library-ancestors-chip/dynamic-library-ancestors-chip.component';
 import { LayoutComponent } from '../layout/layout.component';
+import { SpeedometerComponent } from '../speedometer/speedometer.component';
 import { StepperComponent } from '../stepper/stepper.component';
 
 @UntilDestroy()
@@ -58,6 +59,7 @@ import { StepperComponent } from '../stepper/stepper.component';
     MatButton,
     StepperComponent,
     DynamicLibraryAncestorsChipComponent,
+    SpeedometerComponent,
   ],
   providers: [ChordPracticeViewStore],
 })
@@ -69,6 +71,7 @@ export class ChordPracticeViewComponent implements OnInit {
   public practiceSet = input.required<ChordGroup[]>();
   public phase = input.required<Phase>();
   public hintDisplayMode = input<HintDisplayMode>('always');
+  public chpm = this.chordPracticeViewStore.chpm;
 
   public input = viewChild.required<ElementRef<HTMLInputElement>>('input');
 

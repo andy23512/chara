@@ -1,6 +1,7 @@
 {
   "general": {
     "step-info": "ステップ {step}/{total}：",
+    "chord-speed-unit": "和音毎分",
     "chords-loading-message": "和音を読み込んでいます...",
     "chords-loaded-message": "和音の読み込みに成功しました。",
     "device-layout-loading-message": "デバイスレイアウトを読み込んでいます...",

@@ -1,6 +1,7 @@
 {
   "general": {
     "step-info": "Step {step}/{total}: ",
+    "chord-speed-unit": "ChPM",
     "chords-loading-message": "Loading chords...",
     "chords-loaded-message": "The chords are loaded successfully.",
     "device-layout-loading-message": "Loading device layout...",
