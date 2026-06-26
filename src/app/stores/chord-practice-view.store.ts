@@ -84,6 +84,12 @@ export const ChordPracticeViewStore = signalStore(
           },
         );
       },
+      pause() {
+        patchState(store, (state) => ({
+          ...state,
+          lastCorrectChordTime: null,
+        }));
+      },
     };
   }),
   withComputed((state) => ({

@@ -29,10 +29,10 @@
       [(ngModel)]="inputValue"
       (input)="onInput($any($event))"
       (focus)="isFocus.set(true)"
-      (blur)="isFocus.set(false)"
+      (blur)="isFocus.set(false); pausePractice()"
     />
     <div
-      class="absolute inset-0 flex cursor-pointer items-center justify-center gap-2 bg-surface text-white peer-focus:pointer-events-none peer-focus:opacity-0"
+      class="absolute inset-0 flex cursor-pointer items-center justify-end bg-surface p-2 text-white peer-focus:pointer-events-none peer-focus:opacity-0"
     >
       <button mat-flat-button (click)="startPractice()">
         <mat-icon class="!size-6 !text-[24px]">{{
@@ -41,6 +41,18 @@
         {{ "general.start-action" | translate | realTitleCase }}
       </button>
     </div>
+    @if (isFocus()) {
+      <div
+        class="absolute right-0 top-0 flex h-full items-center bg-surface p-2 text-white"
+      >
+        <button mat-flat-button (click)="pausePractice()">
+          <mat-icon class="!size-6 !text-[24px]">{{
+            "pause" | iconGuard
+          }}</mat-icon>
+          {{ "general.pause-action" | translate | realTitleCase }}
+        </button>
+      </div>
+    }
   </div>
 </section>
 <app-layout

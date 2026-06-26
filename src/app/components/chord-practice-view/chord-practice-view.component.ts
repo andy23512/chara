@@ -208,4 +208,8 @@ export class ChordPracticeViewComponent implements OnInit {
     const value = this.inputValue();
     this.entrySubject.next({ timestamp, value });
   }
+
+  public pausePractice() {
+    this.chordPracticeViewStore.pause();
+  }
 }

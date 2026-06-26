@@ -11,6 +11,7 @@
     "delete-confirm-button": "Yes. Delete them.",
     "delete-single-confirm-button": "Yes. Delete it.",
     "start-action": "start",
+    "pause-action": "pause",
     "load-device-layout-and-chords-from-device": "Load the device layout and the chords from device",
     "device-layout-and-chords-loaded-message": "The device layout and the chords are loaded successfully."
   },
