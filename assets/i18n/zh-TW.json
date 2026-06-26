@@ -1,6 +1,7 @@
 {
   "general": {
     "step-info": "步驟 {step}/{total}: ",
+    "chord-speed-unit": "和弦/分鐘",
     "chords-loading-message": "載入和弦中...",
     "chords-loaded-message": "和弦已成功載入。",
     "device-layout-loading-message": "載入裝置佈局中...",
