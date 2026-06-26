@@ -11,6 +11,7 @@
     "delete-confirm-button": "はい、削除します。",
     "delete-single-confirm-button": "はい、削除します。",
     "start-action": "開始",
+    "pause-action": "一時停止",
     "load-device-layout-and-chords-from-device": "デバイスからデバイスレイアウトと和音を読み込む",
     "device-layout-and-chords-loaded-message": "デバイスレイアウトと和音の読み込みに成功しました。"
   },
