@@ -104,7 +104,8 @@
   },
   "visibility-setting": {
     "thumb-3-switch-help-button-aria-label": "open help dialog for thumb 3 switch",
-    "layout-thumb-3-switch": "layout - thumb 3 switch"
+    "layout-thumb-3-switch": "layout - thumb 3 switch",
+    "speedometer": "speedometer"
   },
   "thumb-3-switch-help-dialog": {
     "title": "thumb 3 switch",
