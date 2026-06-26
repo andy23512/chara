@@ -7,6 +7,7 @@ import { VisibilitySetting } from '../models/visibility-setting.models';
 
 const INITIAL_VISIBILITY_SETTING: VisibilitySetting = {
   layoutThumb3Switch: true,
+  speedometer: true,
 };
 
 export const VisibilitySettingStore = signalStore(

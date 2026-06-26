@@ -104,7 +104,8 @@
   },
   "visibility-setting": {
     "thumb-3-switch-help-button-aria-label": "親指後列スイッチのヘルプダイアログを開く",
-    "layout-thumb-3-switch": "レイアウト - 親指後列スイッチ"
+    "layout-thumb-3-switch": "レイアウト - 親指後列スイッチ",
+    "speedometer": "スピードメーター"
   },
   "thumb-3-switch-help-dialog": {
     "title": "親指後列スイッチ",

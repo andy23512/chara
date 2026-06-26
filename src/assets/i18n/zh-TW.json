@@ -104,7 +104,8 @@
   },
   "visibility-setting": {
     "thumb-3-switch-help-button-aria-label": "開啟拇指第三搖桿的幫助視窗",
-    "layout-thumb-3-switch": "佈局 - 拇指第三搖桿"
+    "layout-thumb-3-switch": "佈局 - 拇指第三搖桿",
+    "speedometer": "速度計"
   },
   "thumb-3-switch-help-dialog": {
     "title": "拇指第三搖桿",

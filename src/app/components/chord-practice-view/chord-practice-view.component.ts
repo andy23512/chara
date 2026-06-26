@@ -27,6 +27,7 @@ import {
   tap,
   timer,
 } from 'rxjs';
+import { VisibleDirective } from 'src/app/directives/visible.directive';
 import { ChordGroup } from 'src/app/models/chord.models';
 import { HintDisplayMode } from 'src/app/models/hint-display-mode.models';
 import { Phase } from 'src/app/models/phase.models';
@@ -60,6 +61,7 @@ import { StepperComponent } from '../stepper/stepper.component';
     StepperComponent,
     DynamicLibraryAncestorsChipComponent,
     SpeedometerComponent,
+    VisibleDirective,
   ],
   providers: [ChordPracticeViewStore],
 })

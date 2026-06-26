@@ -67,6 +67,7 @@
   </div>
 }
 <app-speedometer
+  *appVisible="'speedometer'"
   class="absolute bottom-4 right-4 size-24"
   [class.opacity-50]="isFocus()"
   [speed]="chpm()"

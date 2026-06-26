@@ -23,6 +23,10 @@ const VISIBILITY_SETTING_ITEMS: {
     name: 'visibility-setting.layout-thumb-3-switch',
     key: 'layoutThumb3Switch',
   },
+  {
+    name: 'visibility-setting.speedometer',
+    key: 'speedometer',
+  },
 ];
 
 @Component({
