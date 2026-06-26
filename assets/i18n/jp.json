@@ -195,5 +195,15 @@
         "このツールにおける入力統計情報と設定は、ブラウザの localStorage にローカルに保存されます。このツールを介して他の場所に送信されることはありません。"
       ]
     }
+  },
+  "hotkey-dialog": {
+    "title": "ホットキー"
+  },
+  "hotkey": {
+    "practice-phase-pages": {
+      "name": "練習フェーズページ（適応、実現、蓄積）",
+      "start-or-resume-the-practice": "練習を開始または再開",
+      "pause-the-practice": "練習を一時停止"
+    }
   }
 }
