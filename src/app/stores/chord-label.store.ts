@@ -44,6 +44,15 @@ export const ChordLabelStore = signalStore(
         ],
       }));
     },
+    bookmarkChords(chords: ChordData[]) {
+      patchState(store, (state) => ({
+        ...state,
+        bookmarkedHashes: [
+          ...state.bookmarkedHashes,
+          ...chords.map((c) => c.actionAndPhraseHash),
+        ],
+      }));
+    },
     unbookmarkChord({ actionAndPhraseHash }: ChordData) {
       patchState(store, (state) => ({
         ...state,
@@ -52,10 +61,32 @@ export const ChordLabelStore = signalStore(
         ),
       }));
     },
+    unbookmarkChords(chords: ChordData[]) {
+      patchState(store, (state) => {
+        const actionAndPhraseHashSet = new Set(
+          chords.map((c) => c.actionAndPhraseHash),
+        );
+        return {
+          ...state,
+          bookmarkedHashes: state.bookmarkedHashes.filter(
+            (h) => !actionAndPhraseHashSet.has(h),
+          ),
+        };
+      });
+    },
     blockChord(chord: ChordData) {
       patchState(store, (state) => ({
         ...state,
         blockedHashes: [...state.blockedHashes, chord.actionAndPhraseHash],
+      }));
+    },
+    blockChords(chords: ChordData[]) {
+      patchState(store, (state) => ({
+        ...state,
+        blockedHashes: [
+          ...state.blockedHashes,
+          ...chords.map((c) => c.actionAndPhraseHash),
+        ],
       }));
     },
     unblockChord({ actionAndPhraseHash }: ChordData) {
@@ -65,6 +96,19 @@ export const ChordLabelStore = signalStore(
           (h) => h !== actionAndPhraseHash,
         ),
       }));
+    },
+    unblockChords(chords: ChordData[]) {
+      patchState(store, (state) => {
+        const actionAndPhraseHashSet = new Set(
+          chords.map((c) => c.actionAndPhraseHash),
+        );
+        return {
+          ...state,
+          blockedHashes: state.bookmarkedHashes.filter(
+            (h) => !actionAndPhraseHashSet.has(h),
+          ),
+        };
+      });
     },
   })),
   withComputed((state) => ({

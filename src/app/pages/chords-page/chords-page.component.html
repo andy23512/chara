@@ -1,24 +1,56 @@
-<div class="flex gap-2">
-  <button
-    type="button"
-    mat-flat-button
-    color="primary"
-    (click)="loadDeviceLayoutAndChordsFromDevice()"
-  >
-    {{ "general.load-device-layout-and-chords-from-device" | translate }}
-  </button>
-  @if (isDevMode) {
-    <button mat-flat-button color="primary" (click)="openFileSelectionDialog()">
-      {{ "chords-page.load-chords-from-file-button" | translate }}
+<div class="flex h-12 items-center gap-2 px-1">
+  @if (selectedChordNumber() === 0) {
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      (click)="loadDeviceLayoutAndChordsFromDevice()"
+    >
+      {{ "general.load-device-layout-and-chords-from-device" | translate }}
     </button>
-    <input
-      #fileInput
-      class="hidden"
-      type="file"
-      accept=".json"
-      [attr.aria-label]="'chords-page.file-input-aria-label' | translate"
-      (change)="onFileInputChange()"
-    />
+    @if (isDevMode) {
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="openFileSelectionDialog()"
+      >
+        {{ "chords-page.load-chords-from-file-button" | translate }}
+      </button>
+      <input
+        #fileInput
+        class="hidden"
+        type="file"
+        accept=".json"
+        [attr.aria-label]="'chords-page.file-input-aria-label' | translate"
+        (change)="onFileInputChange()"
+      />
+    }
+  } @else {
+    <mat-chip-option>
+      {{
+        "chords-page.selected-chord-chip-text"
+          | translate: { count: selectedChordNumber() }
+      }}
+      <button matChipRemove (click)="clearSelectedState()">
+        <mat-icon>{{ "cancel" | iconGuard }}</mat-icon>
+      </button>
+    </mat-chip-option>
+    <mat-icon
+      [class.opacity-20]="!isAllSelectedChordsBookmarked()"
+      [class.text-chara-500]="isAllSelectedChordsBookmarked()"
+      class="cursor-pointer hover:opacity-100"
+      (click)="
+        setSelectedChordsBookmarkedState(!isAllSelectedChordsBookmarked())
+      "
+      >{{ "bookmark" | iconGuard }}</mat-icon
+    >
+    <mat-icon
+      [class.opacity-20]="!isAllSelectedChordsBlocked()"
+      [class.text-red-500]="isAllSelectedChordsBlocked()"
+      class="cursor-pointer hover:opacity-100"
+      (click)="setSelectedChordsBlockedState(!isAllSelectedChordsBlocked())"
+      >{{ "block" | iconGuard }}</mat-icon
+    >
   }
 </div>
 <ag-grid-angular
@@ -31,4 +63,5 @@
   [getRowId]="getRowId"
   [headerHeight]="40"
   (selectionChanged)="onSelectionChanged($event)"
+  (gridReady)="onGridReady($event)"
 />

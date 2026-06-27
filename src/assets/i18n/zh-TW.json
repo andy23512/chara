@@ -143,7 +143,8 @@
       "accumulation": "積累",
       "chpm": "分速",
       "count": "次數"
-    }
+    },
+    "selected-chord-chip-text": "已選取 {count} 個和弦"
   },
   "information-page": {
     "description": "本網站，Chara 常陳四，是專為 CharaChorder One、CharaChorder Two、CCU 和 Master Forge 等 CharaChorder 3D 輸入裝置所設計的一個非官方和弦練習工具。This website, Chara, is an unofficial chord practice tool designed for CharaChorder 3D input devices, including CharaChorder One, CharaChorder Two, CCU and Master Forge.",
@@ -187,9 +188,9 @@
       "description": [
         [
           "本網站與 CharaChorder 和 Forge Keyboard 沒有隸屬、關聯、授權、認可，或任何正式關聯的關係。他們的官方網站可以在 ",
-          "{{charachorder url}}",
+          "{{charachorder_url}}",
           " 和 ",
-          "{{forge keyboard url}}",
+          "{{forge_keyboard_url}}",
           " 上找到。"
         ],
         "你的打字統計和設定資料會保存在你的瀏覽器的 localStorage 之中。這些資料不會透過本工具傳送到其他任何地方。"

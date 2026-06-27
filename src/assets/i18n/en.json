@@ -143,7 +143,8 @@
       "accumulation": "Accumulation",
       "chpm": "ChPM",
       "count": "Count"
-    }
+    },
+    "selected-chord-chip-text": "{count, plural, one {1 chord selected} other {{count} chords selected}}"
   },
   "information-page": {
     "description": "This website, Chara, is an unofficial chord practice tool designed for CharaChorder 3D input devices, including CharaChorder One, CharaChorder Two, CCU and Master Forge.",
@@ -187,9 +188,9 @@
       "description": [
         [
           "This site is not affiliated, associated, authorized, endorsed by, or in any way officially connected with CharaChorder and Forge Keyboard. Their official websites can be found at ",
-          "{{charachorder url}}",
+          "{{charachorder_url}}",
           " and ",
-          "{{forge keyboard url}}",
+          "{{forge_keyboard_url}}",
           "."
         ],
         "Your typing statistics and settings in this tool are kept and stored locally in the localStorage of your browser. They are not transmitted to any other place via this tool."

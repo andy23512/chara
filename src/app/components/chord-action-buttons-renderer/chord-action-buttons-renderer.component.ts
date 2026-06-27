@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+} from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
@@ -17,6 +22,7 @@ export class ChordActionButtonsRendererComponent
   implements ICellRendererAngularComp
 {
   private readonly chordLabelStore = inject(ChordLabelStore);
+  private readonly cdf = inject(ChangeDetectorRef);
 
   public chord!: ChordDataWithLabelState;
 
@@ -26,6 +32,7 @@ export class ChordActionButtonsRendererComponent
 
   refresh(params: ICellRendererParams<any, any, any>): boolean {
     this.chord = params.node.data;
+    this.cdf.markForCheck();
     return true;
   }
 

@@ -17,6 +17,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipOption, MatChipRemove } from '@angular/material/chips';
+import { MatIcon } from '@angular/material/icon';
 import { patchState } from '@ngrx/signals';
 import { setEntities } from '@ngrx/signals/entities';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -36,6 +38,7 @@ import {
   LocaleModule,
   ModuleRegistry,
   NumberFilterModule,
+  RowApiModule,
   RowSelectionModule,
   RowSelectionOptions,
   SelectionChangedEvent,
@@ -47,8 +50,10 @@ import { ChordActionButtonsRendererComponent } from 'src/app/components/chord-ac
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
 import { ChordDataWithLabelStateAndStatistic } from 'src/app/models/chord.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
+import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { ChordDataService } from 'src/app/services/chord-data.service';
 import { QuickSettingService } from 'src/app/services/quick-setting.service';
+import { ChordLabelStore } from 'src/app/stores/chord-label.store';
 import { ChordStore } from 'src/app/stores/chord.store';
 import { LanguageSettingStore } from 'src/app/stores/language-setting.store';
 import {
@@ -65,6 +70,7 @@ ModuleRegistry.registerModules([
   LocaleModule,
   ClientSideRowModelModule,
   CellStyleModule,
+  RowApiModule,
 ]);
 
 const tableTheme = themeQuartz.withPart(colorSchemeDark);
@@ -73,7 +79,15 @@ const tableTheme = themeQuartz.withPart(colorSchemeDark);
   selector: 'app-chords-page',
   templateUrl: 'chords-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatButtonModule, AgGridAngular, TranslatePipe],
+  imports: [
+    MatButtonModule,
+    AgGridAngular,
+    TranslatePipe,
+    MatChipOption,
+    MatChipRemove,
+    MatIcon,
+    IconGuardPipe,
+  ],
   standalone: true,
 })
 export class ChordsPageComponent implements OnInit {
@@ -86,6 +100,7 @@ export class ChordsPageComponent implements OnInit {
   private readonly chordDataService = inject(ChordDataService);
   private readonly translateService = inject(TranslateService);
   private readonly quickSettingService = inject(QuickSettingService);
+  private readonly chordLabelStore = inject(ChordLabelStore);
 
   private readonly fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
@@ -114,6 +129,22 @@ export class ChordsPageComponent implements OnInit {
     this.chordDataService.chordDataListWithLabelStateAndStatistic;
 
   private readonly selectedIdList = signal<number[]>([]);
+  public readonly selectedChordNumber = computed(
+    () => this.selectedIdList().length,
+  );
+  private readonly selectedChords = computed(() => {
+    const chordDataList = this.chordDataListWithLabelStateAndStatistic();
+    const selectedIdSet = new Set(this.selectedIdList());
+    return chordDataList.filter((c) => selectedIdSet.has(c.id));
+  });
+  public readonly isAllSelectedChordsBookmarked = computed(() => {
+    const selectedChords = this.selectedChords();
+    return selectedChords.every((c) => c.bookmarked);
+  });
+  public readonly isAllSelectedChordsBlocked = computed(() => {
+    const selectedChords = this.selectedChords();
+    return selectedChords.every((c) => c.blocked);
+  });
 
   public colDefs: (
     | ColDef<ChordDataWithLabelStateAndStatistic>
@@ -320,5 +351,27 @@ export class ChordsPageComponent implements OnInit {
         (id: string) => +id,
       ),
     );
+  }
+
+  public clearSelectedState() {
+    this.selectedIdList.set([]);
+  }
+
+  public setSelectedChordsBookmarkedState(nextBookmarked: boolean) {
+    const selectedChords = this.selectedChords();
+    if (nextBookmarked) {
+      this.chordLabelStore.bookmarkChords(selectedChords);
+    } else {
+      this.chordLabelStore.unbookmarkChords(selectedChords);
+    }
+  }
+
+  public setSelectedChordsBlockedState(nextBlocked: boolean) {
+    const selectedChords = this.selectedChords();
+    if (nextBlocked) {
+      this.chordLabelStore.blockChords(selectedChords);
+    } else {
+      this.chordLabelStore.unblockChords(selectedChords);
+    }
   }
 }
