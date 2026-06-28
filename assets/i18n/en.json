@@ -12,6 +12,7 @@
     "delete-single-confirm-button": "Yes. Delete it.",
     "start-action": "start",
     "pause-action": "pause",
+    "enter-action": "enter",
     "load-device-layout-and-chords-from-device": "Load the device layout and the chords from device",
     "device-layout-and-chords-loaded-message": "The device layout and the chords are loaded successfully."
   },
@@ -144,7 +145,16 @@
       "chpm": "ChPM",
       "count": "Count"
     },
-    "selected-chord-chip-text": "{count, plural, one {1 chord selected} other {{count} chords selected}}"
+    "selected-chord-chip-text": "{count, plural, one {1 chord selected} other {{count} chords selected}}",
+    "bookmark-single": "Bookmark",
+    "unbookmark-single": "Unbookmark",
+    "block-single": "Block",
+    "unblock-single": "Unblock",
+    "bookmark-selected": "Bookmark selected chord(s)",
+    "unbookmark-selected": "Unbookmark selected chord(s)",
+    "block-selected": "Block selected chord(s)",
+    "unblock-selected": "Unblock selected chord(s)",
+    "custom-practice": "Custom practice"
   },
   "information-page": {
     "description": "This website, Chara, is an unofficial chord practice tool designed for CharaChorder 3D input devices, including CharaChorder One, CharaChorder Two, CCU and Master Forge.",
@@ -154,7 +164,8 @@
       "description": [
         "At chords page, you can load and view your chord library, and check the practice statistics of each chord in each phase.",
         "You can bookmark any chords, which make them have higher priority to enter the practice cycle.",
-        "You can block any chords, which would keep them out of the practice cycle."
+        "You can block any chords, which would keep them out of the practice cycle.",
+        "You can select any chords and enter a custom practice session."
       ]
     },
     "practice-phases": {
@@ -205,6 +216,14 @@
       "name": "practice phase pages (adaptation, realization, accumulation)",
       "start-or-resume-the-practice": "start or resume the practice",
       "pause-the-practice": "pause the practice"
+    }
+  },
+  "custom-practice-setting-dialog": {
+    "title": "custom practice setting",
+    "hint-display-mode": {
+      "label": "hint display mode",
+      "always": "Alway show the hint (like Adaptation page)",
+      "timeout": "Show the hint after 5-second timeout (like Realization page)"
     }
   }
 }

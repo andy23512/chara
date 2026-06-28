@@ -12,6 +12,7 @@
     "delete-single-confirm-button": "はい、削除します。",
     "start-action": "開始",
     "pause-action": "一時停止",
+    "enter-action": "入る",
     "load-device-layout-and-chords-from-device": "デバイスからデバイスレイアウトと和音を読み込む",
     "device-layout-and-chords-loaded-message": "デバイスレイアウトと和音の読み込みに成功しました。"
   },
@@ -144,7 +145,16 @@
       "chpm": "分速",
       "count": "回数"
     },
-    "selected-chord-chip-text": "{count} 和音選択"
+    "selected-chord-chip-text": "{count} 和音選択",
+    "bookmark-single": "ブックマーク",
+    "unbookmark-single": "ブックマーク解除",
+    "block-single": "ブロック",
+    "unblock-single": "ブロック解除",
+    "bookmark-selected": "選択したコードをブックマーク",
+    "unbookmark-selected": "選択したコードのブックマーク解除",
+    "block-selected": "選択したコードをブロック",
+    "unblock-selected": "選択したコードのブロック解除",
+    "custom-practice": "カスタム練習"
   },
   "information-page": {
     "description": "このウェブサイト、「Chara カラ」は、CharaChorder One、CharaChorder Two、CCU、Master Forge などの CharaChorder 3D 入力デバイス用に設計された非公式和音練習ツールです。",
@@ -154,7 +164,8 @@
       "description": [
         "和音ページでは、和音ライブラリを読み込んで表示したり、各和音の練習状況（各段階）を確認したりできます。",
         "和音をブックマークして、練習ループで優先的に練習できます。",
-        "和音をブロックして、練習ループから除外できます。"
+        "和音をブロックして、練習ループから除外できます。",
+        "任意のコードを選択して、カスタム練習セッションを開始できます。"
       ]
     },
     "practice-phases": {
@@ -205,6 +216,14 @@
       "name": "練習フェーズページ（適応、実現、蓄積）",
       "start-or-resume-the-practice": "練習を開始または再開",
       "pause-the-practice": "練習を一時停止"
+    }
+  },
+  "custom-practice-setting-dialog": {
+    "title": "カスタム練習設定",
+    "hint-display-mode": {
+      "label": "ヒント表示モード",
+      "always": "常にヒントを表示する（適応ページと同様）",
+      "timeout": "5秒後にヒントを表示する（実現ページと同様）"
     }
   }
 }

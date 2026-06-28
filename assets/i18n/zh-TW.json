@@ -12,6 +12,7 @@
     "delete-single-confirm-button": "是，我確定要刪除。",
     "start-action": "開始",
     "pause-action": "暫停",
+    "enter-action": "進入",
     "load-device-layout-and-chords-from-device": "從裝置載入裝置佈局和和弦",
     "device-layout-and-chords-loaded-message": "裝置佈局和和弦已成功載入。"
   },
@@ -144,7 +145,16 @@
       "chpm": "分速",
       "count": "次數"
     },
-    "selected-chord-chip-text": "已選取 {count} 個和弦"
+    "selected-chord-chip-text": "已選取 {count} 個和弦",
+    "bookmark-single": "加書籤",
+    "unbookmark-single": "取消加書籤",
+    "block-single": "封鎖",
+    "unblock-single": "解封",
+    "bookmark-selected": "對選取的和弦加書籤",
+    "unbookmark-selected": "對選取的和弦加書籤",
+    "block-selected": "封鎖選取的和弦",
+    "unblock-selected": "解封選取的和弦",
+    "custom-practice": "自訂練習"
   },
   "information-page": {
     "description": "本網站，Chara 常陳四，是專為 CharaChorder One、CharaChorder Two、CCU 和 Master Forge 等 CharaChorder 3D 輸入裝置所設計的一個非官方和弦練習工具。This website, Chara, is an unofficial chord practice tool designed for CharaChorder 3D input devices, including CharaChorder One, CharaChorder Two, CCU and Master Forge.",
@@ -154,7 +164,8 @@
       "description": [
         "在和弦頁面，你可以載入和檢視你的和弦庫，並查看每個和弦在每個階段的練習統計。",
         "你可以將和弦加上書籤，使它們優先進入練習循環。",
-        "你可以封鎖和弦，將它們排除於練習循環之外。"
+        "你可以封鎖和弦，將它們排除於練習循環之外。",
+        "你可以選擇數個和弦後進入自訂練習模式。"
       ]
     },
     "practice-phases": {
@@ -205,6 +216,14 @@
       "name": "練習階段頁面（適應、實現、積累）",
       "start-or-resume-the-practice": "開始或繼續練習",
       "pause-the-practice": "暫停練習"
+    }
+  },
+  "custom-practice-setting-dialog": {
+    "title": "自訂練習設定",
+    "hint-display-mode": {
+      "label": "提示顯示模式",
+      "always": "總是顯示提示（如適應頁面）",
+      "timeout": "5 秒超時後顯示提示（如實現頁面）"
     }
   }
 }
