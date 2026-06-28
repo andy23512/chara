@@ -164,7 +164,8 @@
       "description": [
         "At chords page, you can load and view your chord library, and check the practice statistics of each chord in each phase.",
         "You can bookmark any chords, which make them have higher priority to enter the practice cycle.",
-        "You can block any chords, which would keep them out of the practice cycle."
+        "You can block any chords, which would keep them out of the practice cycle.",
+        "You can select any chords and enter a custom practice session."
       ]
     },
     "practice-phases": {
