@@ -212,6 +212,10 @@
     "title": "ホットキー"
   },
   "hotkey": {
+    "global": {
+      "name": "全域",
+      "toggle-hotkey-dialog": "ホットキーダイアログの切り替え"
+    },
     "practice-phase-pages": {
       "name": "練習フェーズページ（適応、実現、蓄積）",
       "start-or-resume-the-practice": "練習を開始または再開",

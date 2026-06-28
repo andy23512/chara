@@ -212,6 +212,10 @@
     "title": "hotkeys"
   },
   "hotkey": {
+    "global": {
+      "name": "global",
+      "toggle-hotkey-dialog": "toggle hotkey dialog"
+    },
     "practice-phase-pages": {
       "name": "practice phase pages (adaptation, realization, accumulation)",
       "start-or-resume-the-practice": "start or resume the practice",
