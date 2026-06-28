@@ -74,7 +74,7 @@ export class ChordPracticeViewComponent implements OnInit, OnDestroy {
   private readonly hotkeysService = inject(HotkeysService);
 
   public practiceSet = input.required<ChordGroup[]>();
-  public phase = input.required<Phase>();
+  public phase = input.required<Phase | null>();
   public hintDisplayMode = input<HintDisplayMode>('always');
   public chpm = this.chordPracticeViewStore.chpm;
 

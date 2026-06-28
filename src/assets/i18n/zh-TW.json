@@ -12,6 +12,7 @@
     "delete-single-confirm-button": "是，我確定要刪除。",
     "start-action": "開始",
     "pause-action": "暫停",
+    "enter-action": "進入",
     "load-device-layout-and-chords-from-device": "從裝置載入裝置佈局和和弦",
     "device-layout-and-chords-loaded-message": "裝置佈局和和弦已成功載入。"
   },

@@ -44,13 +44,13 @@ export const ChordPracticeViewStore = signalStore(
         text: string,
         time: number,
         chordGroups: ChordGroup[],
-        phase: Phase,
+        phase: Phase | null,
       ) {
         patchState(
           store,
           ({ queue, history, lastCorrectChordTime, chordIntervals }) => {
             if (text.trim() === queue[0].textOutput.trim()) {
-              if (lastCorrectChordTime) {
+              if (lastCorrectChordTime && phase) {
                 const interval = time - lastCorrectChordTime;
                 practiceStatisticStore.saveSpeedRecord(
                   phase,

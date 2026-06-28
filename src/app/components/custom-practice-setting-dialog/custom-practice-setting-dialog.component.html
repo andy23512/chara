@@ -24,7 +24,10 @@
   </mat-radio-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button type="button" mat-button [mat-dialog-close]="true">
+  <button type="button" mat-button mat-dialog-close>
     {{ "general.cancel-action" | translate | realTitleCase }}
+  </button>
+  <button type="button" mat-button (click)="onEnterButtonClick()">
+    {{ "general.enter-action" | translate | realTitleCase }}
   </button>
 </mat-dialog-actions>

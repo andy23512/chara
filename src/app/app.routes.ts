@@ -60,4 +60,11 @@ export const APP_ROUTES: Route[] = [
         (m) => m.AccumulationPageComponent,
       ),
   },
+  {
+    path: 'custom-practice',
+    loadComponent: () =>
+      import(
+        './pages/custom-practice-page/custom-practice-page.component'
+      ).then((m) => m.CustomPracticePageComponent),
+  },
 ].map((r) => ({ ...r, canActivate: [pageLockGuard] }));

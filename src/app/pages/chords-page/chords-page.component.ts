@@ -379,6 +379,10 @@ export class ChordsPageComponent implements OnInit {
   }
 
   public openCustomPracticeSettingDialog() {
-    this.matDialog.open(CustomPracticeSettingDialogComponent);
+    this.matDialog.open(CustomPracticeSettingDialogComponent, {
+      data: {
+        chordHashList: this.selectedChords().map((c) => c.actionAndPhraseHash),
+      },
+    });
   }
 }
