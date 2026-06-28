@@ -206,5 +206,13 @@
       "start-or-resume-the-practice": "開始或繼續練習",
       "pause-the-practice": "暫停練習"
     }
+  },
+  "custom-practice-setting-dialog": {
+    "title": "自訂練習設定",
+    "hint-display-mode": {
+      "label": "提示顯示模式",
+      "always": "總是顯示提示（如適應頁面）",
+      "timeout": "5 秒超時後顯示提示（如實現頁面）"
+    }
   }
 }

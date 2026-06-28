@@ -4,6 +4,7 @@ import {
 } from '@angular-architects/ngrx-toolkit';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { VisibilitySetting } from '../models/visibility-setting.models';
+import { prefixStorageKey } from '../utils/store.utils';
 
 const INITIAL_VISIBILITY_SETTING: VisibilitySetting = {
   layoutThumb3Switch: true,
@@ -14,7 +15,7 @@ export const VisibilitySettingStore = signalStore(
   { providedIn: 'root', protectedState: false },
   withDevtools('visibilitySetting'),
   withStorageSync({
-    key: 'visibilitySetting',
+    key: prefixStorageKey('visibilitySetting'),
     parse(stateString: string) {
       return { ...INITIAL_VISIBILITY_SETTING, ...JSON.parse(stateString) };
     },

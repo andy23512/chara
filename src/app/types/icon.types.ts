@@ -15,6 +15,7 @@ export type Icon =
   | 'close'
   | 'code'
   | 'delete'
+  | 'exercise'
   | 'function'
   | 'help'
   | 'info'

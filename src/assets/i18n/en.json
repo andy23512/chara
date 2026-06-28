@@ -206,5 +206,13 @@
       "start-or-resume-the-practice": "start or resume the practice",
       "pause-the-practice": "pause the practice"
     }
+  },
+  "custom-practice-setting-dialog": {
+    "title": "custom practice setting",
+    "hint-display-mode": {
+      "label": "hint display mode",
+      "always": "Alway show the hint (like Adaptation page)",
+      "timeout": "Show the hint after 5-second timeout (like Realization page)"
+    }
   }
 }

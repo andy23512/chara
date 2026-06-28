@@ -51,6 +51,11 @@
       (click)="setSelectedChordsBlockedState(!isAllSelectedChordsBlocked())"
       >{{ "block" | iconGuard }}</mat-icon
     >
+    <mat-icon
+      class="cursor-pointer opacity-20 hover:opacity-100"
+      (click)="openCustomPracticeSettingDialog()"
+      >{{ "exercise" | iconGuard }}</mat-icon
+    >
   }
 </div>
 <ag-grid-angular

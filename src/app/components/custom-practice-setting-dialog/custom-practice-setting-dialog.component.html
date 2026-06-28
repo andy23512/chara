@@ -1,0 +1,25 @@
+<h2 mat-dialog-title class="!text-xl">
+  {{ "custom-practice-setting-dialog.title" | translate | realTitleCase }}
+</h2>
+<mat-dialog-content>
+  <label id="hint-display-mode-label">{{
+    "custom-practice-setting-dialog.hint-display-mode.label"
+      | translate
+      | realTitleCase
+  }}</label>
+  <br />
+  <mat-radio-group
+    aria-labelledby="hint-display-mode-label"
+    [ngModel]="hintDisplayMode()"
+    (ngModelChange)="onHintDisplayModeChange($event)"
+  >
+    @for (mode of hintDisplayModes; track mode.value; let isLast = $last) {
+      <mat-radio-button [value]="mode.value">{{
+        mode.name | translate
+      }}</mat-radio-button>
+      @if (!isLast) {
+        <br />
+      }
+    }
+  </mat-radio-group>
+</mat-dialog-content>

@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipOption, MatChipRemove } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { patchState } from '@ngrx/signals';
 import { setEntities } from '@ngrx/signals/entities';
@@ -48,6 +49,7 @@ import {
 import { AncestorsRendererComponent } from 'src/app/components/ancestors-renderer/ancestors-renderer.component';
 import { ChordActionButtonsRendererComponent } from 'src/app/components/chord-action-buttons-renderer/chord-action-buttons-renderer.component';
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
+import { CustomPracticeSettingDialogComponent } from 'src/app/components/custom-practice-setting-dialog/custom-practice-setting-dialog.component';
 import { ChordDataWithLabelStateAndStatistic } from 'src/app/models/chord.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
@@ -101,6 +103,7 @@ export class ChordsPageComponent implements OnInit {
   private readonly translateService = inject(TranslateService);
   private readonly quickSettingService = inject(QuickSettingService);
   private readonly chordLabelStore = inject(ChordLabelStore);
+  private readonly matDialog = inject(MatDialog);
 
   private readonly fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
@@ -373,5 +376,9 @@ export class ChordsPageComponent implements OnInit {
     } else {
       this.chordLabelStore.unblockChords(selectedChords);
     }
+  }
+
+  public openCustomPracticeSettingDialog() {
+    this.matDialog.open(CustomPracticeSettingDialogComponent);
   }
 }
