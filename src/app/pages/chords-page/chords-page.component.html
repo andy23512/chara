@@ -42,6 +42,12 @@
       (click)="
         setSelectedChordsBookmarkedState(!isAllSelectedChordsBookmarked())
       "
+      [matTooltip]="
+        (isAllSelectedChordsBookmarked()
+          ? 'chords-page.unbookmark-selected'
+          : 'chords-page.bookmark-selected'
+        ) | translate
+      "
       >{{ "bookmark" | iconGuard }}</mat-icon
     >
     <mat-icon
@@ -49,11 +55,18 @@
       [class.text-red-500]="isAllSelectedChordsBlocked()"
       class="cursor-pointer hover:opacity-100"
       (click)="setSelectedChordsBlockedState(!isAllSelectedChordsBlocked())"
+      [matTooltip]="
+        (isAllSelectedChordsBlocked()
+          ? 'chords-page.unblock-selected'
+          : 'chords-page.block-selected'
+        ) | translate
+      "
       >{{ "block" | iconGuard }}</mat-icon
     >
     <mat-icon
       class="cursor-pointer opacity-20 hover:opacity-100"
       (click)="openCustomPracticeSettingDialog()"
+      [matTooltip]="'chords-page.custom-practice' | translate"
       >{{ "exercise" | iconGuard }}</mat-icon
     >
   }

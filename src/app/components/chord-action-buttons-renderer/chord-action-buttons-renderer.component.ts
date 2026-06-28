@@ -5,6 +5,8 @@ import {
   inject,
 } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { ChordDataWithLabelState } from 'src/app/models/chord.models';
@@ -16,7 +18,7 @@ import { ChordLabelStore } from 'src/app/stores/chord-label.store';
   templateUrl: 'chord-action-buttons-renderer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatIcon, IconGuardPipe],
+  imports: [MatIcon, IconGuardPipe, MatTooltip, TranslatePipe],
 })
 export class ChordActionButtonsRendererComponent
   implements ICellRendererAngularComp

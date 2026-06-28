@@ -4,6 +4,12 @@
     [class.text-chara-500]="chord.bookmarked"
     class="cursor-pointer hover:opacity-100"
     (click)="toggleBookmarkedState(chord)"
+    [matTooltip]="
+      (chord.bookmarked
+        ? 'chords-page.unbookmark-single'
+        : 'chords-page.bookmark-single'
+      ) | translate
+    "
     >{{ "bookmark" | iconGuard }}</mat-icon
   >
   <mat-icon
@@ -11,6 +17,12 @@
     [class.text-red-500]="chord.blocked"
     class="cursor-pointer hover:opacity-100"
     (click)="toggleBlockedState(chord)"
+    [matTooltip]="
+      (chord.blocked
+        ? 'chords-page.unblock-single'
+        : 'chords-page.block-single'
+      ) | translate
+    "
     >{{ "block" | iconGuard }}</mat-icon
   >
 </div>

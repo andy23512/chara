@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipOption, MatChipRemove } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 import { patchState } from '@ngrx/signals';
 import { setEntities } from '@ngrx/signals/entities';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -89,6 +90,7 @@ const tableTheme = themeQuartz.withPart(colorSchemeDark);
     MatChipRemove,
     MatIcon,
     IconGuardPipe,
+    MatTooltip,
   ],
   standalone: true,
 })

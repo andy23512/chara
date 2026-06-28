@@ -145,7 +145,16 @@
       "chpm": "ChPM",
       "count": "Count"
     },
-    "selected-chord-chip-text": "{count, plural, one {1 chord selected} other {{count} chords selected}}"
+    "selected-chord-chip-text": "{count, plural, one {1 chord selected} other {{count} chords selected}}",
+    "bookmark-single": "Bookmark",
+    "unbookmark-single": "Unbookmark",
+    "block-single": "Block",
+    "unblock-single": "Unblock",
+    "bookmark-selected": "Bookmark selected chord(s)",
+    "unbookmark-selected": "Unbookmark selected chord(s)",
+    "block-selected": "Block selected chord(s)",
+    "unblock-selected": "Unblock selected chord(s)",
+    "custom-practice": "Custom practice"
   },
   "information-page": {
     "description": "This website, Chara, is an unofficial chord practice tool designed for CharaChorder 3D input devices, including CharaChorder One, CharaChorder Two, CCU and Master Forge.",
