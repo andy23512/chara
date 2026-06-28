@@ -212,6 +212,10 @@
     "title": "快捷鍵"
   },
   "hotkey": {
+    "global": {
+      "name": "全域共通",
+      "toggle-hotkey-dialog": "開啟或關閉快捷鍵對話框"
+    },
     "practice-phase-pages": {
       "name": "練習階段頁面（適應、實現、積累）",
       "start-or-resume-the-practice": "開始或繼續練習",

@@ -12,6 +12,10 @@ import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 
 export const HOTKEY_GROUPS = [
   {
+    name: 'hotkey.global.name',
+    hotkeys: [{ key: '?', description: 'hotkey.global.toggle-hotkey-dialog' }],
+  },
+  {
     name: 'hotkey.practice-phase-pages.name',
     hotkeys: [
       {
