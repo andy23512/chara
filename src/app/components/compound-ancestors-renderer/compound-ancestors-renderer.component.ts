@@ -5,13 +5,13 @@ import { ChordData } from 'src/app/models/chord.models';
 import { ChordKeyLabelComponent } from '../chord-key-label/chord-key-label.component';
 
 @Component({
-  selector: 'app-ancestors-renderer',
-  templateUrl: 'ancestors-renderer.component.html',
+  selector: 'app-compound-ancestors-renderer',
+  templateUrl: 'compound-ancestors-renderer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [ChordKeyLabelComponent],
 })
-export class AncestorsRendererComponent implements ICellRendererAngularComp {
+export class CompoundAncestorsRendererComponent implements ICellRendererAngularComp {
   public ancestors!: ChordData['ancestors'];
 
   agInit(params: ICellRendererParams<any, any, any>): void {
