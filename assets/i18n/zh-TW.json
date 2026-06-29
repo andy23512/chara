@@ -139,6 +139,8 @@
       "output-text": "輸出 (文字)",
       "output-keys": "輸出 (鍵)",
       "ancestors": "上層和弦",
+      "compound": "複合和弦",
+      "dynamic-library": "動態和弦庫",
       "adaptation": "適應",
       "realization": "實現",
       "accumulation": "積累",

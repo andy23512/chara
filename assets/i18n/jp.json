@@ -139,6 +139,8 @@
       "output-text": "出力 (文字)",
       "output-keys": "出力 (キー)",
       "ancestors": "上位和音",
+      "compound": "複合和音",
+      "dynamic-library": "動的和音ライブラリ",
       "adaptation": "適応",
       "realization": "実現",
       "accumulation": "蓄積",
