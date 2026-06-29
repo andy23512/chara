@@ -48,3 +48,5 @@ Thumbs.db
 src/assets/material-symbols-rounded-latin-full-normal.min.woff2
 
 .claude/worktrees
+
+.yarn
