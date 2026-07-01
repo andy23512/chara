@@ -133,6 +133,13 @@
     "load-chords-from-device-button": "load chords from device",
     "load-chords-from-file-button": "load chords from file",
     "file-input-aria-label": "file input for selecting a chord library file to load into this application",
+    "chord-search": {
+      "placeholder": "Search chord...",
+      "setting": {
+        "chord-input": "Chord input",
+        "chord-output": "Chord output"
+      }
+    },
     "table-column": {
       "chord": "Chord",
       "input": "Input",

@@ -133,6 +133,13 @@
     "load-chords-from-device-button": "デバイスから和音を読み込む",
     "load-chords-from-file-button": "ファイルから和音を読み込む",
     "file-input-aria-label": "このアプリケーションに読み込む和音ライブラリファイルを選択するためのファイル入力",
+    "chord-search": {
+      "placeholder": "和音を検索...",
+      "setting": {
+        "chord-input": "和音入力",
+        "chord-output": "和音出力"
+      }
+    },
     "table-column": {
       "chord": "和音",
       "input": "入力",

@@ -1,79 +1,140 @@
-<div class="flex h-12 items-center gap-2 px-1">
-  @if (selectedChordNumber() === 0) {
-    <button
-      type="button"
-      mat-icon-button
-      (click)="loadDeviceLayoutAndChordsFromDevice()"
-      [matTooltip]="
-        'general.load-device-layout-and-chords-from-device' | translate
-      "
-    >
-      <mat-icon>
-        {{ "keyboard_external_input" | iconGuard }}
-      </mat-icon>
-    </button>
-    @if (isDevMode) {
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="openFileSelectionDialog()"
-      >
-        {{ "chords-page.load-chords-from-file-button" | translate }}
-      </button>
+<div class="flex h-12 items-center gap-4 px-1">
+  <div class="flex items-center gap-2">
+    <mat-form-field class="compact-form-field" subscriptSizing="dynamic">
+      <mat-icon matPrefix class="!pl-1 !pr-0">{{
+        "search" | iconGuard
+      }}</mat-icon>
       <input
-        #fileInput
-        class="hidden"
-        type="file"
-        accept=".json"
-        [attr.aria-label]="'chords-page.file-input-aria-label' | translate"
-        (change)="onFileInputChange()"
+        matInput
+        [placeholder]="'chords-page.chord-search.placeholder' | translate"
       />
-    }
-  } @else {
-    <mat-chip-option>
-      {{
-        "chords-page.selected-chord-chip-text"
-          | translate: { count: selectedChordNumber() }
-      }}
-      <button matChipRemove (click)="clearSelectedState()">
-        <mat-icon>{{ "cancel" | iconGuard }}</mat-icon>
+      <button
+        matSuffix
+        mat-icon-button
+        (click)="isSearchSettingOpen = !isSearchSettingOpen"
+        type="button"
+        cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin"
+      >
+        <mat-icon>{{ "tune" | iconGuard }}</mat-icon>
       </button>
-    </mat-chip-option>
-    <mat-icon
-      [class.opacity-20]="!isAllSelectedChordsBookmarked()"
-      [class.text-chara-500]="isAllSelectedChordsBookmarked()"
-      class="cursor-pointer hover:opacity-100"
-      (click)="
-        setSelectedChordsBookmarkedState(!isAllSelectedChordsBookmarked())
-      "
-      [matTooltip]="
-        (isAllSelectedChordsBookmarked()
-          ? 'chords-page.unbookmark-selected'
-          : 'chords-page.bookmark-selected'
-        ) | translate
-      "
-      >{{ "bookmark" | iconGuard }}</mat-icon
-    >
-    <mat-icon
-      [class.opacity-20]="!isAllSelectedChordsBlocked()"
-      [class.text-red-500]="isAllSelectedChordsBlocked()"
-      class="cursor-pointer hover:opacity-100"
-      (click)="setSelectedChordsBlockedState(!isAllSelectedChordsBlocked())"
-      [matTooltip]="
-        (isAllSelectedChordsBlocked()
-          ? 'chords-page.unblock-selected'
-          : 'chords-page.block-selected'
-        ) | translate
-      "
-      >{{ "block" | iconGuard }}</mat-icon
-    >
-    <mat-icon
-      class="cursor-pointer opacity-20 hover:opacity-100"
-      (click)="openCustomPracticeSettingDialog()"
-      [matTooltip]="'chords-page.custom-practice' | translate"
-      >{{ "exercise" | iconGuard }}</mat-icon
-    >
-  }
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="isSearchSettingOpen"
+        (detach)="isSearchSettingOpen = false"
+        (overlayOutsideClick)="isSearchSettingOpen = false"
+      >
+        <div
+          class="space-y-2 rounded-md bg-gray-900 px-3 py-2 text-white shadow-md"
+        >
+          <div>
+            <mat-slide-toggle
+              [ngModel]="chordSearchChordInputEnabled()"
+              (ngModelChange)="onChordSearchSettingChange('chordInput', $event)"
+              [disabled]="
+                chordSearchOnlyOneEnabled() && chordSearchChordInputEnabled()
+              "
+              >{{
+                "chords-page.chord-search.setting.chord-input" | translate
+              }}</mat-slide-toggle
+            >
+          </div>
+          <div>
+            <mat-slide-toggle
+              [ngModel]="chordSearchChordOutputEnabled()"
+              (ngModelChange)="
+                onChordSearchSettingChange('chordOutput', $event)
+              "
+              [disabled]="
+                chordSearchOnlyOneEnabled() && chordSearchChordOutputEnabled()
+              "
+              >{{
+                "chords-page.chord-search.setting.chord-output" | translate
+              }}</mat-slide-toggle
+            >
+          </div>
+        </div>
+      </ng-template>
+    </mat-form-field>
+  </div>
+  <div class="flex items-center gap-2">
+    @if (selectedChordNumber() === 0) {
+      <button
+        type="button"
+        mat-icon-button
+        (click)="loadDeviceLayoutAndChordsFromDevice()"
+        [matTooltip]="
+          'general.load-device-layout-and-chords-from-device' | translate
+        "
+      >
+        <mat-icon>
+          {{ "keyboard_external_input" | iconGuard }}
+        </mat-icon>
+      </button>
+      @if (isDevMode) {
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="openFileSelectionDialog()"
+        >
+          {{ "chords-page.load-chords-from-file-button" | translate }}
+        </button>
+        <input
+          #fileInput
+          class="hidden"
+          type="file"
+          accept=".json"
+          [attr.aria-label]="'chords-page.file-input-aria-label' | translate"
+          (change)="onFileInputChange()"
+        />
+      }
+    } @else {
+      <mat-chip-option>
+        {{
+          "chords-page.selected-chord-chip-text"
+            | translate: { count: selectedChordNumber() }
+        }}
+        <button matChipRemove (click)="clearSelectedState()">
+          <mat-icon>{{ "cancel" | iconGuard }}</mat-icon>
+        </button>
+      </mat-chip-option>
+      <mat-icon
+        [class.opacity-20]="!isAllSelectedChordsBookmarked()"
+        [class.text-chara-500]="isAllSelectedChordsBookmarked()"
+        class="cursor-pointer hover:opacity-100"
+        (click)="
+          setSelectedChordsBookmarkedState(!isAllSelectedChordsBookmarked())
+        "
+        [matTooltip]="
+          (isAllSelectedChordsBookmarked()
+            ? 'chords-page.unbookmark-selected'
+            : 'chords-page.bookmark-selected'
+          ) | translate
+        "
+        >{{ "bookmark" | iconGuard }}</mat-icon
+      >
+      <mat-icon
+        [class.opacity-20]="!isAllSelectedChordsBlocked()"
+        [class.text-red-500]="isAllSelectedChordsBlocked()"
+        class="cursor-pointer hover:opacity-100"
+        (click)="setSelectedChordsBlockedState(!isAllSelectedChordsBlocked())"
+        [matTooltip]="
+          (isAllSelectedChordsBlocked()
+            ? 'chords-page.unblock-selected'
+            : 'chords-page.block-selected'
+          ) | translate
+        "
+        >{{ "block" | iconGuard }}</mat-icon
+      >
+      <mat-icon
+        class="cursor-pointer opacity-20 hover:opacity-100"
+        (click)="openCustomPracticeSettingDialog()"
+        [matTooltip]="'chords-page.custom-practice' | translate"
+        >{{ "exercise" | iconGuard }}</mat-icon
+      >
+    }
+  </div>
 </div>
 <ag-grid-angular
   class="flex-1"

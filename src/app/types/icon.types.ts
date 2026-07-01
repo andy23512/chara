@@ -39,4 +39,5 @@ export type Icon =
   | 'thumb_up'
   | 'topic'
   | 'trending_up'
+  | 'tune'
   | 'volume_off';

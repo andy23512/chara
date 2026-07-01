@@ -130,3 +130,7 @@ span.first-cap {
 .mat-mdc-tooltip-panel {
   pointer-events: none;
 }
+
+.compact-form-field {
+  @include mat.form-field-density(-5);
+}
