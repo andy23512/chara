@@ -20,6 +20,7 @@ export type Icon =
   | 'help'
   | 'info'
   | 'keyboard'
+  | 'keyboard_external_input'
   | 'left_panel_open'
   | 'map'
   | 'merge'

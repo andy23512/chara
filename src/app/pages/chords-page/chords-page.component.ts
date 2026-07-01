@@ -16,7 +16,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatChipOption, MatChipRemove } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
@@ -92,6 +92,7 @@ const tableTheme = themeQuartz.withPart(colorSchemeDark);
     MatIcon,
     IconGuardPipe,
     MatTooltip,
+    MatIconButton,
   ],
   standalone: true,
 })

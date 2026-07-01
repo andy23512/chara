@@ -2,11 +2,15 @@
   @if (selectedChordNumber() === 0) {
     <button
       type="button"
-      mat-flat-button
-      color="primary"
+      mat-icon-button
       (click)="loadDeviceLayoutAndChordsFromDevice()"
+      [matTooltip]="
+        'general.load-device-layout-and-chords-from-device' | translate
+      "
     >
-      {{ "general.load-device-layout-and-chords-from-device" | translate }}
+      <mat-icon>
+        {{ "keyboard_external_input" | iconGuard }}
+      </mat-icon>
     </button>
     @if (isDevMode) {
       <button
