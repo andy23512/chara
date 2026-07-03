@@ -68,6 +68,9 @@
         "aria-label": "積累頁面連結",
         "lock-message": "你需要至少有一個和弦通過實現階段，才能使用積累頁面。"
       }
+    },
+    "open-hotkey-dialog": {
+      "tooltip": "開啟快捷鍵對話框"
     }
   },
   "settings-page": {

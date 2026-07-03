@@ -68,6 +68,9 @@
         "aria-label": "蓄積ページリンク",
         "lock-message": "蓄積ページを使用するには、実装フェーズを少なくとも1つのコードでクリアする必要があります。"
       }
+    },
+    "open-hotkey-dialog": {
+      "tooltip": "ホットキーダイアログを開く"
     }
   },
   "settings-page": {

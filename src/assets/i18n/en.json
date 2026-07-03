@@ -68,6 +68,9 @@
         "aria-label": "accumulation page link",
         "lock-message": "You need to have at least one chord passing the Realization phase to access the Accumulation page."
       }
+    },
+    "open-hotkey-dialog": {
+      "tooltip": "Open hotkey dialog"
     }
   },
   "settings-page": {

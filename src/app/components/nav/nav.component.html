@@ -43,7 +43,7 @@
             mat-icon-button
             aria-label="button that opens hotkey dialog"
             (click)="openHotkeyDialog()"
-            matTooltip="Open Hotkey Dialog"
+            [matTooltip]="'nav.open-hotkey-dialog.tooltip' | translate"
           >
             <mat-icon>{{ "keyboard" | iconGuard }}</mat-icon>
           </button></a
