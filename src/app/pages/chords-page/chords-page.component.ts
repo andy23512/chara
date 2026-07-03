@@ -41,6 +41,7 @@ import {
   ColDef,
   ColGroupDef,
   colorSchemeDark,
+  DoesExternalFilterPass,
   ExternalFilterModule,
   GetRowIdFunc,
   GetRowIdParams,
@@ -62,7 +63,10 @@ import { CompoundAncestorsRendererComponent } from 'src/app/components/compound-
 import { CustomPracticeSettingDialogComponent } from 'src/app/components/custom-practice-setting-dialog/custom-practice-setting-dialog.component';
 import { DynamicLibraryAncestorsRendererComponent } from 'src/app/components/dynamic-library-ancestors-renderer/dynamic-library-ancestors-renderer.component';
 import { ChordSearchSetting } from 'src/app/models/chord-search-setting.models';
-import { ChordDataWithLabelStateAndStatistic } from 'src/app/models/chord.models';
+import {
+  ChordDataWithLabelStateAndStatistic,
+  ChordKeyLabelType,
+} from 'src/app/models/chord.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { ChordDataService } from 'src/app/services/chord-data.service';
@@ -139,6 +143,7 @@ export class ChordsPageComponent implements OnInit {
   private readonly fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
   private gridApi!: GridApi;
+  protected chordSearchQuery = signal('');
 
   public localeText = computed(() => {
     const uiLanguage = this.languageSettingStore.uiLanguage();
@@ -208,6 +213,14 @@ export class ChordsPageComponent implements OnInit {
     effect(() => {
       const _chordDataList = this.chordDataList();
       this.selectedIdList.set([]);
+    });
+    effect(() => {
+      this.chordSearchQuery();
+      this.chordSearchSettingStore.chordInput();
+      this.chordSearchSettingStore.chordOutput();
+      if (this.gridApi) {
+        this.gridApi.onFilterChanged();
+      }
     });
   }
 
@@ -437,4 +450,30 @@ export class ChordsPageComponent implements OnInit {
   ) {
     this.chordSearchSettingStore.set(key, value);
   }
+
+  public isExternalFilterPresent = () => !!this.chordSearchQuery().trim();
+  public doesExternalFilterPass: DoesExternalFilterPass<ChordDataWithLabelStateAndStatistic> =
+    (row) => {
+      if (!row.data) {
+        return false;
+      }
+      const query = this.chordSearchQuery().trim();
+      if (!query) {
+        return true;
+      }
+      const searchChordInputEnabled = this.chordSearchSettingStore.chordInput();
+      const searchChordOutputEnabled =
+        this.chordSearchSettingStore.chordOutput();
+      const queryChars = query.split('');
+      return (
+        (searchChordInputEnabled &&
+          queryChars.every((char) =>
+            row.data?.inputKeyLabels.some(
+              (label) =>
+                label.type === ChordKeyLabelType.Char && label.c === char,
+            ),
+          )) ||
+        (searchChordOutputEnabled && row.data?.textOutput.includes(query))
+      );
+    };
 }

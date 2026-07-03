@@ -6,6 +6,7 @@
       }}</mat-icon>
       <input
         matInput
+        [(ngModel)]="chordSearchQuery"
         [placeholder]="'chords-page.chord-search.placeholder' | translate"
       />
       <button
@@ -145,6 +146,9 @@
   [rowSelection]="rowSelection"
   [getRowId]="getRowId"
   [headerHeight]="40"
+  [isExternalFilterPresent]="isExternalFilterPresent"
+  [doesExternalFilterPass]="doesExternalFilterPass"
+  [animateRows]="false"
   (selectionChanged)="onSelectionChanged($event)"
   (gridReady)="onGridReady($event)"
 />
