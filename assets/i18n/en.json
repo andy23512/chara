@@ -158,6 +158,7 @@
       "count": "Count"
     },
     "selected-chord-chip-text": "{count, plural, one {1 chord selected} other {{count} chords selected}}",
+    "table-count-summary": "{filteredCount} of {totalCount} chords",
     "bookmark-single": "Bookmark",
     "unbookmark-single": "Unbookmark",
     "block-single": "Block",

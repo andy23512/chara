@@ -158,6 +158,7 @@
       "count": "次數"
     },
     "selected-chord-chip-text": "已選取 {count} 個和弦",
+    "table-count-summary": "{filteredCount}/{totalCount} 個和弦",
     "bookmark-single": "加書籤",
     "unbookmark-single": "取消加書籤",
     "block-single": "封鎖",

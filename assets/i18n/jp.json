@@ -158,6 +158,7 @@
       "count": "回数"
     },
     "selected-chord-chip-text": "{count} 和音選択",
+    "table-count-summary": "{filteredCount}/{totalCount} 和音",
     "bookmark-single": "ブックマーク",
     "unbookmark-single": "ブックマーク解除",
     "block-single": "ブロック",
