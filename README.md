@@ -16,6 +16,7 @@ An unofficial chord practice tool of CharaChorder 3D input devices (CharaChorder
   - Chords can be bookmarked, so they would have a higher priority for entering the cycle.
   - Chords can be blocked, so they would not appear in any phase.
   - You can select several chords and enter a custom practice session with them.
+  - You can search, filter and sort the chords by various criteria.
 - Adapt, Realize, Accumulate pages
   - They are practice phases aligning with the CHARA cycle⁠.
   - They automatically choose chords from your chord library into the practice cycle.
