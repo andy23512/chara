@@ -60,6 +60,9 @@
     </mat-form-field>
   </div>
   <div class="flex items-center gap-2">
+    <div class="text-md">
+      {{ "chords-page.table-count-summary" | translate: chordCountSummary() }}
+    </div>
     @if (selectedChordNumber() === 0) {
       <button
         type="button"

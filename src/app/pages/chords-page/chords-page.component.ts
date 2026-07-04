@@ -94,6 +94,56 @@ ModuleRegistry.registerModules([
 
 const tableTheme = themeQuartz.withPart(colorSchemeDark);
 
+export interface ChordCountSummary {
+  totalCount: number;
+  filteredCount: number;
+}
+
+export function matchesChordSearch(
+  chord: Pick<ChordDataWithLabelStateAndStatistic, 'inputKeyLabels' | 'textOutput'>,
+  query: string,
+  searchChordInputEnabled: boolean,
+  searchChordOutputEnabled: boolean,
+): boolean {
+  const trimmedQuery = query.trim();
+  if (!trimmedQuery) {
+    return true;
+  }
+
+  const queryChars = trimmedQuery.split('');
+  return (
+    (searchChordInputEnabled &&
+      queryChars.every((char) =>
+        chord.inputKeyLabels.some(
+          (label) => label.type === ChordKeyLabelType.Char && label.c === char,
+        ),
+      )) ||
+    (searchChordOutputEnabled && chord.textOutput.includes(trimmedQuery))
+  );
+}
+
+export function getChordCountSummary(
+  chords: ChordDataWithLabelStateAndStatistic[],
+  query: string,
+  searchChordInputEnabled: boolean,
+  searchChordOutputEnabled: boolean,
+): ChordCountSummary {
+  const totalCount = chords.length;
+  const filteredCount = chords.filter((chord) =>
+    matchesChordSearch(
+      chord,
+      query,
+      searchChordInputEnabled,
+      searchChordOutputEnabled,
+    ),
+  ).length;
+
+  return {
+    totalCount,
+    filteredCount,
+  };
+}
+
 @Component({
   selector: 'app-chords-page',
   templateUrl: 'chords-page.component.html',
@@ -144,6 +194,14 @@ export class ChordsPageComponent implements OnInit {
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
   private gridApi!: GridApi;
   protected chordSearchQuery = signal('');
+  public readonly chordCountSummary = computed(() =>
+    getChordCountSummary(
+      this.chordDataListWithLabelStateAndStatistic(),
+      this.chordSearchQuery(),
+      this.chordSearchSettingStore.chordInput(),
+      this.chordSearchSettingStore.chordOutput(),
+    ),
+  );
 
   public localeText = computed(() => {
     const uiLanguage = this.languageSettingStore.uiLanguage();
@@ -457,23 +515,12 @@ export class ChordsPageComponent implements OnInit {
       if (!row.data) {
         return false;
       }
-      const query = this.chordSearchQuery().trim();
-      if (!query) {
-        return true;
-      }
-      const searchChordInputEnabled = this.chordSearchSettingStore.chordInput();
-      const searchChordOutputEnabled =
-        this.chordSearchSettingStore.chordOutput();
-      const queryChars = query.split('');
-      return (
-        (searchChordInputEnabled &&
-          queryChars.every((char) =>
-            row.data?.inputKeyLabels.some(
-              (label) =>
-                label.type === ChordKeyLabelType.Char && label.c === char,
-            ),
-          )) ||
-        (searchChordOutputEnabled && row.data?.textOutput.includes(query))
+
+      return matchesChordSearch(
+        row.data,
+        this.chordSearchQuery(),
+        this.chordSearchSettingStore.chordInput(),
+        this.chordSearchSettingStore.chordOutput(),
       );
     };
 }
