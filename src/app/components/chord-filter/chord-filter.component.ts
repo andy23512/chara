@@ -12,6 +12,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatTooltip } from '@angular/material/tooltip';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { BlockFilter, BookmarkFilter } from 'src/app/models/filter.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { ChordDataService } from 'src/app/services/chord-data.service';
 import { ChordFilterStore } from 'src/app/stores/chord-filter.store';
@@ -113,13 +114,11 @@ export class ChordFilterComponent implements OnInit {
     ];
   }
 
-  protected setBookmarkFilter(
-    value: 'all' | 'bookmarked' | 'unbookmarked',
-  ): void {
+  protected setBookmarkFilter(value: BookmarkFilter): void {
     this.chordFilterStore.setBookmarkFilter(value);
   }
 
-  protected setBlockFilter(value: 'all' | 'blocked' | 'unblocked'): void {
+  protected setBlockFilter(value: BlockFilter): void {
     this.chordFilterStore.setBlockFilter(value);
   }
 

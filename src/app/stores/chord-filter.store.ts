@@ -6,11 +6,12 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
+import { BlockFilter, BookmarkFilter } from '../models/filter.models';
 
 interface ChordFilterState {
   searchQuery: string;
-  bookmarkFilter: 'all' | 'bookmarked' | 'unbookmarked';
-  blockFilter: 'all' | 'blocked' | 'unblocked';
+  bookmarkFilter: BookmarkFilter;
+  blockFilter: BlockFilter;
   dynamicLibraryFilter: string;
 }
 
@@ -28,10 +29,10 @@ export const ChordFilterStore = signalStore(
     setSearchQuery(searchQuery: string) {
       patchState(store, { searchQuery });
     },
-    setBookmarkFilter(bookmarkFilter: 'all' | 'bookmarked' | 'unbookmarked') {
+    setBookmarkFilter(bookmarkFilter: BookmarkFilter) {
       patchState(store, { bookmarkFilter });
     },
-    setBlockFilter(blockFilter: 'all' | 'blocked' | 'unblocked') {
+    setBlockFilter(blockFilter: BlockFilter) {
       patchState(store, { blockFilter });
     },
     setDynamicLibraryFilter(dynamicLibraryFilter: string) {

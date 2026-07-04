@@ -59,6 +59,7 @@ import {
   ChordDataWithLabelStateAndStatistic,
   ChordKeyLabelType,
 } from 'src/app/models/chord.models';
+import { BlockFilter, BookmarkFilter } from 'src/app/models/filter.models';
 import { UiLanguage } from 'src/app/models/language-setting.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { ChordDataService } from 'src/app/services/chord-data.service';
@@ -104,8 +105,8 @@ export function matchesChordSearch(
   query: string,
   searchChordInputEnabled: boolean,
   searchChordOutputEnabled: boolean,
-  bookmarkFilter: 'all' | 'bookmarked' | 'unbookmarked',
-  blockFilter: 'all' | 'blocked' | 'unblocked',
+  bookmarkFilter: BookmarkFilter,
+  blockFilter: BlockFilter,
   dynamicLibraryFilter: string,
 ): boolean {
   const trimmedQuery = query.trim();
@@ -140,8 +141,8 @@ export function getChordCountSummary(
   query: string,
   searchChordInputEnabled: boolean,
   searchChordOutputEnabled: boolean,
-  bookmarkFilter: 'all' | 'bookmarked' | 'unbookmarked',
-  blockFilter: 'all' | 'blocked' | 'unblocked',
+  bookmarkFilter: BookmarkFilter,
+  blockFilter: BlockFilter,
   dynamicLibraryFilter: string,
 ): ChordCountSummary {
   const totalCount = chords.length;
