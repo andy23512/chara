@@ -164,6 +164,24 @@ export function getChordCountSummary(
   };
 }
 
+const comparator = (
+  a: null | number,
+  b: null | number,
+  _1: unknown,
+  _2: unknown,
+  isInverted: boolean,
+) => {
+  const sign = isInverted ? -1 : 1;
+  if (a === b) {
+    return 0;
+  } else if (a === null || a === undefined) {
+    return 1 * sign;
+  } else if (b === null || b === undefined) {
+    return -1 * sign;
+  }
+  return a - b;
+};
+
 @Component({
   selector: 'app-chords-page',
   templateUrl: 'chords-page.component.html',
@@ -362,6 +380,8 @@ export class ChordsPageComponent implements OnInit {
             ),
             field: 'adaptation.lastTenAverageChordPerMinute',
             width: 75,
+            sortable: true,
+            comparator,
             cellStyle: { textAlign: 'right' },
             cellClass: (
               param: CellClassParams<ChordDataWithLabelStateAndStatistic>,
@@ -373,6 +393,8 @@ export class ChordsPageComponent implements OnInit {
             ),
             field: 'adaptation.correctCount',
             width: 75,
+            sortable: true,
+            comparator,
             cellStyle: { textAlign: 'right' },
             cellClass: (
               param: CellClassParams<ChordDataWithLabelStateAndStatistic>,
@@ -391,6 +413,8 @@ export class ChordsPageComponent implements OnInit {
             ),
             field: 'realization.lastTenAverageChordPerMinute',
             width: 75,
+            sortable: true,
+            comparator,
             cellStyle: { textAlign: 'right' },
             cellClass: (
               param: CellClassParams<ChordDataWithLabelStateAndStatistic>,
@@ -402,6 +426,8 @@ export class ChordsPageComponent implements OnInit {
             ),
             field: 'realization.correctCount',
             width: 75,
+            sortable: true,
+            comparator,
             cellStyle: { textAlign: 'right' },
             cellClass: (
               param: CellClassParams<ChordDataWithLabelStateAndStatistic>,
@@ -420,6 +446,8 @@ export class ChordsPageComponent implements OnInit {
             ),
             field: 'accumulation.lastTenAverageChordPerMinute',
             width: 75,
+            sortable: true,
+            comparator,
             cellStyle: { textAlign: 'right' },
           },
           {
@@ -428,6 +456,8 @@ export class ChordsPageComponent implements OnInit {
             ),
             field: 'accumulation.correctCount',
             width: 75,
+            sortable: true,
+            comparator,
             cellStyle: { textAlign: 'right' },
           },
         ],
