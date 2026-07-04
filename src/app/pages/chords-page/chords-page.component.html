@@ -1,63 +1,6 @@
 <div class="flex h-12 items-center gap-4 px-1">
   <div class="flex items-center gap-2">
-    <mat-form-field class="compact-form-field" subscriptSizing="dynamic">
-      <mat-icon matPrefix class="!pl-1 !pr-0">{{
-        "search" | iconGuard
-      }}</mat-icon>
-      <input
-        matInput
-        [(ngModel)]="chordSearchQuery"
-        [placeholder]="'chords-page.chord-search.placeholder' | translate"
-      />
-      <button
-        matSuffix
-        mat-icon-button
-        (click)="isSearchSettingOpen = !isSearchSettingOpen"
-        type="button"
-        cdkOverlayOrigin
-        #trigger="cdkOverlayOrigin"
-      >
-        <mat-icon>{{ "tune" | iconGuard }}</mat-icon>
-      </button>
-      <ng-template
-        cdkConnectedOverlay
-        [cdkConnectedOverlayOrigin]="trigger"
-        [cdkConnectedOverlayOpen]="isSearchSettingOpen"
-        (detach)="isSearchSettingOpen = false"
-        (overlayOutsideClick)="isSearchSettingOpen = false"
-      >
-        <div
-          class="space-y-2 rounded-md bg-gray-900 px-3 py-2 text-white shadow-md"
-        >
-          <div>
-            <mat-slide-toggle
-              [ngModel]="chordSearchChordInputEnabled()"
-              (ngModelChange)="onChordSearchSettingChange('chordInput', $event)"
-              [disabled]="
-                chordSearchOnlyOneEnabled() && chordSearchChordInputEnabled()
-              "
-              >{{
-                "chords-page.chord-search.setting.chord-input" | translate
-              }}</mat-slide-toggle
-            >
-          </div>
-          <div>
-            <mat-slide-toggle
-              [ngModel]="chordSearchChordOutputEnabled()"
-              (ngModelChange)="
-                onChordSearchSettingChange('chordOutput', $event)
-              "
-              [disabled]="
-                chordSearchOnlyOneEnabled() && chordSearchChordOutputEnabled()
-              "
-              >{{
-                "chords-page.chord-search.setting.chord-output" | translate
-              }}</mat-slide-toggle
-            >
-          </div>
-        </div>
-      </ng-template>
-    </mat-form-field>
+    <app-chord-search></app-chord-search>
   </div>
   <div class="flex items-center gap-2">
     <div class="text-md">

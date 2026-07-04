@@ -3,7 +3,6 @@ import {
   AG_GRID_LOCALE_JP,
   AG_GRID_LOCALE_TW,
 } from '@ag-grid-community/locale';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,18 +16,10 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatChipOption, MatChipRemove } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  MatFormField,
-  MatPrefix,
-  MatSuffix,
-} from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatTooltip } from '@angular/material/tooltip';
 import { patchState } from '@ngrx/signals';
 import { setEntities } from '@ngrx/signals/entities';
@@ -59,10 +50,10 @@ import {
 } from 'ag-grid-community';
 import { ChordActionButtonsRendererComponent } from 'src/app/components/chord-action-buttons-renderer/chord-action-buttons-renderer.component';
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
+import { ChordSearchComponent } from 'src/app/components/chord-search/chord-search.component';
 import { CompoundAncestorsRendererComponent } from 'src/app/components/compound-ancestors-renderer/compound-ancestors-renderer.component';
 import { CustomPracticeSettingDialogComponent } from 'src/app/components/custom-practice-setting-dialog/custom-practice-setting-dialog.component';
 import { DynamicLibraryAncestorsRendererComponent } from 'src/app/components/dynamic-library-ancestors-renderer/dynamic-library-ancestors-renderer.component';
-import { ChordSearchSetting } from 'src/app/models/chord-search-setting.models';
 import {
   ChordDataWithLabelStateAndStatistic,
   ChordKeyLabelType,
@@ -71,6 +62,7 @@ import { UiLanguage } from 'src/app/models/language-setting.models';
 import { IconGuardPipe } from 'src/app/pipes/icon-guard.pipe';
 import { ChordDataService } from 'src/app/services/chord-data.service';
 import { QuickSettingService } from 'src/app/services/quick-setting.service';
+import { ChordFilterStore } from 'src/app/stores/chord-filter.store';
 import { ChordLabelStore } from 'src/app/stores/chord-label.store';
 import { ChordSearchSettingStore } from 'src/app/stores/chord-search-setting.store';
 import { ChordStore } from 'src/app/stores/chord.store';
@@ -100,7 +92,10 @@ export interface ChordCountSummary {
 }
 
 export function matchesChordSearch(
-  chord: Pick<ChordDataWithLabelStateAndStatistic, 'inputKeyLabels' | 'textOutput'>,
+  chord: Pick<
+    ChordDataWithLabelStateAndStatistic,
+    'inputKeyLabels' | 'textOutput'
+  >,
   query: string,
   searchChordInputEnabled: boolean,
   searchChordOutputEnabled: boolean,
@@ -158,14 +153,7 @@ export function getChordCountSummary(
     IconGuardPipe,
     MatTooltip,
     MatIconButton,
-    MatFormField,
-    MatInput,
-    MatPrefix,
-    MatSuffix,
-    CdkOverlayOrigin,
-    CdkConnectedOverlay,
-    MatSlideToggle,
-    FormsModule,
+    ChordSearchComponent,
   ],
   standalone: true,
 })
@@ -182,18 +170,12 @@ export class ChordsPageComponent implements OnInit {
   private readonly chordLabelStore = inject(ChordLabelStore);
   private readonly matDialog = inject(MatDialog);
   private readonly chordSearchSettingStore = inject(ChordSearchSettingStore);
-  protected readonly chordSearchChordInputEnabled =
-    this.chordSearchSettingStore.chordInput;
-  protected readonly chordSearchChordOutputEnabled =
-    this.chordSearchSettingStore.chordOutput;
-  protected readonly chordSearchOnlyOneEnabled =
-    this.chordSearchSettingStore.onlyOneEnabled;
-  public isSearchSettingOpen = false;
+  private readonly chordFilterStore = inject(ChordFilterStore);
 
   private readonly fileInput =
     viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
   private gridApi!: GridApi;
-  protected chordSearchQuery = signal('');
+  protected chordSearchQuery = this.chordFilterStore.searchQuery;
   public readonly chordCountSummary = computed(() =>
     getChordCountSummary(
       this.chordDataListWithLabelStateAndStatistic(),
@@ -500,13 +482,6 @@ export class ChordsPageComponent implements OnInit {
         chordHashList: this.selectedChords().map((c) => c.actionAndPhraseHash),
       },
     });
-  }
-
-  public onChordSearchSettingChange(
-    key: keyof ChordSearchSetting,
-    value: boolean,
-  ) {
-    this.chordSearchSettingStore.set(key, value);
   }
 
   public isExternalFilterPresent = () => !!this.chordSearchQuery().trim();
