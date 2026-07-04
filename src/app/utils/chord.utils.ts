@@ -167,6 +167,7 @@ export function convertFlattenedChordTreeNodesToChordData(
         keyboardLayout,
       ),
       isDynamicLibraryChord: ancestor.isDynamicLibraryChord,
+      actionAndPhraseHash: ancestor.actionAndPhraseHash,
     }));
     const firstCompoundAncestorIndex = ancestors.findIndex(
       (a) => !a.isDynamicLibraryChord,

@@ -169,6 +169,26 @@
       "chord-output": "和音出力"
     }
   },
+  "chord-filter": {
+    "tooltip": "和音をフィルタリング",
+    "bookmark-filter": {
+      "label": "ブックマーク状態",
+      "all": "すべて",
+      "bookmarked": "ブックマーク済み",
+      "unbookmarked": "未ブックマーク"
+    },
+    "block-filter": {
+      "label": "ブロック状態",
+      "all": "すべて",
+      "blocked": "ブロック済み",
+      "unblocked": "未ブロック"
+    },
+    "dynamic-library-filter": {
+      "label": "動的和音ライブラリ",
+      "all": "すべて",
+      "base": "ベース"
+    }
+  },
   "information-page": {
     "description": "このウェブサイト、「Chara カラ」は、CharaChorder One、CharaChorder Two、CCU、Master Forge などの CharaChorder 3D 入力デバイス用に設計された非公式和音練習ツールです。",
     "page-introductions-title": "ページ紹介",

@@ -49,6 +49,7 @@ import {
   themeQuartz,
 } from 'ag-grid-community';
 import { ChordActionButtonsRendererComponent } from 'src/app/components/chord-action-buttons-renderer/chord-action-buttons-renderer.component';
+import { ChordFilterComponent } from 'src/app/components/chord-filter/chord-filter.component';
 import { ChordKeyLabelsRendererComponent } from 'src/app/components/chord-key-labels-renderer/chord-key-labels-renderer.component';
 import { ChordSearchComponent } from 'src/app/components/chord-search/chord-search.component';
 import { CompoundAncestorsRendererComponent } from 'src/app/components/compound-ancestors-renderer/compound-ancestors-renderer.component';
@@ -94,26 +95,43 @@ export interface ChordCountSummary {
 export function matchesChordSearch(
   chord: Pick<
     ChordDataWithLabelStateAndStatistic,
-    'inputKeyLabels' | 'textOutput'
+    | 'inputKeyLabels'
+    | 'textOutput'
+    | 'bookmarked'
+    | 'blocked'
+    | 'dynamicLibraryAncestors'
   >,
   query: string,
   searchChordInputEnabled: boolean,
   searchChordOutputEnabled: boolean,
+  bookmarkFilter: 'all' | 'bookmarked' | 'unbookmarked',
+  blockFilter: 'all' | 'blocked' | 'unblocked',
+  dynamicLibraryFilter: string,
 ): boolean {
   const trimmedQuery = query.trim();
-  if (!trimmedQuery) {
-    return true;
-  }
-
   const queryChars = trimmedQuery.split('');
   return (
-    (searchChordInputEnabled &&
-      queryChars.every((char) =>
-        chord.inputKeyLabels.some(
-          (label) => label.type === ChordKeyLabelType.Char && label.c === char,
-        ),
-      )) ||
-    (searchChordOutputEnabled && chord.textOutput.includes(trimmedQuery))
+    (!trimmedQuery ||
+      (searchChordInputEnabled &&
+        queryChars.every((char) =>
+          chord.inputKeyLabels.some(
+            (label) =>
+              label.type === ChordKeyLabelType.Char && label.c === char,
+          ),
+        )) ||
+      (searchChordOutputEnabled && chord.textOutput.includes(trimmedQuery))) &&
+    (bookmarkFilter === 'all' ||
+      (bookmarkFilter === 'bookmarked' && chord.bookmarked) ||
+      (bookmarkFilter === 'unbookmarked' && !chord.bookmarked)) &&
+    (blockFilter === 'all' ||
+      (blockFilter === 'blocked' && chord.blocked) ||
+      (blockFilter === 'unblocked' && !chord.blocked)) &&
+    (dynamicLibraryFilter === 'all' ||
+      (dynamicLibraryFilter === 'base' &&
+        chord.dynamicLibraryAncestors.length === 0) ||
+      chord.dynamicLibraryAncestors.some(
+        (ancestor) => ancestor.actionAndPhraseHash === dynamicLibraryFilter,
+      ))
   );
 }
 
@@ -122,6 +140,9 @@ export function getChordCountSummary(
   query: string,
   searchChordInputEnabled: boolean,
   searchChordOutputEnabled: boolean,
+  bookmarkFilter: 'all' | 'bookmarked' | 'unbookmarked',
+  blockFilter: 'all' | 'blocked' | 'unblocked',
+  dynamicLibraryFilter: string,
 ): ChordCountSummary {
   const totalCount = chords.length;
   const filteredCount = chords.filter((chord) =>
@@ -130,6 +151,9 @@ export function getChordCountSummary(
       query,
       searchChordInputEnabled,
       searchChordOutputEnabled,
+      bookmarkFilter,
+      blockFilter,
+      dynamicLibraryFilter,
     ),
   ).length;
 
@@ -154,6 +178,7 @@ export function getChordCountSummary(
     MatTooltip,
     MatIconButton,
     ChordSearchComponent,
+    ChordFilterComponent,
   ],
   standalone: true,
 })
@@ -182,6 +207,9 @@ export class ChordsPageComponent implements OnInit {
       this.chordSearchQuery(),
       this.chordSearchSettingStore.chordInput(),
       this.chordSearchSettingStore.chordOutput(),
+      this.chordFilterStore.bookmarkFilter(),
+      this.chordFilterStore.blockFilter(),
+      this.chordFilterStore.dynamicLibraryFilter(),
     ),
   );
 
@@ -256,6 +284,9 @@ export class ChordsPageComponent implements OnInit {
     });
     effect(() => {
       this.chordSearchQuery();
+      this.chordFilterStore.bookmarkFilter();
+      this.chordFilterStore.blockFilter();
+      this.chordFilterStore.dynamicLibraryFilter();
       this.chordSearchSettingStore.chordInput();
       this.chordSearchSettingStore.chordOutput();
       if (this.gridApi) {
@@ -484,7 +515,9 @@ export class ChordsPageComponent implements OnInit {
     });
   }
 
-  public isExternalFilterPresent = () => !!this.chordSearchQuery().trim();
+  public isExternalFilterPresent = () =>
+    this.chordFilterStore.hasActiveSelectionFilters() ||
+    this.chordFilterStore.hasActiveSearchFilter();
   public doesExternalFilterPass: DoesExternalFilterPass<ChordDataWithLabelStateAndStatistic> =
     (row) => {
       if (!row.data) {
@@ -496,6 +529,9 @@ export class ChordsPageComponent implements OnInit {
         this.chordSearchQuery(),
         this.chordSearchSettingStore.chordInput(),
         this.chordSearchSettingStore.chordOutput(),
+        this.chordFilterStore.bookmarkFilter(),
+        this.chordFilterStore.blockFilter(),
+        this.chordFilterStore.dynamicLibraryFilter(),
       );
     };
 }

@@ -1,0 +1,78 @@
+<button
+  mat-icon-button
+  [matTooltip]="'chord-filter.tooltip' | translate"
+  cdkOverlayOrigin
+  (click)="isFilterOpen = !isFilterOpen"
+  type="button"
+  #trigger="cdkOverlayOrigin"
+>
+  <mat-icon
+    class="opacity-30"
+    [class.!text-chara-500]="hasActiveSelectionFilters()"
+    [class.!opacity-100]="hasActiveSelectionFilters()"
+    >{{ "filter_list" | iconGuard }}</mat-icon
+  >
+</button>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isFilterOpen"
+  (detach)="isFilterOpen = false"
+  (overlayOutsideClick)="isFilterOpen = false"
+>
+  <div class="space-y-2 rounded-md bg-gray-900 px-3 py-2 text-white">
+    <table class="border-separate border-spacing-x-2 border-spacing-y-3">
+      <colgroup>
+        <col />
+        <col class="w-52" />
+      </colgroup>
+      <tbody>
+        <tr>
+          <td>{{ "chord-filter.bookmark-filter.label" | translate }}</td>
+          <td>
+            <mat-select
+              [value]="bookmarkFilter()"
+              (valueChange)="setBookmarkFilter($event)"
+            >
+              @for (option of bookmarkFilterOptions; track $index) {
+                <mat-option [value]="option.value">{{
+                  option.label
+                }}</mat-option>
+              }
+            </mat-select>
+          </td>
+        </tr>
+        <tr>
+          <td>{{ "chord-filter.block-filter.label" | translate }}</td>
+          <td>
+            <mat-select
+              [value]="blockFilter()"
+              (valueChange)="setBlockFilter($event)"
+            >
+              @for (option of blockFilterOptions; track $index) {
+                <mat-option [value]="option.value">{{
+                  option.label
+                }}</mat-option>
+              }
+            </mat-select>
+          </td>
+        </tr>
+        <tr>
+          <td>{{ "chord-filter.dynamic-library-filter.label" | translate }}</td>
+          <td>
+            <mat-select
+              [value]="dynamicLibraryFilter()"
+              (valueChange)="setDynamicLibraryFilter($event)"
+            >
+              @for (option of dynamicLibraryFilterOptions(); track $index) {
+                <mat-option [value]="option.value">{{
+                  option.label
+                }}</mat-option>
+              }
+            </mat-select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>

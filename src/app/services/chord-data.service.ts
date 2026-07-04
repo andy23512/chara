@@ -36,6 +36,12 @@ export class ChordDataService {
     );
   });
 
+  public dynamicLibraries = computed(() => {
+    const chords = this.chordDataList();
+    const dynamicLibraryChords = chords.filter((c) => c.isDynamicLibraryChord);
+    return dynamicLibraryChords;
+  });
+
   public chordDataListWithLabelState = computed(() => {
     const bookmarkedHashSet = this.chordLabelStore.bookmarkedHashSet();
     const blockedHashSet = this.chordLabelStore.blockedHashSet();

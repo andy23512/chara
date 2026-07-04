@@ -16,6 +16,7 @@ export type Icon =
   | 'code'
   | 'delete'
   | 'exercise'
+  | 'filter_list'
   | 'function'
   | 'help'
   | 'info'

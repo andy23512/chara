@@ -54,6 +54,7 @@ export interface AncestorData {
   input: number[];
   textOutput: string;
   isDynamicLibraryChord: boolean;
+  actionAndPhraseHash: string;
 }
 
 export interface ChordDataWithLabelState extends ChordData {
@@ -61,8 +62,7 @@ export interface ChordDataWithLabelState extends ChordData {
   blocked: boolean;
 }
 
-export interface ChordDataWithLabelStateAndStatistic
-  extends ChordDataWithLabelState {
+export interface ChordDataWithLabelStateAndStatistic extends ChordDataWithLabelState {
   adaptation: {
     correctCount: number | null;
     lastTenAverageChordPerMinute: number | null;
