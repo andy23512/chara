@@ -232,10 +232,8 @@
       "title": "免責事項",
       "description": [
         [
-          "このサイトは、CharaChorder および Forge Keyboard と提携、関連、認可、推奨、またはいかなる形でも公式な関係を有していません。それぞれの公式サイトは、 ",
-          "{{charachorder_url}}",
-          " および ",
-          "{{forge_keyboard_url}}",
+          "このサイトは、CharaChorder と提携、関連、認可、推奨、またはいかなる形でも公式な関係を有していません。CharaChorder の公式サイトは、 ",
+          "{{charachorder url}}",
           " でご覧いただけます。"
         ],
         "このツールにおける入力統計情報と設定は、ブラウザの localStorage にローカルに保存されます。このツールを介して他の場所に送信されることはありません。"

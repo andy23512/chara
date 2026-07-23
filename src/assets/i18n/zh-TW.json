@@ -232,10 +232,8 @@
       "title": "免責聲明",
       "description": [
         [
-          "本網站與 CharaChorder 和 Forge Keyboard 沒有隸屬、關聯、授權、認可，或任何正式關聯的關係。他們的官方網站可以在 ",
-          "{{charachorder_url}}",
-          " 和 ",
-          "{{forge_keyboard_url}}",
+          "本網站與 CharaChorder 沒有隸屬、關聯、授權、認可，或任何正式關聯的關係。他們的官方網站可以在 ",
+          "{{charachorder url}}",
           " 上找到。"
         ],
         "你的打字統計和設定資料會保存在你的瀏覽器的 localStorage 之中。這些資料不會透過本工具傳送到其他任何地方。"
