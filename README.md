@@ -6,6 +6,7 @@ An unofficial chord practice tool of CharaChorder 3D input devices (CharaChorder
 
 - [Website](https://andy23512.github.io/chara/)
 - [Introduction & Development Note](https://andy23512.github.io/blog/chara-a-chord-practice-tool-of-charachorder-3d-input-devices-developed-by-tangent/)
+- [Chara Lite](https://andy23512.github.io/chara-lite/) (Companion project for CharaChorder Lite)
 - [CHARA cycle](https://andy23512.github.io/blog/tangent-s-suggestion-for-learning-english-chorded-entry-on-charachorder-devices/#What-is-CHARA-cycle)
 
 ## Features
