@@ -22,6 +22,7 @@ export type Icon =
   | 'info'
   | 'keyboard'
   | 'keyboard_external_input'
+  | 'kid_star'
   | 'left_panel_open'
   | 'map'
   | 'merge'
