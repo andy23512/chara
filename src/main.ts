@@ -36,6 +36,7 @@ bootstrapApplication(AppComponent, {
       loader: provideTranslateHttpLoader({
         prefix: './assets/i18n/',
         suffix: '.json',
+        enforceLoading: true,
       }),
     }),
     provideAppInitializer(() => {
