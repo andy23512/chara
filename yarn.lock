@@ -7118,7 +7118,6 @@ __metadata:
     karma-jasmine: "npm:~5.1.0"
     karma-jasmine-html-reporter: "npm:~2.1.0"
     ngx-mat-select-search: "npm:^8.0.0"
-    ngx-print: "npm:^2.0.0"
     ngx-translate-messageformat-compiler: "npm:^7.2.0"
     nx: "npm:22.7.1"
     postcss: "npm:^8.4.5"
@@ -11681,15 +11680,6 @@ __metadata:
   peerDependencies:
     "@angular/material": ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
   checksum: 10c0/c3a83282b056c83e3eb0b082d5db43f92d661028862101f704025a499b9976caedc11ad96661eb4d6937c71be0cda5c867c8b363e6ba46ce5ceec0319c654d91
-  languageName: node
-  linkType: hard
-
-"ngx-print@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "ngx-print@npm:2.0.0"
-  dependencies:
-    tslib: "npm:^2.3.0"
-  checksum: 10c0/9a79b8bf99e6745dee86294a38440c4e89e453914b88a479a01dbe8f88d78c63b6fe1f8ba4925728ab8357dfa734c776fd483983aeeca8b3f8da8971244bd906
   languageName: node
   linkType: hard
 
