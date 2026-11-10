@@ -21,7 +21,9 @@ describe('getChordCountSummary', () => {
       },
     ] as any[];
 
-    expect(getChordCountSummary(chords, 'A', true, true)).toEqual({
+    expect(
+      getChordCountSummary(chords, 'A', true, true, 'all', 'all', 'all'),
+    ).toEqual({
       totalCount: 3,
       filteredCount: 1,
     });
