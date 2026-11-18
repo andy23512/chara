@@ -1,14 +1,29 @@
 import { computed, inject, Injectable, signal, Signal } from '@angular/core';
 import { Page } from '../models/page.models';
-import { ChordStore } from '../stores/chord.store';
 import { DeviceLayoutStore } from '../stores/device-layout.store';
 import { ChordDataService } from './chord-data.service';
 
 @Injectable({ providedIn: 'root' })
 export class PageLockService {
   private readonly deviceLayoutStore = inject(DeviceLayoutStore);
-  private readonly chordStore = inject(ChordStore);
   private readonly chordDataService = inject(ChordDataService);
+
+  /**
+   * The translation key of the message that explains why a page is locked, when
+   * it differs from the page's usual lock message; otherwise null.
+   */
+  public getLockMessageOverride(page: Page): Signal<string | null> {
+    if (page !== Page.Adaptation) {
+      return signal(null);
+    }
+    return computed(() =>
+      this.deviceLayoutStore.hasLoadedProfileLayoutMap() &&
+      this.chordDataService.chordDataList().length > 0 &&
+      this.chordDataService.nonBlockedChordCount() === 0
+        ? 'nav.page.adaptation.all-blocked-lock-message'
+        : null,
+    );
+  }
 
   public canAccessPage(page: Page): Signal<boolean> {
     switch (page) {
@@ -16,7 +31,7 @@ export class PageLockService {
         return computed(() => {
           return (
             this.deviceLayoutStore.hasLoadedProfileLayoutMap() &&
-            this.chordStore.entityCount() > 0
+            this.chordDataService.nonBlockedChordCount() > 0
           );
         });
       case Page.Realization:

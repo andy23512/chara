@@ -55,7 +55,8 @@
         "title": "adapt",
         "tooltip": "Go to Adaptation page",
         "aria-label": "adaptation page link",
-        "lock-message": "Load device layout and chords on Settings page to use the Adaptation page."
+        "lock-message": "Load device layout and chords on Settings page to use the Adaptation page.",
+        "all-blocked-lock-message": "All of your chords are blocked. Unblock some chords on the Chords page to use the Adaptation page."
       },
       "realization": {
         "title": "realize",

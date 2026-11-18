@@ -56,6 +56,7 @@ export class NavComponent {
   public mainNavLinks = MAIN_NAV_LINKS.map((link) => ({
     ...link,
     enabled: this.pageLockService.canAccessPage(link.page),
+    lockMessageOverride: this.pageLockService.getLockMessageOverride(link.page),
     count: this.navService.getPageCount(link.page),
   }));
 

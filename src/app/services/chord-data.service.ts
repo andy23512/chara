@@ -113,31 +113,36 @@ export class ChordDataService {
     });
   });
 
+  /** Chords that are not blocked, which are the ones that can be practiced. */
+  public nonBlockedChordCount = computed<number>(
+    () => this.chordDataListWithLabelState().filter((c) => !c.blocked).length,
+  );
+
   public adaptationPhaseRemainedChordCount = computed<number>(
     () =>
       this.chordDataListWithLabelStateAndStatistic().filter(
-        (c) => !c.adaptation.passed,
+        (c) => !c.blocked && !c.adaptation.passed,
       ).length,
   );
 
   public adaptationPhasePassedChordCount = computed<number>(
     () =>
       this.chordDataListWithLabelStateAndStatistic().filter(
-        (c) => c.adaptation.passed,
+        (c) => !c.blocked && c.adaptation.passed,
       ).length,
   );
 
   public realizationPhaseRemainedChordCount = computed<number>(
     () =>
       this.chordDataListWithLabelStateAndStatistic().filter(
-        (c) => c.adaptation.passed && !c.realization.passed,
+        (c) => !c.blocked && c.adaptation.passed && !c.realization.passed,
       ).length,
   );
 
   public realizationPhasePassedChordCount = computed<number>(
     () =>
       this.chordDataListWithLabelStateAndStatistic().filter(
-        (c) => c.adaptation.passed && c.realization.passed,
+        (c) => !c.blocked && c.adaptation.passed && c.realization.passed,
       ).length,
   );
 

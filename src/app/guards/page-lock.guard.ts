@@ -22,8 +22,9 @@ export const pageLockGuard: CanActivateFn = (route) => {
   }
   const navLink = ALL_NAV_LINKS.find((n) => n.page === page);
   const homeUrlTree = router.parseUrl('/');
-  if (navLink?.lockMessage) {
-    const message = navLink.lockMessage;
+  const message =
+    pageLockService.getLockMessageOverride(page)() ?? navLink?.lockMessage;
+  if (message) {
     return translateService.use(languageSettingStore.uiLanguage()).pipe(
       tap(() => {
         matSnackBar.open(translateService.instant(message), undefined, {

@@ -191,6 +191,37 @@ describe('ChordDataService', () => {
         expect(service.realizationPhaseRemainedChordCount()).toBe(0);
       });
 
+      it('does not count blocked chords as passed', () => {
+        record(Phase.Adaptation, 'ab', [1000, 1000, 1000]);
+        record(Phase.Realization, 'ab', [1000, 1000]);
+        labels.blockChord({ actionAndPhraseHash: AB.actionAndPhraseHash } as never);
+        expect(service.adaptationPhasePassedChordCount()).toBe(0);
+        expect(service.realizationPhasePassedChordCount()).toBe(0);
+        labels.unblockChord({ actionAndPhraseHash: AB.actionAndPhraseHash } as never);
+        expect(service.adaptationPhasePassedChordCount()).toBe(1);
+        expect(service.realizationPhasePassedChordCount()).toBe(1);
+      });
+
+      it('does not count blocked chords as remaining', () => {
+        labels.blockChord({ actionAndPhraseHash: AB.actionAndPhraseHash } as never);
+        expect(service.adaptationPhaseRemainedChordCount()).toBe(1);
+        labels.unblockChord({ actionAndPhraseHash: AB.actionAndPhraseHash } as never);
+        record(Phase.Adaptation, 'ab', [1000, 1000, 1000]);
+        expect(service.realizationPhaseRemainedChordCount()).toBe(1);
+        labels.blockChord({ actionAndPhraseHash: AB.actionAndPhraseHash } as never);
+        expect(service.realizationPhaseRemainedChordCount()).toBe(0);
+      });
+
+      it('counts the chords that are not blocked', () => {
+        expect(service.nonBlockedChordCount()).toBe(2);
+        labels.blockChord({ actionAndPhraseHash: AB.actionAndPhraseHash } as never);
+        expect(service.nonBlockedChordCount()).toBe(1);
+        labels.blockChord({ actionAndPhraseHash: C.actionAndPhraseHash } as never);
+        expect(service.nonBlockedChordCount()).toBe(0);
+        labels.unblockChord({ actionAndPhraseHash: C.actionAndPhraseHash } as never);
+        expect(service.nonBlockedChordCount()).toBe(1);
+      });
+
       it('follows changes of the pass requirements', () => {
         record(Phase.Adaptation, 'ab', [1000, 1000, 1000]);
         phase.set(Phase.Adaptation, 'minRepsToPass', 10);
