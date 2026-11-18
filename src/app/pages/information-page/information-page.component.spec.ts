@@ -1,3 +1,5 @@
+import { provideRouter } from '@angular/router';
+import { provideTranslateService } from '@ngx-translate/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InformationPageComponent } from './information-page.component';
 
@@ -8,6 +10,7 @@ describe('InformationPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [InformationPageComponent],
+      providers: [provideTranslateService(), provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(InformationPageComponent);

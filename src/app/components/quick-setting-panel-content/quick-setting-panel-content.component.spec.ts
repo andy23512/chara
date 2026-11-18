@@ -1,3 +1,4 @@
+import { provideTranslateService } from '@ngx-translate/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QuickSettingPanelContentComponent } from './quick-setting-panel-content.component';
@@ -8,7 +9,8 @@ describe('QuickSettingPanelContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [QuickSettingPanelContentComponent]
+      imports: [QuickSettingPanelContentComponent],
+      providers: [provideTranslateService()]
     });
     fixture = TestBed.createComponent(QuickSettingPanelContentComponent);
     component = fixture.componentInstance;

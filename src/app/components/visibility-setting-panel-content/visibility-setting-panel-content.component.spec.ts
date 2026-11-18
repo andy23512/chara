@@ -1,3 +1,4 @@
+import { provideTranslateService } from '@ngx-translate/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { VisibilitySettingPanelContentComponent } from './visibility-setting-panel-content.component';
 
@@ -8,6 +9,7 @@ describe('VisibilitySettingPanelContentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [VisibilitySettingPanelContentComponent],
+      providers: [provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(VisibilitySettingPanelContentComponent);

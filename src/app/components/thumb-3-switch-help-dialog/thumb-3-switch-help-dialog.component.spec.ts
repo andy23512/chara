@@ -1,3 +1,4 @@
+import { provideTranslateService } from '@ngx-translate/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Thumb3SwitchHelpDialogComponent } from './thumb-3-switch-help-dialog.component';
@@ -8,7 +9,8 @@ describe('Thumb3SwitchHelpDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [Thumb3SwitchHelpDialogComponent]
+      imports: [Thumb3SwitchHelpDialogComponent],
+      providers: [provideTranslateService()]
     });
     fixture = TestBed.createComponent(Thumb3SwitchHelpDialogComponent);
     component = fixture.componentInstance;

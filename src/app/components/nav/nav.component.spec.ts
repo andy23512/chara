@@ -6,6 +6,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { provideRouter } from '@angular/router';
+import { provideTranslateService } from '@ngx-translate/core';
 import { NavComponent } from './nav.component';
 
 describe('NavComponent', () => {
@@ -22,8 +24,9 @@ describe('NavComponent', () => {
         MatSidenavModule,
         MatToolbarModule,
         NavComponent,
-    ]
-}).compileComponents();
+      ],
+      providers: [provideRouter([]), provideTranslateService()],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
