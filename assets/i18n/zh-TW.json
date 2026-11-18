@@ -263,5 +263,8 @@
       "always": "總是顯示提示（如適應頁面）",
       "timeout": "5 秒超時後顯示提示（如實現頁面）"
     }
+  },
+  "custom-practice-page": {
+    "invalid-chord-list": "網址中的和弦清單不正確，沒有可練習的和弦。"
   }
 }

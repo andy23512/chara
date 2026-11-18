@@ -263,5 +263,8 @@
       "always": "Alway show the hint (like Adaptation page)",
       "timeout": "Show the hint after 5-second timeout (like Realization page)"
     }
+  },
+  "custom-practice-page": {
+    "invalid-chord-list": "The chord list in the address is not valid, so there is nothing to practice."
   }
 }
