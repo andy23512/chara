@@ -92,7 +92,7 @@ export class ChordPracticeViewComponent implements OnInit, OnDestroy {
   }>();
   private readonly debouncedEntry$ = this.entrySubject
     .asObservable()
-    .pipe(debounceTime(100));
+    .pipe(debounceTime(50));
   private readonly restartAnimationSubject = new Subject<void>();
   private readonly animationFrameIndex = toSignal(
     this.restartAnimationSubject
@@ -228,6 +228,7 @@ export class ChordPracticeViewComponent implements OnInit, OnDestroy {
 
   public startPractice() {
     if (!this.isFocus()) {
+      this.inputValue.set('');
       this.input().nativeElement.focus();
       this.restartAnimationSubject.next();
       this.restartIdleTimerSubject.next();
@@ -241,6 +242,7 @@ export class ChordPracticeViewComponent implements OnInit, OnDestroy {
   }
 
   public pausePractice() {
+    this.inputValue.set('');
     this.chordPracticeViewStore.pause();
   }
 }
