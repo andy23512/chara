@@ -21,6 +21,11 @@ const INITIAL_CHORD_LABEL_STATE: ChordLabelState = {
   blockedHashes: [],
 };
 
+/** Appends the new hashes, skipping ones that are already in the list. */
+function addUnique(existing: string[], additions: string[]): string[] {
+  return [...new Set([...existing, ...additions])];
+}
+
 export const ChordLabelStore = signalStore(
   {
     providedIn: 'root',
@@ -38,19 +43,18 @@ export const ChordLabelStore = signalStore(
     bookmarkChord(chord: ChordData) {
       patchState(store, (state) => ({
         ...state,
-        bookmarkedHashes: [
-          ...state.bookmarkedHashes,
+        bookmarkedHashes: addUnique(state.bookmarkedHashes, [
           chord.actionAndPhraseHash,
-        ],
+        ]),
       }));
     },
     bookmarkChords(chords: ChordData[]) {
       patchState(store, (state) => ({
         ...state,
-        bookmarkedHashes: [
-          ...state.bookmarkedHashes,
-          ...chords.map((c) => c.actionAndPhraseHash),
-        ],
+        bookmarkedHashes: addUnique(
+          state.bookmarkedHashes,
+          chords.map((c) => c.actionAndPhraseHash),
+        ),
       }));
     },
     unbookmarkChord({ actionAndPhraseHash }: ChordData) {
@@ -77,16 +81,18 @@ export const ChordLabelStore = signalStore(
     blockChord(chord: ChordData) {
       patchState(store, (state) => ({
         ...state,
-        blockedHashes: [...state.blockedHashes, chord.actionAndPhraseHash],
+        blockedHashes: addUnique(state.blockedHashes, [
+          chord.actionAndPhraseHash,
+        ]),
       }));
     },
     blockChords(chords: ChordData[]) {
       patchState(store, (state) => ({
         ...state,
-        blockedHashes: [
-          ...state.blockedHashes,
-          ...chords.map((c) => c.actionAndPhraseHash),
-        ],
+        blockedHashes: addUnique(
+          state.blockedHashes,
+          chords.map((c) => c.actionAndPhraseHash),
+        ),
       }));
     },
     unblockChord({ actionAndPhraseHash }: ChordData) {

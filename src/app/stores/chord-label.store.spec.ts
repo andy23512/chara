@@ -48,15 +48,17 @@ describe('ChordLabelStore', () => {
       expect(store.bookmarkedHashes()).toEqual(['a']);
     });
 
-    // Current behavior: bookmarking twice stores the hash twice, and a single
-    // unbookmark removes every copy.
-    it('stores a hash twice when bookmarked twice, and removes both copies at once', () => {
+    it('does not store a hash twice', () => {
       store.bookmarkChord(A);
       store.bookmarkChord(A);
-      expect(store.bookmarkedHashes()).toEqual(['a', 'a']);
-      expect(store.bookmarkedHashSet().size).toBe(1);
-      store.unbookmarkChord(A);
-      expect(store.bookmarkedHashes()).toEqual([]);
+      store.bookmarkChords([A, B, B]);
+      expect(store.bookmarkedHashes()).toEqual(['a', 'b']);
+    });
+
+    it('keeps the original order when a hash is added again', () => {
+      store.bookmarkChords([A, B]);
+      store.bookmarkChord(A);
+      expect(store.bookmarkedHashes()).toEqual(['a', 'b']);
     });
 
     it('does not touch the blocked chords', () => {
@@ -72,6 +74,13 @@ describe('ChordLabelStore', () => {
       store.blockChord(A);
       store.blockChords([B, C]);
       expect(store.blockedHashes()).toEqual(['a', 'b', 'c']);
+    });
+
+    it('does not store a hash twice', () => {
+      store.blockChord(A);
+      store.blockChord(A);
+      store.blockChords([A, B, B]);
+      expect(store.blockedHashes()).toEqual(['a', 'b']);
     });
 
     it('removes one block', () => {
