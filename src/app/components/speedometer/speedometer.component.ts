@@ -1,11 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   HostBinding,
   OnInit,
+  inject,
   input,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import colormap from 'colormap';
 import { clamp } from 'ramda';
 import { interval } from 'rxjs';
@@ -41,6 +44,8 @@ export class SpeedometerComponent implements OnInit {
   public displaySpeed = signal<number>(0);
   public size = size;
 
+  private readonly destroyRef = inject(DestroyRef);
+
   sectors = Array.from({ length: sectorNumber }).map((_, i) => ({
     index: i,
     degFrom: i * (sectorDeg + gapDeg),
@@ -48,15 +53,17 @@ export class SpeedometerComponent implements OnInit {
   }));
 
   ngOnInit(): void {
-    interval(1000 / fps).subscribe(() => {
-      const speed = this.speed();
-      const displaySpeed = this.displaySpeed();
-      const diff = speed - displaySpeed;
-      this.displaySpeed.set(
-        displaySpeed +
-          Math.max(Math.min(diff, maxDiffPerFrame), -maxDiffPerFrame),
-      );
-    });
+    interval(1000 / fps)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        const speed = this.speed();
+        const displaySpeed = this.displaySpeed();
+        const diff = speed - displaySpeed;
+        this.displaySpeed.set(
+          displaySpeed +
+            Math.max(Math.min(diff, maxDiffPerFrame), -maxDiffPerFrame),
+        );
+      });
   }
 
   d({ degFrom, degTo }: { degFrom: number; degTo: number }) {
