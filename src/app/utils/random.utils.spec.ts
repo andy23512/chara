@@ -83,12 +83,9 @@ describe('random utils', () => {
       expect(picks).toEqual(['y', 'x', 'y', 'x', 'y', 'x']);
     });
 
-    // Current behavior: an empty list has min = 0 and max = -1, so the
-    // generator never finds a valid index and returns undefined items.
-    it('returns undefined items for an empty list', () => {
-      spyOn(Math, 'random').and.returnValues(0.5, 0.6, 0.7);
-      const picks = pickRandomItemNTimes([] as string[], 3);
-      expect(picks).toEqual([undefined, undefined, undefined] as never);
+    it('returns an empty list for an empty list, instead of looping forever', () => {
+      expect(pickRandomItemNTimes([] as string[], 3)).toEqual([]);
+      expect(pickRandomItemNTimes([] as string[], 3, 0)).toEqual([]);
     });
   });
 });

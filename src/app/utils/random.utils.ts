@@ -8,6 +8,11 @@ export function pickRandomItemNTimes<T>(
   n: number,
   previousIndex: number | null = null,
 ) {
+  if (list.length === 0) {
+    // There is nothing to pick. Without this, the index generator would loop
+    // forever, because no index can differ from the previous one.
+    return [];
+  }
   return getNonConsecutiveRandoms(n, 0, list.length - 1, previousIndex).map(
     (index) => list[index],
   );
