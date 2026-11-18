@@ -1,7 +1,8 @@
 import { computed, inject, Injectable } from '@angular/core';
-import { ascend, groupBy, path, prop, sortWith, toPairs } from 'ramda';
+import { ascend, groupBy, prop, sortWith, toPairs } from 'ramda';
 import { ENGLISH_WORD_RANK_MAP } from '../data/english-word-rank';
 import {
+  ChordDataWithLabelState,
   ChordDataWithLabelStateAndStatistic,
   ChordGroup,
 } from '../models/chord.models';
@@ -149,10 +150,8 @@ export class ChordDataService {
           Infinity;
         const nonBlockedChords = sortWith(
           [
-            ascend(
-              path(['ancestorKeyLabel', 'length']) as (obj: any) => number,
-            ),
-            ascend(path(['input', 'length']) as (obj: any) => number),
+            ascend((c: ChordDataWithLabelState) => c.ancestors.length),
+            ascend((c: ChordDataWithLabelState) => c.inputKeyLabels.length),
           ],
           (chordsInGroup ?? []).filter((c) => !c.blocked),
         );

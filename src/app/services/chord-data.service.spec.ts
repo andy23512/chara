@@ -207,15 +207,26 @@ describe('ChordDataService', () => {
       expect(groups.find((g) => g.textOutput === 'ab')!.nonBlockedChords.length).toBe(2);
     });
 
-    // Current behavior, almost certainly not what was meant: the sort keys are
-    // `ancestorKeyLabel.length` (no such field exists) and `input.length` (the
-    // zero-padded raw input, always the same length), so the order of the
-    // chords in a group is just the order they came in.
-    it('does not actually sort the chords of a group (sort keys are dead)', () => {
+    it('puts chords with fewer keys first', () => {
       const longer = make([97, 98, 99], [97, 98]);
       setChords(longer, AB);
       const group = service.chordGroups().find((g) => g.textOutput === 'ab')!;
-      expect(group.nonBlockedChords.map((c) => c.id)).toEqual([longer.id, AB.id]);
+      expect(group.nonBlockedChords.map((c) => c.id)).toEqual([AB.id, longer.id]);
+    });
+
+    it('does not count the zero padding of the input', () => {
+      setChords(AB, BA); // both have 2 keys
+      const group = service.chordGroups()[0];
+      expect(group.nonBlockedChords.map((c) => c.id)).toEqual([AB.id, BA.id]);
+    });
+
+    it('puts chords without a parent chord before chords with one', () => {
+      const child: Chord = { ...make([100, 99], [97, 98]), parentId: AB.id };
+      const top = make([99, 100, 97], [97, 98]); // 3 keys, no parent
+      setChords(child, top, AB);
+      const group = service.chordGroups().find((g) => g.textOutput === 'ab')!;
+      // AB (0 ancestors, 2 keys), top (0 ancestors, 3 keys), child (1 ancestor, 2 keys)
+      expect(group.nonBlockedChords.map((c) => c.id)).toEqual([AB.id, top.id, child.id]);
     });
 
     it('leaves out blocked chords', () => {

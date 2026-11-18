@@ -75,11 +75,23 @@ describe('QuickSettingService', () => {
       expect(snackBar.open).not.toHaveBeenCalled();
     });
 
-    // Current behavior: the port is not closed when a load step fails.
-    it('leaves the port connected when loading fails', async () => {
+    it('closes the port when loading the layout fails', async () => {
+      serial['loadProfileLayoutMapWithProgressSnackBar'].and.rejectWith(new Error('x'));
+      await expectAsync(service.loadDeviceLayoutAndChordsFromDevice()).toBeRejectedWithError('x');
+      expect(serial['disconnect']).toHaveBeenCalledTimes(1);
+    });
+
+    it('closes the port when loading the chords fails', async () => {
       serial['loadChordsWithProgressSnackBar'].and.rejectWith(new Error('x'));
-      await expectAsync(service.loadDeviceLayoutAndChordsFromDevice()).toBeRejected();
-      expect(serial['disconnect']).not.toHaveBeenCalled();
+      await expectAsync(service.loadDeviceLayoutAndChordsFromDevice()).toBeRejectedWithError('x');
+      expect(serial['disconnect']).toHaveBeenCalledTimes(1);
+      expect(snackBar.open).not.toHaveBeenCalled();
+    });
+
+    it('still passes on the original error when closing the port fails too', async () => {
+      serial['loadChordsWithProgressSnackBar'].and.rejectWith(new Error('load failed'));
+      serial['disconnect'].and.rejectWith(new Error('close failed'));
+      await expectAsync(service.loadDeviceLayoutAndChordsFromDevice()).toBeRejectedWithError('load failed');
     });
   });
 });

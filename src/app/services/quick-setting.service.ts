@@ -11,14 +11,20 @@ export class QuickSettingService {
 
   public async loadDeviceLayoutAndChordsFromDevice() {
     await this.serialHandlerService.connect();
-    await this.serialHandlerService.loadProfileLayoutMapWithProgressSnackBar({
-      step: 1,
-      total: 2,
-    });
-    await this.serialHandlerService.loadChordsWithProgressSnackBar({
-      step: 2,
-      total: 2,
-    });
+    try {
+      await this.serialHandlerService.loadProfileLayoutMapWithProgressSnackBar({
+        step: 1,
+        total: 2,
+      });
+      await this.serialHandlerService.loadChordsWithProgressSnackBar({
+        step: 2,
+        total: 2,
+      });
+    } catch (e) {
+      // Do not leave the port open when a step fails.
+      await this.serialHandlerService.disconnect().catch(() => undefined);
+      throw e;
+    }
     await this.serialHandlerService.disconnect();
     this.matSnackBar.open(
       this.translateService.instant(
