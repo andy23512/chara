@@ -28,6 +28,8 @@
       inputmode="none"
       [(ngModel)]="inputValue"
       (input)="onInput($any($event))"
+      (keydown)="onKeyDown($event)"
+      (keyup)="onKeyUp($event)"
       (focus)="isFocus.set(true)"
       (blur)="isFocus.set(false); pausePractice()"
     />
