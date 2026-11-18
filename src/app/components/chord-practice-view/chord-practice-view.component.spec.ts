@@ -302,6 +302,22 @@ describe('ChordPracticeViewComponent', () => {
     }));
   });
 
+  describe('with an empty practice set', () => {
+    it('shows an empty queue and takes no entry', fakeAsync(() => {
+      create([]);
+      component.startPractice();
+      fixture.detectChanges();
+      expect(internals.queue()).toEqual([]);
+      expect(() => {
+        type('a');
+        wait(DEBOUNCE_MS * 3);
+      }).not.toThrow();
+      expect(internals.history()).toEqual([]);
+      expect(internals.inputValue()).toBe('a');
+      finish();
+    }));
+  });
+
   describe('forgetting held keys', () => {
     it('forgets them when practice is paused, so a missed key release cannot block checks', fakeAsync(() => {
       create();

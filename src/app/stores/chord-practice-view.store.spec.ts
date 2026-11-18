@@ -236,12 +236,29 @@ describe('ChordPracticeViewStore', () => {
       });
     });
 
-    // Current behavior: asking while the queue is empty throws.
-    it('throws when the queue is empty', () => {
-      store.restore();
-      expect(() => store.checkText('a', 1000, GROUPS, null)).toThrowError(
-        TypeError,
-      );
+    describe('with nothing in the queue', () => {
+      beforeEach(() => store.restore());
+
+      it('ignores any entry instead of failing', () => {
+        expect(() => store.checkText('a', 1000, GROUPS, null)).not.toThrow();
+        expect(() =>
+          store.checkText('', 1000, GROUPS, Phase.Adaptation),
+        ).not.toThrow();
+      });
+
+      it('leaves the state as it is', () => {
+        store.checkText('a', 1000, GROUPS, Phase.Adaptation);
+        expect(store.queue()).toEqual([]);
+        expect(store.history()).toEqual([]);
+        expect(store.lastCorrectChordTime()).toBeNull();
+        expect(statistic.adaptation()).toEqual({});
+      });
+
+      it('stays empty after filling with an empty practice set', () => {
+        store.fillQueue([]);
+        store.checkText('a', 1000, [], null);
+        expect(store.queue()).toEqual([]);
+      });
     });
   });
 

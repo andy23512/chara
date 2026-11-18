@@ -49,6 +49,10 @@ export const ChordPracticeViewStore = signalStore(
         patchState(
           store,
           ({ queue, history, lastCorrectChordTime, chordIntervals }) => {
+            if (queue.length === 0) {
+              // Nothing is asked for, so no entry can be correct.
+              return {};
+            }
             if (text.trim() === queue[0].textOutput.trim()) {
               if (lastCorrectChordTime && phase) {
                 const interval = time - lastCorrectChordTime;

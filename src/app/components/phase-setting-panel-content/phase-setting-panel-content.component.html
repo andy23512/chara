@@ -23,10 +23,14 @@
               <input
                 matInput
                 type="number"
+                [attr.min]="
+                  setting.key === 'practiceSetSize' ? minPracticeSetSize : null
+                "
                 [ngModel]="phaseSettingStore[phase.value]()[setting.key]"
                 (ngModelChange)="
                   onSettingValueChange(phase.value, setting.key, $event)
                 "
+                (blur)="onSettingBlur(phase.value, setting.key)"
               />
             </mat-form-field>
           </td>
