@@ -36,7 +36,7 @@ export class DataDeletionSettingPanelContentComponent {
       .open(DeleteDeviceLayoutConfirmDialogComponent)
       .afterClosed()
       .subscribe((response) => {
-        if (response.confirmed) {
+        if (response?.confirmed) {
           this.deviceLayoutStore.deleteProfileLayoutMap();
           this.matSnackBar.open(
             this.translateService.instant(
@@ -54,7 +54,7 @@ export class DataDeletionSettingPanelContentComponent {
       .open(DeleteChordsConfirmDialogComponent)
       .afterClosed()
       .subscribe((response) => {
-        if (response.confirmed) {
+        if (response?.confirmed) {
           patchState(this.chordStore, removeAllEntities());
           this.matSnackBar.open(
             this.translateService.instant(
