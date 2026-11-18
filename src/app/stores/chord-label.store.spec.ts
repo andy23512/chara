@@ -87,20 +87,18 @@ describe('ChordLabelStore', () => {
       expect(store.bookmarkedHashes()).toEqual(['a']);
     });
 
-    // Current behavior, which is almost certainly a bug: unblockChords builds
-    // the new blocked list from the *bookmarked* hashes, so it replaces the
-    // blocked list with the bookmark list (minus the chords to unblock).
-    it('unblockChords replaces the blocked list with the bookmarked list (bug)', () => {
+    it('unblockChords removes only the given chords from the blocked list', () => {
+      store.blockChords([A, B, C]);
+      store.unblockChords([A, C]);
+      expect(store.blockedHashes()).toEqual(['b']);
+    });
+
+    it('unblockChords does not use the bookmarked list', () => {
       store.blockChords([A, B, C]);
       store.bookmarkChord(C);
       store.unblockChords([A]);
-      expect(store.blockedHashes()).toEqual(['c']); // should be ['b', 'c']
-    });
-
-    it('unblockChords empties the blocked list when nothing is bookmarked (bug)', () => {
-      store.blockChords([A, B, C]);
-      store.unblockChords([A]);
-      expect(store.blockedHashes()).toEqual([]); // should be ['b', 'c']
+      expect(store.blockedHashes()).toEqual(['b', 'c']);
+      expect(store.bookmarkedHashes()).toEqual(['c']);
     });
   });
 

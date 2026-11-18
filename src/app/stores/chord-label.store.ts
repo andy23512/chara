@@ -104,7 +104,7 @@ export const ChordLabelStore = signalStore(
         );
         return {
           ...state,
-          blockedHashes: state.bookmarkedHashes.filter(
+          blockedHashes: state.blockedHashes.filter(
             (h) => !actionAndPhraseHashSet.has(h),
           ),
         };
