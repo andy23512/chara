@@ -22,6 +22,7 @@ import { RealTitleCasePipe } from 'src/app/pipes/real-title-case.pipe';
 import { NavService } from 'src/app/services/nav.service';
 import { PageLockService } from 'src/app/services/page-lock.service';
 import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component';
+import { HOTKEY_DIALOG_ID } from '../hotkey-dialog/hotkey-dialog.const';
 
 @Component({
   selector: 'app-nav',
@@ -63,6 +64,9 @@ export class NavComponent {
   private readonly matDialog = inject(MatDialog);
 
   openHotkeyDialog() {
-    this.matDialog.open(HotkeyDialogComponent);
+    if (this.matDialog.getDialogById(HOTKEY_DIALOG_ID)) {
+      return;
+    }
+    this.matDialog.open(HotkeyDialogComponent, { id: HOTKEY_DIALOG_ID });
   }
 }

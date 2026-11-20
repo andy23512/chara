@@ -13,6 +13,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { HotkeyDialogComponent } from '../hotkey-dialog/hotkey-dialog.component';
+import { HOTKEY_DIALOG_ID } from '../hotkey-dialog/hotkey-dialog.const';
 import { NavComponent } from './nav.component';
 
 describe('NavComponent', () => {
@@ -93,6 +96,26 @@ describe('NavComponent', () => {
       enabled.set(true);
       fixture.detectChanges();
       expect(tooltipOf(ADAPT)).toBe('nav.page.adaptation.tooltip');
+    });
+  });
+
+  describe('hotkey dialog button', () => {
+    it('opens the hotkey dialog under its own id', () => {
+      const dialog = TestBed.inject(MatDialog);
+      const open = spyOn(dialog, 'open');
+      component.openHotkeyDialog();
+      expect(open).toHaveBeenCalledOnceWith(HotkeyDialogComponent, {
+        id: HOTKEY_DIALOG_ID,
+      });
+    });
+
+    it('does not open a second one while it is open', () => {
+      const dialog = TestBed.inject(MatDialog);
+      spyOn(dialog, 'getDialogById').and.returnValue({} as never);
+      const open = spyOn(dialog, 'open');
+      component.openHotkeyDialog();
+      expect(dialog.getDialogById).toHaveBeenCalledWith(HOTKEY_DIALOG_ID);
+      expect(open).not.toHaveBeenCalled();
     });
   });
 });
