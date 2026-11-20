@@ -18,7 +18,8 @@ describe('VisibleDirective', () => {
   function create() {
     const fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    const shown = () => fixture.nativeElement.querySelector('#content') !== null;
+    const shown = () =>
+      fixture.nativeElement.querySelector('#content') !== null;
     return { fixture, shown };
   }
 
@@ -79,5 +80,65 @@ describe('VisibleDirective', () => {
     fixture.componentInstance.key.set('speedometer');
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('#content')).toBe(first);
+  });
+
+  describe('while the content is on screen', () => {
+    it('hides the content when the setting is turned off, and shows it again when turned on', () => {
+      store.set('speedometer', true);
+      const { fixture, shown } = create();
+      expect(shown()).toBe(true);
+      store.set('speedometer', false);
+      fixture.detectChanges();
+      expect(shown()).toBe(false);
+      store.set('speedometer', true);
+      fixture.detectChanges();
+      expect(shown()).toBe(true);
+    });
+
+    it('shows the content when the setting is turned on after it was hidden at the start', () => {
+      store.set('speedometer', false);
+      const { fixture, shown } = create();
+      expect(shown()).toBe(false);
+      store.set('speedometer', true);
+      fixture.detectChanges();
+      expect(shown()).toBe(true);
+    });
+
+    it('follows the setting of the current key only', () => {
+      store.set('speedometer', true);
+      store.set('layoutThumb3Switch', true);
+      const { fixture, shown } = create();
+      store.set('layoutThumb3Switch', false);
+      fixture.detectChanges();
+      expect(shown()).toBe(true);
+      fixture.componentInstance.key.set('layoutThumb3Switch');
+      fixture.detectChanges();
+      expect(shown()).toBe(false);
+      store.set('speedometer', false);
+      fixture.detectChanges();
+      expect(shown()).toBe(false);
+      store.set('layoutThumb3Switch', true);
+      fixture.detectChanges();
+      expect(shown()).toBe(true);
+    });
+
+    it('keeps showing the content when there is no key, whatever the settings do', () => {
+      store.set('speedometer', true);
+      const { fixture, shown } = create();
+      fixture.componentInstance.key.set(null);
+      fixture.detectChanges();
+      store.set('speedometer', false);
+      fixture.detectChanges();
+      expect(shown()).toBe(true);
+    });
+
+    it('does not create the content again when an unrelated setting changes', () => {
+      store.set('speedometer', true);
+      const { fixture } = create();
+      const first = fixture.nativeElement.querySelector('#content');
+      store.set('layoutThumb3Switch', false);
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('#content')).toBe(first);
+    });
   });
 });
