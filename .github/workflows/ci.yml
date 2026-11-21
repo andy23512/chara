@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Minify icon font
+        run: yarn minify-icon-font
+
       - name: Test
         run: yarn test --watch=false --browsers=ChromeHeadless
 
