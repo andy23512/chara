@@ -497,7 +497,13 @@ export class ChordsPageComponent implements OnInit {
     if (!text) {
       return;
     }
-    const data = JSON.parse(text);
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      // Not a JSON file: ignore it like an empty one.
+      return;
+    }
     if (!data?.chords) {
       return;
     }

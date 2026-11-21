@@ -865,9 +865,9 @@ describe('ChordsPageComponent', () => {
       expect(chordStore.entityCount()).toBe(4);
     });
 
-    it('fails on a file that is not JSON, leaving the chords alone (current behavior)', async () => {
+    it('ignores a file that is not JSON, leaving the chords alone', async () => {
       pick('not json');
-      await expectAsync(page.onFileInputChange()).toBeRejected();
+      await expectAsync(page.onFileInputChange()).toBeResolved();
       expect(chordStore.entityCount()).toBe(4);
     });
   });
