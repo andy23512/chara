@@ -1,5 +1,7 @@
 # Chara
 
+[![CI](https://github.com/andy23512/chara/actions/workflows/ci.yml/badge.svg)](https://github.com/andy23512/chara/actions/workflows/ci.yml)
+
 An unofficial chord practice tool of CharaChorder 3D input devices (CharaChorder One, CharaChorder Two, CCU, and Master Forge)
 
 ## Links
